@@ -3,8 +3,8 @@ CS 435 Project
 
 # Project Participants
 
-* KirkLeroy J. Powell
-* Kyle Walter
+* KirkLeroy J. Powell    
+* Kyle Walter             850971420     walter.kl26@gmail.com     
 * Kaitlyn Jarrett 
 * Andrew Korous
 
