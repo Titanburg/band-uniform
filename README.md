@@ -5,7 +5,7 @@ CS 435 Project
 
 * KirkLeroy J. Powell    
 * Kyle Walter | walter.kl26@gmail.com | SIU850971420
-* Kaitlyn Jarrett       
+* Kaitlyn Jarrett | kjarrett94@siu.edu | SIU850893935
 * Andrew Korous         
 
 ## Application Instructions
@@ -19,4 +19,4 @@ CS 435 Project
 7.  Navigate to a web browser
 8.  Enter the URI ```localhost:3000```
 
-## Your application is installed and functional 
+## Your application is installed and functional
