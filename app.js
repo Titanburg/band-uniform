@@ -37,10 +37,10 @@
     if(err){
       console.log(err);
     }else{
-      console.log('Mongoose:      Connected to weddingsite database');
+      console.log('Mongoose:      Connected to banduniform database');
 
       // Seed mongoose
-      require('./config/db/seeding');
+      require('./config/db/seeds/banduniform.js');
     }
   });
 
