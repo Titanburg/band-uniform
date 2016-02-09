@@ -40,7 +40,7 @@
       console.log('Mongoose:      Connected to banduniform database');
 
       // Seed mongoose
-      require('./database/seeds/banduniform.js');
+      require('./database/seeds/banduniforms_1.0.js');
     }
   });
 
@@ -54,8 +54,8 @@
   app.set('view engine', 'jade');
 
   // Icon and style setup
-  app.use(favicon(__dirname + '/public/favicon.ico'));
-  app.use(lessMiddleware(__dirname + '/public'));
+  // app.use(favicon(__dirname + '/public/favicon.ico'));
+  // app.use(lessMiddleware(__dirname + '/public'));
 
   // Express utilities
   app.use(logger('dev'));

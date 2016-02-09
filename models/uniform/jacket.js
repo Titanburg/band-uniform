@@ -4,7 +4,7 @@ var schema   = new mongoose.Schema({
     number        : Number,
     sex           : String,
     chest         : Number,
-    length        : Number,
+    armlength        : String,
     available     : Boolean
 });
 
