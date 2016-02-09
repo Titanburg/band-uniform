@@ -2,12 +2,24 @@ var mongoose = require('mongoose');
 var bcrypt   = require('bcrypt-nodejs');
 
 var userSchema  = mongoose.Schema({
-    local            : {
-        email        : String,
-        password     : String,
-        admin        : Boolean,
-        jacket       : Number,
-        jumpsuit     : Number
+    local           : {
+        email       : String,
+        password    : String,
+        admin       : Boolean
+    },
+    uniform:{
+      jacket        : Number,
+      jumpsuit      : Number,
+      hat           : Number
+    },
+    sizes:{
+      sex           : String,
+      chest         : Number,
+      armlength     : Number,
+      waist         : Number,
+      seat          : Number,
+      outseam       : Number,
+      hat           : String
     }
 });
 
