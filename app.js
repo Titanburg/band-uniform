@@ -14,7 +14,7 @@
 
   // Database Setup
   var mongoose = require('mongoose');
-  var configDB = require('./config/db/mongoose.js');
+  var configDB = require('./database/mongoose.js');
 
   // Authentication
   var passport = require('passport');
@@ -40,7 +40,7 @@
       console.log('Mongoose:      Connected to banduniform database');
 
       // Seed mongoose
-      require('./config/db/seeds/banduniform.js');
+      require('./database/seeds/banduniform.js');
     }
   });
 

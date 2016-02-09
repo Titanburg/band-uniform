@@ -8,18 +8,18 @@ var userSchema  = mongoose.Schema({
         admin       : Boolean
     },
     uniform:{
-      jacket        : Number,
-      jumpsuit      : Number,
-      hat           : Number
+        jacket      : Number,
+        jumpsuit    : Number,
+        hat         : Number
     },
     sizes:{
-      sex           : String,
-      chest         : Number,
-      armlength     : Number,
-      waist         : Number,
-      seat          : Number,
-      outseam       : Number,
-      hat           : String
+        sex         : String,
+        chest       : Number,
+        armlength   : Number,
+        waist       : Number,
+        seat        : Number,
+        outseam     : Number,
+        hat         : String
     }
 });
 
