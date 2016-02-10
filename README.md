@@ -6,7 +6,7 @@ CS 435 Project
 * KirkLeroy J. Powell    
 * Kyle Walter | walter.kl26@gmail.com | SIU850971420
 * Kaitlyn Jarrett | kjarrett94@siu.edu | SIU850893935
-* Andrew Korous         
+* Andrew Korous  | ajkorous@gmail.com | SIU851054947       
 
 ## Application Instructions
 
