@@ -64,10 +64,11 @@
   app.use(cookieParser());
 
   // Passport setup
-  // app.use(session({secret:'thisisasuperdupersecret',cookie:{_expires:60000}}));
-  // app.use(passport.initialize());
-  // app.use(passport.session());
-  // app.use(flash());
+  app.use(session({secret:'thisisasuperdupersecret',cookie:{_expires:60000}}));
+  app.use(passport.initialize());
+  app.use(passport.session());
+  app.use(flash());
+  require('./controllers/passport.js')(passport);
 
   app.use(express.static(path.join(__dirname, 'public')));
 
