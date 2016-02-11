@@ -19,7 +19,14 @@ var userSchema  = mongoose.Schema({
         waist       : Number,
         seat        : Number,
         outseam     : Number,
-        hat         : String
+        hat         : String,
+        glove       : String,
+        shoe        : Number,
+        tshirt      : String,
+    },
+    other:{
+      instrument    : String,
+      years         : String      
     }
 });
 
