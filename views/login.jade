@@ -1,5 +1,16 @@
 extends layout
 
 block content
-  form(action='/user/login')
-    input(type='text' name='email' placeholder='Email')
+  form(action='/user/login' method='post')
+    h1.text-center.title= title
+    - if(message.length > 0)
+        .alert.alert-danger= message
+    .form-group
+      label Email
+      input(type='text' name='email' placeholder='Email')
+    .form-group
+      label Password
+      input(type='password' name='password' placeholder='Password')
+    p Don't have an account?
+      a(href='/user/signup') Signup
+    button(type='submit') Submit
