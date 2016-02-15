@@ -22,8 +22,8 @@
   var flash = require('connect-flash');
 
   // Routes
-  var routes = require('./routes/index');
-  var users = require('./routes/users');
+  // var routes = require('./routes/index');
+  // var users = require('./routes/users');
 
   // Initialize App
   var app = express();
@@ -79,8 +79,7 @@
   //require('./routes/index')(app,passport);
 
   //Routes
-  app.use('/', routes);
-  app.use('/users', users);
+  require('./routes/index.js')(app,passport);
 
 ///////////////////////////////////////////////////////////////////
 //  Error Handlers                                               //
