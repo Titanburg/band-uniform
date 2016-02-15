@@ -3,10 +3,10 @@ CS 435 Project
 
 # Project Participants
 
-* KirkLeroy J. Powell
-* Kyle Walter
-* Kaitlyn Jarrett 
-* Andrew Korous
+* KirkLeroy J. Powell | kirk@thegamestoreapp.com | SIU853154798
+* Kyle Walter | walter.kl26@gmail.com | SIU850971420
+* Kaitlyn Jarrett | kjarrett94@siu.edu | SIU850893935
+* Andrew Korous  | ajkorous@gmail.com | SIU851054947       
 
 ## Application Instructions
 
@@ -19,4 +19,4 @@ CS 435 Project
 7.  Navigate to a web browser
 8.  Enter the URI ```localhost:3000```
 
-## Your application is installed and functional 
+## Your application is installed and functional
