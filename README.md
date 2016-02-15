@@ -13,7 +13,7 @@ CS 435 Project
 * http://www.gliffy.com/go/publish/9980037
 
 ## Web Application Demo
-* titanburg.me
+* https://titanburg.me
 
 ## Application Instructions
 
