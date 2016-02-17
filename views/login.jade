@@ -1,16 +1,14 @@
 extends layout
 
 block content
-  form(action='/user/login' method='post')
-    h1.text-center.title= title
-    - if(message.length > 0)
-        .alert.alert-danger= message
-    .form-group
-      label Email
-      input(type='text' name='email' placeholder='Email')
-    .form-group
-      label Password
-      input(type='password' name='password' placeholder='Password')
-    p Don't have an account?
-      a(href='/user/signup') Signup
-    button(type='submit') Submit
+  .login-page
+    .login-overlay
+    .login-bar
+      img(src="..\public\images\mblogo.png", width='200px', alt="MB Man Logo")
+      form(name='login', class="login-bar-contents", action='/login', method='post')
+        input(type='email', name='email', placeholder='Email') 
+        br
+        input(type='password', name='password', placeholder='Password')
+        br
+        input(type='submit', value='Sign In')
+  
