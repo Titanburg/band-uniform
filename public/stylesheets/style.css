@@ -1,8 +1,46 @@
 body {
-  padding: 50px;
+  margin:0px;
   font: 14px "Lucida Grande", Helvetica, Arial, sans-serif;
 }
 
 a {
   color: #00B7FF;
+}
+
+.login-page {
+  background: maroon;
+  margin:0px;
+  background-image: url('/images/loginCover.jpg');
+  height: 100vh;
+  background-size: cover;
+}
+
+.login-overlay {
+  background: rgba(128,0,0,.6);
+  height: 100vh;
+  float: center;
+}
+
+.login-bar {
+  position: absolute;
+  top: 0%;
+  margin-right: 0;
+  margin-left: auto;
+  background: white;
+  width: 413px;
+  height: 100%;
+  text-align: center;
+}
+
+.login-bar-contents {
+  margin-top: 50%;
+}
+
+.login-bar-contents input {
+  padding:5px;
+  margin: 5px;
+}
+
+.login-bar img {
+  margin-top: 50%;
 }
