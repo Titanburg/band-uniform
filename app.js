@@ -70,6 +70,7 @@
   app.use(flash());
   require('./controllers/passport.js')(passport);
 
+  app.use('/bower_components',express.static(path.join(__dirname,'/bower_components')));
   app.use(express.static(path.join(__dirname, 'public')));
 
 
