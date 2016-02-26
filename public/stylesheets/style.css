@@ -32,15 +32,64 @@ a {
   text-align: center;
 }
 
-.login-bar-contents {
-  margin-top: 50%;
+.login-input {
+  margin-top: 50px;
 }
 
-.login-bar-contents input {
+.login-input input {
   padding:5px;
   margin: 5px;
 }
 
 .login-bar img {
-  margin-top: 50%;
+  margin-top: 15%;
+  width: 150px;
+}
+
+.group-name h2{
+  margin-top: 50px;
+  font-weight: normal;
+}
+
+.creators {
+  text-align: left;
+  display: inline-block;
+}
+
+.copyright {
+  position: absolute;
+  bottom: 0px;
+  margin-left: 60px;
+  margin-right: auto;
+  text-align: center;
+}
+
+.login-input a{
+  text-decoration: none;
+  color: rgba(128,0,0,.6);
+}
+
+.login-input a:hover {
+  color: rgba(128,0,0,1);
+}
+
+.signin-btn {
+  background-color: white;
+  border-style: solid;
+  border-color: maroon;
+  color: maroon;
+}
+
+.signin-btn:hover {
+  background-color: maroon;
+  color: white;
+}
+
+.login-input .text {
+  border-style: solid;
+  border-color: maroon;
+}
+
+.muted {
+  color: rgba(0,0,0,.6)
 }
