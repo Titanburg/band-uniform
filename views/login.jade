@@ -5,10 +5,25 @@ block content
     .login-overlay
     .login-bar
       img(src="/images/mblogo.png", width='200px', alt="MB Man Logo")
-      form(name='login', class="login-bar-contents", action='/user/login', method='post')
-        input(type='email', name='email', placeholder='Email') 
+      form(name='login', class="login-input", action='/user/login', method='post')
+        input(type='email', class="text", name='email', placeholder='Email')
         br
-        input(type='password', name='password', placeholder='Password')
+        input(type='password', class="text", name='password', placeholder='Password')
         br
-        input(type='submit', value='Sign In')
-  
+        input(type='submit', class="signin-btn", value='Sign In')
+        a(href="#") Request Account
+      .group-name
+        h2.muted
+          | Created by Titanburg
+      .creators
+        p.muted
+          | Kyle Walter
+          br
+          | Kirk Powell
+          br
+          | Kaitlyn Jarret
+          br
+          | Andrew Korous
+      .copyright
+        p.muted
+          | Copyright © 2016 Titanburg Technologies
