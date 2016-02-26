@@ -1,5 +1,5 @@
 doctype html
-html
+html(ng-app='bandApp')
   head
     title= title
     link(rel='stylesheet', href='/stylesheets/style.css')
@@ -7,5 +7,6 @@ html
     block content
     script(src='/bower_components/angular/angular.min.js')
     script(src='/bower_components/angular-route/angular-route.min.js')
+    script(src='/javascript/bandApp.js')
     script(src='/bower_components/jquery/dist/jquery.min.js')
     script(src='/bower_components/bootstrap/dist/js/bootstrap.min.js')
