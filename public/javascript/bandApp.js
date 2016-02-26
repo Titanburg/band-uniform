@@ -1,0 +1,1 @@
+var bandApp = angular.module('bandApp',[]);
