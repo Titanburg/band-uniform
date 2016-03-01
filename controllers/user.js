@@ -1,14 +1,16 @@
 /**
  * Created by Kyle Walter on 2/29/2016.
  */
+var User = require('../models/user.js');
+
 module.exports = {
-    User : require('../models/user.js'),
     getUsers : function(req,res){
         User.find({},function(err,users){
             if(err) return;
-            users.each(function(user){
+            users.forEach(function(user){
                 user.local.password = '';
-            })
+            });
+            console.log(users);
             res.json(users);
         });
     },
@@ -16,4 +18,4 @@ module.exports = {
     getUser : function(req,res){},
     editUser : function(req,res){},
     deleteUser :function(req,res){}
-}
+};

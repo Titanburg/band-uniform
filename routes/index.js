@@ -2,10 +2,10 @@
 module.exports = function(app,passport){
 
   var auth = require('./auth')(passport);
-  // var api = require('./api');
+  var api = require('./api');
 
   app.use('/auth',auth);
-  // app.use('/api',api);
+  app.use('/api',api);
 
   app.get('/partial/:name', isLoggedIn,function(req,res,next){
     res.render('partials/' + req.params.name);
