@@ -44,13 +44,13 @@
                     form.form
                         .form-group
                             label First name
-                            input.form-control(type='text' ng-value='user.local.firstName')
+                            input.form-control(type='text' ng-model='user.local.firstName')
                         .form-group
                             lable Last name
-                            input.form-control(type='text' ng-value='user.local.lastName')
+                            input.form-control(type='text' ng-model='user.local.lastName')
                         .form-group
                             lable Email
-                            input.form-control(type='email' ng-value='user.local.email')
+                            input.form-control(type='email' ng-model='user.local.email')
                 .modal-footer
                     button.btn.btn-default(type='button' data-dismiss='modal') Close
-                    button.btn.btn-primary(type='button') Save Changes
+                    button.btn.btn-primary(type='button' ng-click='sendUser()' data-dismiss='modal') Save Changes

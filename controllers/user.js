@@ -53,22 +53,26 @@ module.exports = {
 
     // Edit existing user
     editUser : function(req,res){
-        User.find({_id:req.body.email},function(err,user){
+        User.findOne({_id:req.params.id},function(err,user){
             if(err) return;
             if(user){
-                var newUser = new User();
-                newUser.local.email = req.body.email;
-                newUser.local.firstName = req.body.firstName;
-                newUser.local.lastName = req.body.lastName;
-                newUser.local.admin = req.body.admin;
-                newUser.local.password = newUser.generateHash(req.body.password);
-                newUser.save(function(err) {
+                console.log(user);
+                console.log(req);
+                user.local.email = req.body.local.email;
+                user.local.firstName = req.body.local.firstName;
+                user.local.lastName = req.body.local.lastName;
+                user.local.admin = req.body.local.admin;
+                if(req.body.password != ''){
+                    user.local.password = user.generateHash(req.body.password);
+                }
+                user.save(function(err) {
                     if (err)
                         throw err;
-                    return done(null, newUser);
+                    return;
                 });
             }else{
                 // No user handle
+                console.log("Not Found");
             }
         });
     },
