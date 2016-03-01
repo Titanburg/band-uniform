@@ -5,7 +5,7 @@ module.exports = function(app,passport){
   var api = require('./api');
 
   app.use('/auth',auth);
-  app.use('/api',api);
+  app.use('/api',isLoggedIn,api);
 
   app.get('/partial/:name', isLoggedIn,function(req,res,next){
     res.render('partials/' + req.params.name);
