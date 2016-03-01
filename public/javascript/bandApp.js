@@ -4,7 +4,7 @@ angular.module('bandApp',['ngRoute'])
     .config(function($routeProvider,$locationProvider){
         $routeProvider
             .when('/users',{
-                templateUrl: 'partials/users.jade',
+                templateUrl: 'partial/users.jade',
                 controller: 'usersController'
             });
         $locationProvider.html5Mode(true);
