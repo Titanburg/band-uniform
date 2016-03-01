@@ -28,7 +28,7 @@
                                 tr(ng-repeat='user in users | orderBy:"firstName"')
                                     td {{user.firstName}}
                                     td {{user.lastName}}
-                                    td {{user.email}}
+                                    td {{user.local.email}}
                                     td
                                         button.btn.btn-info(type='button' data-toggle='modal' data-target='#editUser') Edit
                                 tr
