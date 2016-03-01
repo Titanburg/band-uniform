@@ -1,3 +1,10 @@
 
 // bandApp angular module creation
-var bandApp = angular.module('bandApp',[]);
+angular.module('bandApp',[])
+    .config(function($routeProvider){
+        $routeProvider
+            .when('/users',{
+                templateUrl: 'partials/users.jade',
+                controller: 'usersController'
+            });
+    });
