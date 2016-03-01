@@ -11,8 +11,8 @@ module.exports = function(app,passport){
     res.render('partials/' + req.params.name);
   });
 
-  app.get('/*',function(req,res,next){
-    res.render('index');
+  app.get('/*',isLoggedIn,function(req,res,next){
+    res.render('index',{title:'Band Uniform'});
   });
 
   function isLoggedIn(req, res, next) {
