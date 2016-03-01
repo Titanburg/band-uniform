@@ -20,31 +20,30 @@ angular.module('bandApp')
             });
         };
         $scope.getUser = function(user){
-            console.log(user._id)
             $http.get('/api/user/' + user._id )
                 .success(function(data){
                     $scope.user = data;
-                    console.log(data)
                 }).error(function(err){
                 console.log(err);
             });
         };
         $scope.sendUser = function(){
-            if($scope.user = {}){
-                $http.post('/api/user/',$scope.user)
+            //if($scope.user = {}){
+            //    $http.post('/api/user/',$scope.user)
+            //        .success(function(data){
+            //
+            //        }).error(function(err){
+            //        console.log(err);
+            //    })
+            //}else{
+                console.log('sendpost')
+                $http.post('/api/user/' + $scope.user._id,$scope.user)
                     .success(function(data){
 
                     }).error(function(err){
                     console.log(err);
-                })
-            }else{
-                $http.post('/api/user/:' + $scope.user.local.id,$scope.user)
-                    .success(function(data){
-
-                    }).error(function(err){
-                    console.log(err);
-                })
-            }
+                });
+            //}
         }
 
     });
