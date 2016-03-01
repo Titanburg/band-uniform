@@ -30,7 +30,7 @@
                                     td {{user.local.lastName}}
                                     td {{user.local.email}}
                                     td
-                                        button.btn.btn-info(type='button' data-toggle='modal' data-target='#editUser') Edit
+                                        button.btn.btn-info(type='button' data-toggle='modal' data-target='#editUser' ng-click='getUser(user)') Edit
                                 tr
                                     td.success.text-center(colspan='4') Add User
     .modal.fade(id='editUser' tabindex='-1' role='dialog')
@@ -41,7 +41,16 @@
                         span(aria-hidden='true')
                     h4.modal-title Edit User
                 .modal-body
-                    p Test
+                    form.form
+                        .form-group
+                            label First name
+                            input.form-control(type='text' ng-value='user.local.firstName')
+                        .form-group
+                            lable Last name
+                            input.form-control(type='text' ng-value='user.local.lastName')
+                        .form-group
+                            lable Email
+                            input.form-control(type='email' ng-value='user.local.email')
                 .modal-footer
                     button.btn.btn-default(type='button' data-dismiss='modal') Close
                     button.btn.btn-primary(type='button') Save Changes

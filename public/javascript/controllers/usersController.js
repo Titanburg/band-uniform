@@ -19,10 +19,12 @@ angular.module('bandApp')
               console.log(err);
             });
         };
-        $scope.getUser = function(userID){
-            $http.get('/api/user/:' + userID )
+        $scope.getUser = function(user){
+            console.log(user._id)
+            $http.get('/api/user/' + user._id )
                 .success(function(data){
                     $scope.user = data;
+                    console.log(data)
                 }).error(function(err){
                 console.log(err);
             });
