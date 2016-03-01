@@ -2,4 +2,46 @@
    Created by Kyle Walter on 2/29/2016.
 
 .users
-    h1 {{title}}
+    .container-fluid
+        .row
+            .col-sm-8.col-sm-offset-2
+                .panel.panel-default
+                    .panel-heading
+                        h3 {{title}}
+                    .panel-body
+                        ul.nav.nav-pills
+                            li.active(role='presentation')
+                                a(href='#') Admin
+                            li(role='presentation')
+                                a(href='#') Woodwinds
+                            li(role='presentation')
+                                a(href='#') Sousas
+                            li(role='presentation')
+                                a(href='#') Percussion
+                        table.table.table-hover
+                            thead
+                                tr
+                                    th First Name
+                                    th Last Name
+                                    th Email
+                            tbody
+                                tr(ng-repeat='user in users | orderBy:"firstName"')
+                                    td {{user.firstName}}
+                                    td {{user.lastName}}
+                                    td {{user.email}}
+                                    td
+                                        button.btn.btn-info(type='button' data-toggle='modal' data-target='#editUser') Edit
+                                tr
+                                    td.success.text-center(colspan='4') Add User
+    .modal.fade(id='editUser' tabindex='-1' role='dialog')
+        .modal-dialog
+            .modal-content
+                .modal-header
+                    button.close(type='button' data-dismiss='modal' aria-label="Close")
+                        span(aria-hidden='true')
+                    h4.modal-title Edit User
+                .modal-body
+                    p Test
+                .modal-footer
+                    button.btn.btn-default(type='button' data-dismiss='modal') Close
+                    button.btn.btn-primary(type='button') Save Changes
