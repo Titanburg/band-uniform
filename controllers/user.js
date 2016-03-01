@@ -41,19 +41,19 @@ module.exports = {
 
     // Get single user from database
     getUser : function(req,res){
-        User.find({id:req.params.id},function(err,users){
-            if(err) return;
-            users.forEach(function(user){
-                user.local.password = '';
-            });
-            console.log(users);
-            res.json(users);
+        console.log("getUser called")
+        User.findById(mongoose.Types.ObjectId(req.params.id),function(err,user){
+            if(err) {
+                console.log(err);
+            }
+            user.local.password = '';
+            res.json(user);
         });
     },
 
     // Edit existing user
     editUser : function(req,res){
-        User.find({email:req.body.email},function(err,user){
+        User.find({_id:req.body.email},function(err,user){
             if(err) return;
             if(user){
                 var newUser = new User();
