@@ -1,6 +1,6 @@
 
 // bandApp angular module creation
-angular.module('bandApp',['ngRoute'])
+angular.module('bandApp')
     .config(function($routeProvider,$locationProvider){
         $routeProvider
             .when('/users',{
