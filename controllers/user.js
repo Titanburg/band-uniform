@@ -41,10 +41,10 @@ module.exports = {
 
     // Get single user from database
     getUser : function(req,res){
-        console.log("getUser called")
-        User.findById(mongoose.Types.ObjectId(req.params.id),function(err,user){
+        console.log("getUser called:",req.params.id)
+        User.findOne({_id:req.params.id},function(err,user){
             if(err) {
-                console.log(err);
+                console.log("Err",err);
             }
             user.local.password = '';
             res.json(user);
