@@ -44,7 +44,7 @@ angular.module('bandApp')
             if($scope.creating === true){
                $http.post('/api/user',$scope.user)
                    .success(function(data){
-                     $scope.getUsers();
+                     
                    }).error(function(err){
                    console.log(err);
                });
@@ -52,21 +52,22 @@ angular.module('bandApp')
             }else{
               $http.post('/api/user/' + $scope.user._id,$scope.user)
                   .success(function(data){
-                    $scope.getUsers();
+                    
                   }).error(function(err){
                   console.log(err);
               });
             }
+            $scope.getUsers();
 
         };
         $scope.deleteUser = function(user){
           $http.get('/api/user/delete/' + user._id )
               .success(function(data){
-                $scope.getUsers();
+                
               }).error(function(err){
               console.log(err);
           });
-
         };
+        $scope.getUsers();
 
     });
