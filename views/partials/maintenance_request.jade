@@ -1,0 +1,56 @@
+.maintenance(ng-init='getRequests()')
+    .container-fluid
+        .row
+            .col-sm-8.col-sm-offset-2
+                .panel.panel-default
+                    .panel-heading
+                        h3 {{title}}
+                    .panel-body
+                        ul.nav.nav-pills
+                            li.active(role='presentation')
+                                a(href='#') All
+                            li(role='presentation')
+                                a(href='#') Woodwinds
+                            li(role='presentation')
+                                a(href='#') Sousas
+                            li(role='presentation')
+                                a(href='#') Percussion
+                        table.table.table-hover
+                            thead
+                                tr
+                                    th First Name
+                                    th Last Name
+                                    th Email
+                            tbody
+                                tr(ng-repeat='user in users | orderBy:"firstName"')
+                                    td {{user.firstName}}
+                                    td {{user.lastName}}
+                                    td {{user.local.email}}
+                                    td
+                                        button.btn.btn-info(type='button' data-toggle='modal' data-target='#editUser') Edit
+                                tr
+                                    td.success.text-center(colspan='4') New Request
+                            button.btn.btn-info(type='button' data-toggle='modal' data-target='#editUser') Edit
+    .modal.fade(id='editUser' tabindex='-1' role='dialog')
+        .modal-dialog
+            .modal-content
+                .modal-header
+                    button.close(type='button' data-dismiss='modal' aria-label="Close")
+                        span(aria-hidden='true')
+                    h4.modal-title Edit User
+                .modal-body
+                  form(name="maintenance_request", method="post")
+                    - var parts = { 1: 'jacket', 2: 'jumpsuit', 3: 'hat', 4: 'glove', 5: 'other' }
+                    label Piece:
+                    select(name="part")
+                      each part, i in parts
+                        option(value=i) #{parts}
+                    br
+                    label Descibe what is wrong:
+                    br
+                    textarea(rows="4" cols="50")
+                    br
+                    input(type="submit" value="submit")
+                    input(type="submit" value="clear")
+                .modal-footer
+                    button.btn.btn-default(type='button' data-dismiss='modal') Cancel
