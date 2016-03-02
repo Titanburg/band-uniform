@@ -4,53 +4,69 @@
 .users(ng-init='getUsers()')
     .container-fluid
         .row
-            .col-sm-8.col-sm-offset-2
+            .col-sm-10.col-sm-offset-1
                 .panel.panel-default
                     .panel-heading
                         h3 {{title}}
                     .panel-body
                         ul.nav.nav-pills
-                            li.active(role='presentation')
-                                a(href='#') Admin
-                            li(role='presentation')
-                                a(href='#') Woodwinds
-                            li(role='presentation')
-                                a(href='#') Sousas
-                            li(role='presentation')
-                                a(href='#') Percussion
+                          li.active(role='presentation')
+                            a(href='#') Admin
+                          li(role='presentation')
+                            a(href='#') Woodwinds
+                          li(role='presentation')
+                            a(href='#') Sousas
+                          li(role='presentation')
+                            a(href='#') Percussion
                         table.table.table-hover
-                            thead
-                                tr
-                                    th First Name
-                                    th Last Name
-                                    th Email
-                            tbody
-                                tr(ng-repeat='user in users | orderBy:"firstName"')
-                                    td {{user.local.firstName}}
-                                    td {{user.local.lastName}}
-                                    td {{user.local.email}}
-                                    td
-                                        button.btn.btn-info(type='button' data-toggle='modal' data-target='#editUser' ng-click='getUser(user)') Edit
-                                tr
-                                    td.success.text-center(colspan='4') Add User
+                          thead
+                            tr
+                              th First Name
+                              th Last Name
+                              th Email
+                              th Admin
+                          tbody
+                            tr(ng-repeat='user in users | orderBy:"firstName"')
+                              td {{user.local.firstName}}
+                              td {{user.local.lastName}}
+                              td {{user.local.email}}
+                              td {{user.local.admin}}
+                              td  
+                                a.btn(data-toggle='modal' data-target='#editUser' ng-click='getUser(user)')
+                                  span.glyphicon.glyphicon-cog
+                                a.btn(ng-click='deleteUser(user)')
+                                  span.glyphicon.glyphicon-trash.text-danger
+                    .panel-footer
+                      button.btn.btn-success(data-toggle='modal' data-target='#editUser' type='button' ng-click='createUser()') Add User
     .modal.fade(id='editUser' tabindex='-1' role='dialog')
-        .modal-dialog
-            .modal-content
-                .modal-header
-                    button.close(type='button' data-dismiss='modal' aria-label="Close")
-                        span(aria-hidden='true')
-                    h4.modal-title Edit User
-                .modal-body
-                    form.form
-                        .form-group
-                            label First name
-                            input.form-control(type='text' ng-model='user.local.firstName')
-                        .form-group
-                            lable Last name
-                            input.form-control(type='text' ng-model='user.local.lastName')
-                        .form-group
-                            lable Email
-                            input.form-control(type='email' ng-model='user.local.email')
-                .modal-footer
-                    button.btn.btn-default(type='button' data-dismiss='modal') Close
-                    button.btn.btn-primary(type='button' ng-click='sendUser()' data-dismiss='modal') Save Changes
+      .modal-dialog
+          .modal-content
+              .modal-header
+                button.close(type='button' data-dismiss='modal' aria-label="Close")
+                  span(aria-hidden='true')
+                h4.modal-title Edit {{user.local.firstName + ' ' + user.local.lastName}}
+              .modal-body
+                  //- .row
+                  //-   .col-sm-3
+                  //-     img.img-thumbnail.pull-right(width='50px' height='50px')
+                  form.form-horizontal
+                    .form-group
+                      label.col-sm-3.control-label First name
+                      .col-sm-9
+                        input.form-control(type='text' ng-model='user.local.firstName')
+                    .form-group
+                      label.col-sm-3.control-label Last name
+                      .col-sm-9
+                        input.form-control(type='text' ng-model='user.local.lastName')
+                    .form-group
+                      label.col-sm-3.control-label Email
+                      .col-sm-9
+                        input.form-control(type='email' ng-model='user.local.email')
+                    .form-group
+                      label.col-sm-3.control-label Admin
+                      .col-sm-9
+                        input(type='checkbox' ng-model='user.local.admin')
+                    p {{user}}
+              .modal-footer
+                button.btn.btn-default(type='button' data-dismiss='modal') Close
+                button.btn.btn-primary(type='button' ng-click='sendUser()' data-dismiss='modal') Save Changes

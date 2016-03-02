@@ -3,12 +3,12 @@
  */
 angular.module('bandApp')
     .controller('usersController',function($scope,$http){
-        $scope.title = "This is the users page.";
+        $scope.title = "Users";
         $scope.creating = false;
         $scope.user = {};
         $scope.users = [];
         $scope.createUser = function(){
-            $scope.creating = false;
+            $scope.creating = true;
             $scope.user = {};
         };
         $scope.getUsers = function(){
@@ -28,22 +28,32 @@ angular.module('bandApp')
             });
         };
         $scope.sendUser = function(){
-            //if($scope.user = {}){
-            //    $http.post('/api/user/',$scope.user)
-            //        .success(function(data){
-            //
-            //        }).error(function(err){
-            //        console.log(err);
-            //    })
-            //}else{
-                console.log('sendpost')
-                $http.post('/api/user/' + $scope.user._id,$scope.user)
-                    .success(function(data){
+            if($scope.creating === true){
+               $http.post('/api/user',$scope.user)
+                   .success(function(data){
+                     $scope.getUsers();
+                   }).error(function(err){
+                   console.log(err);
+               });
+               $scope.creating = false;
+            }else{
+              $http.post('/api/user/' + $scope.user._id,$scope.user)
+                  .success(function(data){
+                    $scope.getUsers();
+                  }).error(function(err){
+                  console.log(err);
+              });
+            }
 
-                    }).error(function(err){
-                    console.log(err);
-                });
-            //}
-        }
+        };
+        $scope.deleteUser = function(user){
+          $http.get('/api/user/delete/' + user._id )
+              .success(function(data){
+                $scope.getUsers();
+              }).error(function(err){
+              console.log(err);
+          });
+
+        };
 
     });
