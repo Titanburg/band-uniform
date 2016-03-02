@@ -19,21 +19,24 @@ module.exports = {
 
     // Create new user in database
     newUser : function(req,res){
-        User.find({email:req.body.email},function(err,user){
+
+        User.findOne({'local.email':req.body.local.email},function(err,user){
+            console.log(user);
             if(err) return;
             if(user){
+                console.log('here');
                 // User already exists handle
             }else{
+                console.log(user);
                 var newUser = new User();
-                newUser.local.email = req.body.email;
-                newUser.local.firstName = req.body.firstName;
-                newUser.local.lastName = req.body.lastName;
-                newUser.local.admin = req.body.admin;
-                newUser.local.password = newUser.generateHash(req.body.password);
+                newUser.local.email = req.body.local.email;
+                newUser.local.firstName = req.body.local.firstName;
+                newUser.local.lastName = req.body.local.lastName;
+                newUser.local.admin = req.body.local.admin;
+                // newUser.local.password = newUser.generateHash(req.body.password);
                 newUser.save(function(err) {
                     if (err)
                         throw err;
-                    return done(null, newUser);
                 });
             }
         });
@@ -56,8 +59,6 @@ module.exports = {
         User.findOne({_id:req.params.id},function(err,user){
             if(err) return;
             if(user){
-                console.log(user);
-                console.log(req);
                 user.local.email = req.body.local.email;
                 user.local.firstName = req.body.local.firstName;
                 user.local.lastName = req.body.local.lastName;
@@ -79,21 +80,8 @@ module.exports = {
 
     // Delete user
     deleteUser :function(req,res){
-        User.find({email:req.body.email},function(err,user){
-            if(err) return;
-            if(!user){
-                var newUser = new User();
-                newUser.local.email = req.body.email;
-                newUser.local.firstName = req.body.firstName;
-                newUser.local.lastName = req.body.lastName;
-                newUser.local.admin = req.body.admin;
-                newUser.local.password = newUser.generateHash(req.body.password);
-                newUser.save(function(err) {
-                    if (err)
-                        throw err;
-                    return done(null, newUser);
-                });
-            }
-        });
+      User.findOne({_id:req.params.id},function(err,user){
+        user.remove().exec($scope.getUsers());
+      });
     }
 };
