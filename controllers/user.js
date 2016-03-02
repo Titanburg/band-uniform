@@ -19,7 +19,6 @@ module.exports = {
 
     // Create new user in database
     newUser : function(req,res){
-
         User.findOne({'local.email':req.body.local.email},function(err,user){
             console.log(user);
             if(err) return;
@@ -37,6 +36,14 @@ module.exports = {
                 newUser.save(function(err) {
                     if (err)
                         throw err;
+                     User.find({},function(err,users){
+                        if(err) return;
+                        users.forEach(function(user){
+                            user.local.password = '';
+                        });
+                        console.log(users);
+                        res.json(users);
+                    });
                 });
             }
         });
@@ -69,19 +76,40 @@ module.exports = {
                 user.save(function(err) {
                     if (err)
                         throw err;
-                    return;
+                    User.find({},function(err,users){
+                        if(err) return;
+                        users.forEach(function(user){
+                            user.local.password = '';
+                        });
+                        console.log(users);
+                        res.json(users);
+                    });
                 });
             }else{
                 // No user handle
                 console.log("Not Found");
             }
         });
+        
     },
 
     // Delete user
     deleteUser :function(req,res){
       User.findOne({_id:req.params.id},function(err,user){
-        user.remove().exec($scope.getUsers());
+        if(err)
+            throw err;
+        user.remove(function(err,remove){
+            if(err)
+                throw err;
+            User.find(function(err,users){
+                if(err) return;
+                users.forEach(function(user){
+                    user.local.password = '';
+                });
+                console.log(users);
+                res.json(users);
+            });
+        });
       });
     }
 };
