@@ -7,6 +7,19 @@ angular.module('bandApp')
         $scope.creating = false;
         $scope.user = {};
         $scope.users = [];
+        $scope.order = 'local.firstName';
+        $scope.filter = '';
+
+        // Helper Functions
+        $scope.setOrder = function(order){
+          $scope.order= 'local.' + order;
+        };
+        $scope.setFilter = function(filter,value){
+          // $scope.filter = filter + ':' + value ;
+          // console.log($scope.filter);
+        };
+
+        // Crud Functions
         $scope.createUser = function(){
             $scope.creating = true;
             $scope.user = {};
