@@ -11,22 +11,32 @@
                     .panel-body
                         ul.nav.nav-pills
                           li.active(role='presentation')
-                            a(href='#') Admin
+                            a(href="#") All
                           li(role='presentation')
-                            a(href='#') Woodwinds
+                            a(href="#" ng-click='setFilter("local.admin","true")') Admin
                           li(role='presentation')
-                            a(href='#') Sousas
+                            a(href='#' ng-click='setFilter("local.admin","true")') Woodwinds
                           li(role='presentation')
-                            a(href='#') Percussion
+                            a(href='#' ng-click='setFilter("local.admin","true")') Sousas
+                          li(role='presentation')
+                            a(href='#' ng-click='setFilter("local.admin","true")') Percussion
                         table.table.table-hover
                           thead
                             tr
                               th First Name
+                                a.btn(ng-click='setOrder("firstName")')
+                                  span.glyphicon.glyphicon-sort-by-alphabet
                               th Last Name
+                                a.btn(ng-click='setOrder("lastName")')
+                                  span.glyphicon.glyphicon-sort-by-alphabet
                               th Email
+                                a.btn(ng-click='setOrder("email")')
+                                  span.glyphicon.glyphicon-sort-by-alphabet
                               th Admin
+                                a.btn(ng-click='setOrder("admin")')
+                                  span.glyphicon.glyphicon-sort-by-alphabet
                           tbody
-                            tr(ng-repeat='user in users | orderBy:"firstName"')
+                            tr(ng-repeat='user in users | orderBy:order | filter:filter')
                               td {{user.local.firstName}}
                               td {{user.local.lastName}}
                               td {{user.local.email}}
