@@ -2,7 +2,7 @@ var request = require('../models/maintenance_request.js');
 
 module.exports = {
     getRequests : function(req,res){
-        request.find({},function(err,maintenance_request){
+        request.find({},function(err,request){
             if(err) return;
             console.log(requests);
             res.json(requests);

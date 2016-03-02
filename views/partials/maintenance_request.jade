@@ -20,18 +20,19 @@
                                 tr
                                     th First Name
                                     th Last Name
-                                    th Email
+                                    th Piece
+                                    th Discription
                             tbody
-                                tr(ng-repeat='user in users | orderBy:"firstName"')
-                                    td {{user.firstName}}
-                                    td {{user.lastName}}
-                                    td {{user.local.email}}
-                                    td
+                                tr(ng-repeat='request in requests | orderBy:"firstName"')
+                                    td {{request.local.firstName}}
+                                    td {{request.local.lastName}}
+                                    td {{request.local.piece}}
+                                    td {{request.local.desription}}
                                         button.btn.btn-info(type='button' data-toggle='modal' data-target='#editUser') Edit
                                 tr
                                     td.success.text-center(colspan='4') New Request
-                            button.btn.btn-info(type='button' data-toggle='modal' data-target='#editUser') Edit
-    .modal.fade(id='editUser' tabindex='-1' role='dialog')
+                            button.btn.btn-info(type='button' data-toggle='modal' data-target='#editRequest') Edit
+    .modal.fade(id='editRequest' tabindex='-1' role='dialog')
         .modal-dialog
             .modal-content
                 .modal-header
@@ -40,11 +41,14 @@
                     h4.modal-title Edit User
                 .modal-body
                   form(name="maintenance_request", method="post")
-                    - var parts = { 1: 'jacket', 2: 'jumpsuit', 3: 'hat', 4: 'glove', 5: 'other' }
                     label Piece:
                     select(name="part")
-                      each part, i in parts
-                        option(value=i) #{parts}
+                        option jacket
+                        option jumpsuit
+                        option hat
+                        option glove
+                        option other
+                        
                     br
                     label Descibe what is wrong:
                     br
