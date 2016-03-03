@@ -11,15 +11,15 @@
                     .panel-body
                         ul.nav.nav-pills
                           li.active(role='presentation')
-                            a(href="#") All
+                            a(href="#" ng-click='setFilter()') All
                           li(role='presentation')
-                            a(href="#" ng-click='setFilter("local.admin","true")') Admin
+                            a(href="#" ng-click='setFilter("true")') Admin
                           li(role='presentation')
-                            a(href='#' ng-click='setFilter("local.admin","true")') Woodwinds
+                            a(href='#' ng-click='setFilter("Woodwinds")') Woodwinds
                           li(role='presentation')
-                            a(href='#' ng-click='setFilter("local.admin","true")') Sousas
+                            a(href='#' ng-click='setFilter("Sousas")') Sousas
                           li(role='presentation')
-                            a(href='#' ng-click='setFilter("local.admin","true")') Percussion
+                            a(href='#' ng-click='setFilter("Percussion")') Percussion
                         table.table.table-hover
                           thead
                             tr
@@ -85,7 +85,14 @@
                     .form-group
                       label.col-sm-3.control-label Confirm
                       .col-sm-9
-                        input(type='password' ng-model='confirmPassword')
+                        input(type='password' ng-model='confirmPass')
+                    hr(ng-hide='simpleView')
+                    .form-group(ng-hide='simpleView')
+                      label.col-sm-3.control-label Instrument
+                      .col-sm-9
+                        input(type='text' ng-model='user.other.instrument')
+                  
               .modal-footer
+                a.btn.pull-left(ng-click='toggleMode()') Advanced 
                 button.btn.btn-default(type='button' data-dismiss='modal') Close
                 button.btn.btn-primary(type='button' ng-click='sendUser()' data-dismiss='modal') Save Changes
