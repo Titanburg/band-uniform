@@ -33,6 +33,7 @@ module.exports = {
                 newUser.local.lastName = req.body.local.lastName;
                 newUser.local.admin = req.body.local.admin;
                 newUser.local.password = newUser.generateHash(req.body.local.password);
+                newUser.other.instrument = req.body.other.instrument;
                 newUser.save(function(err) {
                     if (err)
                         throw err;
@@ -73,6 +74,7 @@ module.exports = {
                 if(req.body.local.password != ''){
                     user.local.password = user.generateHash(req.body.local.password);
                 }
+                user.other.instrument = req.body.other.instrument;
                 user.save(function(err) {
                     if (err)
                         throw err;
