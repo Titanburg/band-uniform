@@ -13,5 +13,10 @@ block content
       .collapse.navbar-collapse(id='band-navbar')
         ul.nav.navbar-nav
           li
-            a(href='/users' Users) Users
+            a(href='/users') Users
+        ul.nav.navbar-nav.navbar-right
+          li
+            a(href='#')= user.name
+          li
+            a(href='/logout') Logout
   .content(ng-view)
