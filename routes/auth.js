@@ -22,7 +22,7 @@ module.exports = function(passport){
   }));
   router.get('/logout',function(req,res,next){
     req.logout();
-    res.redirect('/');
+    res.redirect('/auth/login')
   })
 
   return router;
