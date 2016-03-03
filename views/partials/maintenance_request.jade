@@ -15,7 +15,7 @@
                               th Piece
                               th Description
                           tbody
-                            tr(ng-repeat='request in requests')
+                            tr(ng-repeat='request in requests | orderBy:firstName')
                               td {{request.firstName}}
                               td {{request.lastName}}
                               td {{request.piece}}

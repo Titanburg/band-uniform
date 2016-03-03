@@ -66,7 +66,7 @@ angular.module('bandApp')
         };
 
         $scope.deleteRequest = function(request){
-            $http.get('/api/request/delete/' + request._id )
+            $http.get('/api/maintenance_request/delete/' + request._id )
             .success(function(data){
               $scope.requests = data;
             }).error(function(err){
