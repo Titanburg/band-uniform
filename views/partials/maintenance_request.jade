@@ -1,63 +1,66 @@
 .maintenance(ng-init='getRequests()')
     .container-fluid
         .row
-            .col-sm-8.col-sm-offset-2
+            .col-sm-10.col-sm-offset-1
                 .panel.panel-default
                     .panel-heading
                         h3 {{title}}
                     .panel-body
-                        ul.nav.nav-pills
-                            li.active(role='presentation')
-                                a(href='#') All
-                            li(role='presentation')
-                                a(href='#') Woodwinds
-                            li(role='presentation')
-                                a(href='#') Sousas
-                            li(role='presentation')
-                                a(href='#') Percussion
+                      
                         table.table.table-hover
-                            thead
-                                tr
-                                    th First Name
-                                    th Last Name
-                                    th Piece
-                                    th Discription
-                            tbody
-                                tr(ng-repeat='request in requests | orderBy:"firstName"')
-                                    td {{request.local.firstName}}
-                                    td {{request.local.lastName}}
-                                    td {{request.local.piece}}
-                                    td {{request.local.desription}}
-                                        button.btn.btn-info(type='button' data-toggle='modal' data-target='#editUser') Edit
-                                tr
-                                    td.success.text-center(colspan='4') New Request
-                            button.btn.btn-info(type='button' data-toggle='modal' data-target='#editRequest') Edit
+                          thead
+                            tr
+                              th First Name
+                              th Last Name
+                              th Piece
+                              th Description
+                          tbody
+                            tr(ng-repeat='request in requests')
+                              td {{request.firstName}}
+                              td {{request.lastName}}
+                              td {{request.piece}}
+                              td {{request.description}}
+                              td  
+                                a.btn(data-toggle='modal' data-target='#editRequest' ng-click='getRequest(request)')
+                                  span.glyphicon.glyphicon-cog
+                                a.btn(ng-click='deleteRequest(request)')
+                                  span.glyphicon.glyphicon-trash.text-danger
+                    .panel-footer
+                      button.btn.btn-success(data-toggle='modal' data-target='#editRequest' type='button' ng-click='createRequest()') New Request
     .modal.fade(id='editRequest' tabindex='-1' role='dialog')
-        .modal-dialog
-            .modal-content
-                .modal-header
-                    button.close(type='button' data-dismiss='modal' aria-label="Close")
-                        span(aria-hidden='true')
-                    h4.modal-title Edit User
-                .modal-body
-                  form(name="maintenance_request" method="post" action="api/maintenance_request/")
-                    label Name: 
-                    input(type="text", name="user" placeholder="First") 
-                    input(type="text", name="user" placeholder="Last")
-                    br
-                    label Piece:
-                    select(name="part")
-                        option jacket
-                        option jumpsuit
-                        option hat
-                        option glove
-                        option other    
-                    br
-                    label Descibe what is wrong:
-                    br
-                    textarea(rows="4" cols="50")
-                    br
-                    button(type="submit") Submit
-                    button(type="submit") Clear
-                .modal-footer
-                    button.btn.btn-default(type='button' data-dismiss='modal') Cancel
+      .modal-dialog
+          .modal-content
+              .modal-header
+                button.close(type='button' data-dismiss='modal' aria-label="Close")
+                  span(aria-hidden='true')
+                h4.modal-title Edit Request
+              .modal-body
+                  //- .row
+                  //-   .col-sm-3
+                  //-     img.img-thumbnail.pull-right(width='50px' height='50px')
+                  form.form-horizontal
+                    .for
+                    .form-group
+                      label.col-sm-3.control-label First name
+                      .col-sm-9
+                        input.form-control(type='text' ng-model='request.firstName')
+                    .form-group
+                      label.col-sm-3.control-label Last name
+                      .col-sm-9
+                        input.form-control(type='text' ng-model='request.lastName')
+                    .form-group
+                      label.col-sm-3.control-label Piece
+                      .col-sm-9
+                        select.form-control(ng-model='request.piece')
+                          option(value="jacket") Jacket
+                          option(value="jumpsuit") Jumpsuit
+                          option(value="hat") Hat
+                          option(value="gloves") Gloves
+                          option(value="other") Other
+                    .form-group
+                      label.col-sm-3.control-label Description
+                      .col-sm-9
+                        textarea(rows="4" cols="50" ng-model='request.description')  
+              .modal-footer 
+                button.btn.btn-default(type='button' data-dismiss='modal') Close
+                button.btn.btn-primary(type='button' ng-click='sendRequest()' data-dismiss='modal') Save Changes
