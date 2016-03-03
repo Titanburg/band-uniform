@@ -71,6 +71,7 @@
   require('./controllers/passport.js')(passport);
 
   app.use('/bower_components',express.static(path.join(__dirname,'/bower_components')));
+  app.use('/fonts',express.static(path.join(__dirname,'/bower_components/bootstrap/fonts')));
   app.use(express.static(path.join(__dirname, 'public')));
 
 
