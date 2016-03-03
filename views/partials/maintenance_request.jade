@@ -40,21 +40,24 @@
                         span(aria-hidden='true')
                     h4.modal-title Edit User
                 .modal-body
-                  form(name="maintenance_request", method="post")
+                  form(name="maintenance_request" method="post" action="api/maintenance_request/")
+                    label Name: 
+                    input(type="text", name="user" placeholder="First") 
+                    input(type="text", name="user" placeholder="Last")
+                    br
                     label Piece:
                     select(name="part")
                         option jacket
                         option jumpsuit
                         option hat
                         option glove
-                        option other
-                        
+                        option other    
                     br
                     label Descibe what is wrong:
                     br
                     textarea(rows="4" cols="50")
                     br
-                    input(type="submit" value="submit")
-                    input(type="submit" value="clear")
+                    button(type="submit") Submit
+                    button(type="submit") Clear
                 .modal-footer
                     button.btn.btn-default(type='button' data-dismiss='modal') Cancel
