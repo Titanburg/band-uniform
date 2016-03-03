@@ -10,6 +10,12 @@ angular.module('bandApp',['ngRoute'])
             .when('/maintenance_request',{
                 templateUrl: 'partial/maintenance_request.jade',
                 controller: 'maintenanceController'
-            });
+            })
+            .when('/logout',{
+                templateUrl: 'partial/logout.jade',
+                controller: 'logout'
+            })
         $locationProvider.html5Mode(true);
+    }).controller('logout',function($scope,$window){
+        $window.location.href = '/auth/logout';
     });
