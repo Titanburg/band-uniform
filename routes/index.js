@@ -12,7 +12,7 @@ module.exports = function(app,passport){
   });
 
   app.get('/*',isLoggedIn,function(req,res,next){
-    res.render('index',{title:'Band Uniform'});
+    res.render('index',{title:'Band Uniform Management Utility',user:{name:req.user.local.firstName}});
   });
 
   function isLoggedIn(req, res, next) {
