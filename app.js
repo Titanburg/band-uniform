@@ -10,7 +10,7 @@
 
   // Style and Icon
   //var favicon = require('serve-favicon');
-  //var lessMiddleware = require('less-middleware');
+  var lessMiddleware = require('less-middleware');
 
   // Database Setup
   var mongoose = require('mongoose');
@@ -55,7 +55,7 @@
 
   // Icon and style setup
   // app.use(favicon(__dirname + '/public/favicon.ico'));
-  // app.use(lessMiddleware(__dirname + '/public'));
+  app.use(lessMiddleware(__dirname + '/public'));
 
   // Express utilities
   app.use(logger('dev'));
@@ -70,6 +70,8 @@
   app.use(flash());
   require('./controllers/passport.js')(passport);
 
+  app.use('/bower_components',express.static(path.join(__dirname,'/bower_components')));
+  app.use('/fonts',express.static(path.join(__dirname,'/bower_components/bootstrap/fonts')));
   app.use(express.static(path.join(__dirname, 'public')));
 
 

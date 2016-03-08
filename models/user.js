@@ -5,7 +5,9 @@ var userSchema  = mongoose.Schema({
     local           : {
         email       : String,
         password    : String,
-        admin       : Boolean
+        admin       : Boolean,
+        firstName   : String,
+        lastName    : String
     },
     uniform:{
         jacket      : Number,
@@ -26,7 +28,7 @@ var userSchema  = mongoose.Schema({
     },
     other:{
       instrument    : String,
-      years         : String      
+      years         : String
     }
 });
 

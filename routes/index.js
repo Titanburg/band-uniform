@@ -1,24 +1,24 @@
 
 module.exports = function(app,passport){
 
-  var user = require('./user')(passport);
-  // var api = require('./api');
+  var auth = require('./auth')(passport);
+  var api = require('./api');
 
-  app.use('/user',user);
-  // app.use('/api',api);
+  app.use('/auth',auth);
+  app.use('/api',isLoggedIn,api);
 
-  app.get('/dashboard', isLoggedIn,function(req,res,next){
-    res.render('index',{title: 'Titanburg Band Uniform'});
+  app.get('/partial/:name', isLoggedIn,function(req,res,next){
+    res.render('partials/' + req.params.name);
   });
 
-  app.get('/*',function(req,res,next){
-    res.redirect('/dashboard');
+  app.get('/*',isLoggedIn,function(req,res,next){
+    res.render('index',{title:'Band Uniform Management Utility',user:{name:req.user.local.firstName}});
   });
 
   function isLoggedIn(req, res, next) {
     if (req.isAuthenticated())
       return next();
-    res.redirect('/user/login');
+    res.redirect('/auth/login');
   }
 
 };

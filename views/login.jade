@@ -1,16 +1,49 @@
 extends layout
 
 block content
-  form(action='/user/login' method='post')
-    h1.text-center.title= title
-    - if(message.length > 0)
-        .alert.alert-danger= message
-    .form-group
-      label Email
-      input(type='text' name='email' placeholder='Email')
-    .form-group
-      label Password
-      input(type='password' name='password' placeholder='Password')
-    p Don't have an account?
-      a(href='/user/signup') Signup
-    button(type='submit') Submit
+  .login-page
+    .login-overlay
+    .login-bar
+      img(src="/images/mblogo.png", width='200px', alt="MB Man Logo")
+      h1 Band Uniform Management Utility
+      form(name='login', class="login-input", action='/auth/login', method='post')
+        input(type='email', class="text", name='email', placeholder='Email')
+        br
+        input(type='password', class="text", name='password', placeholder='Password')
+        br
+        input(type='submit', class="signin-btn", value='Sign In')
+        button(type='button', class="reqacc-btn" data-toggle='modal', data-target='#myModal')
+          | Request Account
+      #myModal.modal.fade(tabindex='-1', role='dialog', aria-labelledby='myModalLabel')
+        .modal-dialog(role='document')
+          .modal-content
+            .modal-header
+              button.close(type='button', data-dismiss='modal', aria-label='Close')
+                span(aria-hidden='true') x
+              h4#myModalLabel.modal-title Account Sign Up Form
+            .modal-body
+              form(action='/auth/signup' method='post')
+                - if(message.length > 0)
+                  .alert.alert-danger= message
+                .form-group
+                  input(type='text' class="text", name='email', placeholder='Email')
+                .form-group
+                  input(type='password' class="text", name='password' placeholder='Password')
+                button(type='submit' class="signup-btn") Submit
+            .modal-footer
+              | .
+      .group-name
+        h2.muted
+          | Created by Titanburg
+      .creators
+        p.muted
+          | Kyle Walter
+          br
+          | Kirk Powell
+          br
+          | Kaitlyn Jarret
+          br
+          | Andrew Korous
+      .copyright
+        p.muted
+          | Copyright © 2016 Titanburg Technologies

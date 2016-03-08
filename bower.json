@@ -1,0 +1,19 @@
+{
+  "name": "band-uniform",
+  "description": "Tool to assist selection and allocation of band uniforms",
+  "main": "",
+  "authors": [
+    "Powell",
+    "Walter",
+    "Jarrett & Korous"
+  ],
+  "license": "ISC",
+  "homepage": "https://github.com/Titanburg/band-uniform",
+  "moduleType": [],
+  "dependencies": {
+    "jquery": "^2.2.1",
+    "bootstrap": "^3.3.6",
+    "angular": "^1.5.0",
+    "angular-route": "^1.5.0"
+  }
+}
