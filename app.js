@@ -64,7 +64,17 @@
   app.use(cookieParser());
 
   // Passport setup
-  app.use(session({secret:'thisisasuperdupersecret',cookie:{_expires:60000}}));
+  // TODO: Delete next line after code review
+  // app.use(session({secret:'thisisasuperdupersecret',cookie:{_expires:60000}}));
+  app.use(session({
+    secret: 'thisisasuperdupersecret',
+    cookie: { maxAge: 60000 },
+    name: 'band-uniform',
+    // store: sessionStore, // connect-mongo session store TODO: Make this applicable to Postgres?
+    proxy: true,
+    resave: true,
+    saveUninitialized: true
+  }));
   app.use(passport.initialize());
   app.use(passport.session());
   app.use(flash());
@@ -118,5 +128,7 @@
     });
   });
 
+// Confirm application started
+console.log('Band-Uniform:  Application Started ...');
 
 module.exports = app;

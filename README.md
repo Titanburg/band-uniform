@@ -17,13 +17,14 @@ CS 435 Project
 
 ## Application Instructions
 
-1.  Install Node.js on your local system
-2.  Create a directory where you want the application stored
-3.  Download and unzip ```band-uniform``` to your directory
-4.  Navigate to a command prompt
-5.	Type in ```npm install```
-6.  Then type in ```npm start```
-7.  Navigate to a web browser
-8.  Enter the URI ```localhost:3000```
+- Install Node.js
+- Install MongoDB
+- Create a directory where you want the application stored
+- Download and unzip ```band-uniform``` to your directory
+- Navigate to a command prompt in the directory where you installed the application
+- Type in ```npm install```
+- Then type in ```npm start```
+- Navigate to a web browser
+- Enter the URI ```localhost:4444```
 
 ## Your application is installed and functional
