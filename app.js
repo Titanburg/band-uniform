@@ -27,6 +27,7 @@
 
   // Initialize App
   var app = express();
+  var sessionStore = new session.MemoryStore;
 
 ///////////////////////////////////////////////////////////////////
 // Database Setup                                                //
@@ -70,7 +71,7 @@
     secret: 'thisisasuperdupersecret',
     cookie: { maxAge: 60000 },
     name: 'band-uniform',
-    // store: sessionStore, // connect-mongo session store TODO: Make this applicable to Postgres?
+    store: sessionStore, // connect-mongo session store TODO: Make this applicable to Postgres?
     proxy: true,
     resave: true,
     saveUninitialized: true
@@ -84,7 +85,6 @@
   app.use('/fonts',express.static(path.join(__dirname,'/bower_components/bootstrap/fonts')));
   app.use(express.static(path.join(__dirname, 'public')));
 
-
 ///////////////////////////////////////////////////////////////////
 //  Add Routes                                                   //
 ///////////////////////////////////////////////////////////////////
@@ -96,6 +96,12 @@
 ///////////////////////////////////////////////////////////////////
 //  Error Handlers                                               //
 ///////////////////////////////////////////////////////////////////
+
+  // // Middleware for connect-flash messages
+  // app.use(function(req, res, next){
+  //   res.locals.messages = req.flash();
+  //   next();
+  // });
 
   // catch 404 and forward to error handler
   app.use(function(req, res, next) {
@@ -128,7 +134,9 @@
     });
   });
 
+
+
 // Confirm application started
 console.log('Band-Uniform:  Application Started ...');
-
+console.log('---------------------------------------------------------------------------------------------------');
 module.exports = app;

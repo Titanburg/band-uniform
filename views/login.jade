@@ -5,8 +5,11 @@ block content
     .login-overlay
     .login-bar
       img(src="/images/mblogo.png", width='200px', alt="MB Man Logo")
-      h1 Band Uniform Management Utility
+      p.h1 Band Uniform Management Utility
       form(name='login', class="login-input", action='/auth/login', method='post')
+        -if(messages)
+          .alert.alert-danger=messages
+        br
         input(type='email', class="text", name='email', placeholder='Email')
         br
         input(type='password', class="text", name='password', placeholder='Password')
@@ -23,8 +26,6 @@ block content
               h4#myModalLabel.modal-title Account Sign Up Form
             .modal-body
               form(action='/auth/signup' method='post')
-                - if(message.length > 0)
-                  .alert.alert-danger= message
                 .form-group
                   input(type='text' class="text", name='email', placeholder='Email')
                 .form-group

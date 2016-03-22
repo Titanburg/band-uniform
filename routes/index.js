@@ -5,7 +5,7 @@ module.exports = function(app,passport){
   var api = require('./api');
 
   app.use('/auth',auth);
-  app.use('/api',isLoggedIn,api);
+  app.use('/api',api);
 
   app.get('/partial/:name', isLoggedIn,function(req,res,next){
     res.render('partials/' + req.params.name);
@@ -18,7 +18,9 @@ module.exports = function(app,passport){
   function isLoggedIn(req, res, next) {
     if (req.isAuthenticated())
       return next();
-    res.redirect('/auth/login');
+    console.log('Not Logged In');
+    req.flash('authentication', "Authentication Required");
+    res.render('login', {messages: req.flash('authentication')});
   }
 
 };
