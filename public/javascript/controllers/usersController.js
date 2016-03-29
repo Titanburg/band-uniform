@@ -7,11 +7,15 @@ angular.module('bandApp')
         $scope.creating = false;
         $scope.user = {};
         $scope.users = [];
-        $scope.order = 'local.firstName';
-        $scope.filter = '';
         $scope.confirmPass = '';
         $scope.simpleView = true;
-        
+
+        // Ordering
+        $scope.order = 'local.firstName';
+
+        // Filtering
+        $scope.selection = 1;
+        $scope.filter = '';
 
         // Helper Functions
         $scope.setOrder = function(order){
@@ -22,7 +26,16 @@ angular.module('bandApp')
         };
         $scope.toggleMode = function(){
           $scope.simpleView = !$scope.simpleView;
-        }
+        };
+        $scope.simpleOff = function(){
+          $scope.simpleView = false;
+        };
+        $scope.editSelection = function(index){
+          $scope.selection = index;
+        };
+        $scope.isSelected = function(index){
+          return $scope.selection == index;
+        };
 
         // Crud Functions
         $scope.createUser = function(){
@@ -65,8 +78,8 @@ angular.module('bandApp')
                   console.log(err);
               });
             }
-            
-            //Disable creating variable to allow 
+
+            //Disable creating variable to allow
             $scope.creating = false;
             //Clear all data in user variable. This is for security.
             $scope.user = {};
