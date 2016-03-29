@@ -1,0 +1,67 @@
+.uniform(ng-init='getJackets()')
+    .container-fluid
+        .row
+            .col-sm-10.col-sm-offset-1
+                .panel.panel-default
+                    .panel-heading
+                        h3 {{title}}
+                    .panel-body
+                        table.table.table-hover
+                          thead
+                            tr
+                              th ID
+                              th Size
+                              th Sex
+                              th Available
+                              th
+                          tbody
+                            tr(ng-repeat='jacket in jackets | orderBy:number')
+                              td {{jacket.number}}
+                              td {{jacket.armlength}}
+                              td {{jacket.sex}}
+                              td {{jacket.available}}
+                              td  
+                                a.btn(data-toggle='modal' data-target='#editJacket' ng-click='getJacket(jacket)')
+                                  span.glyphicon.glyphicon-cog
+                                a.btn(ng-click='deleteJacket(jacket)')
+                                  span.glyphicon.glyphicon-trash.text-danger
+                    .panel-footer
+                      button.btn.btn-success(data-toggle='modal' data-target='#editJacket' type='button' ng-click='createJacket()') Add Jacket
+    .modal.fade(id='editJacket' tabindex='-1' role='dialog')
+      .modal-dialog
+          .modal-content
+              .modal-header
+                button.close(type='button' data-dismiss='modal' aria-label="Close")
+                  span(aria-hidden='true')
+                h4.modal-title Edit Jacket
+              .modal-body
+                  //- .row
+                  //-   .col-sm-3
+                  //-     img.img-thumbnail.pull-right(width='50px' height='50px')
+                  form.form-horizontal
+                    .for
+                    .form-group
+                      label.col-sm-3.control-label Number
+                      .col-sm-9
+                        input.form-control(type='text' ng-model='jacket.number')
+                    .form-group
+                      label.col-sm-3.control-label Chest
+                      .col-sm-9
+                        input.form-control(type='text' ng-model='jacket.chest')
+                    .form-group
+                      label.col-sm-3.control-label armlength
+                      .col-sm-9
+                        input.form-control(type='text' ng-model='jacket.armlength')
+                    .form-group
+                      label.col-sm-3.control-label Sex
+                      .col-sm-9
+                        input.form-control(type='email' ng-model='jacket.sex')
+                    .form-group
+                      label.col-sm-3.control-label Available
+                      .col-sm-9
+                        input(type='checkbox' ng-model='jacket.available')
+    
+              .modal-footer
+                a.btn.pull-left(ng-click='toggleMode()') Advanced 
+                button.btn.btn-default(type='button' data-dismiss='modal') Close
+                button.btn.btn-primary(type='button' ng-click='sendJacket()' data-dismiss='modal') Save Changes
