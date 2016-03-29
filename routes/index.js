@@ -8,8 +8,9 @@ module.exports = function(app,passport){
   app.use('/api',isLoggedIn,api);
 
   app.get('/partial/:name', isLoggedIn,function(req,res,next){
+    // Check which type of user [user, admin]
     if(req.user && req.user.local.admin){
-      console.log(req.params.name);
+      // admin
       switch(req.params.name){
         case 'users':
         case 'maintenance_request':
@@ -19,6 +20,7 @@ module.exports = function(app,passport){
           res.render('partials/oops');
       }
     }else{
+      // user
       switch(req.params.name){
         case 'maintenance_request':
           res.render('partials/admin/' + req.params.name);
@@ -27,6 +29,8 @@ module.exports = function(app,passport){
           res.render('partials/oops');
       }
     }
+    // Catch the impossible scenario
+    res.render('partials/oops');
   });
 
   app.get('/*',isLoggedIn,function(req,res,next){
