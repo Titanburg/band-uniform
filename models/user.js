@@ -7,7 +7,9 @@ var userSchema  = mongoose.Schema({
         password    : String,
         admin       : Boolean,
         firstName   : String,
-        lastName    : String
+        lastName    : String,
+        hasRequested: Boolean,
+        active      : Boolean
     },
     uniform:{
         jacket      : Number,
