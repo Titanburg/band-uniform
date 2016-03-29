@@ -27,6 +27,9 @@ angular.module('bandApp')
         $scope.toggleMode = function(){
           $scope.simpleView = !$scope.simpleView;
         };
+        $scope.simpleOff = function(){
+          $scope.simpleView = false;
+        };
         $scope.editSelection = function(index){
           $scope.selection = index;
         };
