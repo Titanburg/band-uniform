@@ -4,7 +4,7 @@ module.exports = function(passport){
   var router = express.Router();
   /* GET users listing. */
   router.post('/signup',passport.authenticate('local-signup', {
-    successRedirect: '/user', // redirect to the secure profile section
+    successRedirect: '/users', // redirect to the secure profile section
     failureRedirect: '/auth/signup', // redirect back to the signup page if there is an error
     failureFlash: true // allow flash messages
   }));
@@ -15,11 +15,11 @@ module.exports = function(passport){
   });
 
   router.post('/login', passport.authenticate('local-login', {
-    successRedirect: '/user', // redirect to the secure profile section
+    successRedirect: '/users', // redirect to the secure profile section
     failureRedirect: '/auth/login', // redirect back to the signup page if there is an error
     failureFlash: true // allow flash messages
   }));
-  
+
   router.get('/logout',function(req,res,next){
     req.logout();
     res.redirect('/auth/login');

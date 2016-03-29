@@ -12,7 +12,7 @@ module.exports = {
             users.forEach(function(user){
                 user.local.password = '';
             });
-            console.log(users);
+            console.log(JSON.stringify(users));
             res.json(users);
         });
     },
@@ -52,7 +52,7 @@ module.exports = {
 
     // Get single user from database
     getUser : function(req,res){
-        console.log("getUser called:",req.params.id)
+        console.log("getUser called:",req.params.id);
         User.findOne({_id:req.params.id},function(err,user){
             if(err) {
                 console.log("Err",err);
