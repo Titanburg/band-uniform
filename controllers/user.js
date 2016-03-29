@@ -27,13 +27,13 @@ module.exports = {
                 // User already exists handle
             }else{
                 console.log(user);
-                var newUser = new User();
-                newUser.local.email = req.body.local.email;
-                newUser.local.firstName = req.body.local.firstName;
-                newUser.local.lastName = req.body.local.lastName;
-                newUser.local.admin = req.body.local.admin;
-                newUser.local.password = newUser.generateHash(req.body.local.password);
-                newUser.other.instrument = req.body.other.instrument;
+                var newUser = new User(req.body);
+                // newUser.local.email = req.body.local.email;
+                // newUser.local.firstName = req.body.local.firstName;
+                // newUser.local.lastName = req.body.local.lastName;
+                // newUser.local.admin = req.body.local.admin;
+                // newUser.local.password = newUser.generateHash(req.body.local.password);
+                // newUser.other.instrument = req.body.other.instrument;
                 newUser.save(function(err) {
                     if (err)
                         throw err;
@@ -67,14 +67,28 @@ module.exports = {
         User.findOne({_id:req.params.id},function(err,user){
             if(err) return;
             if(user){
-                user.local.email = req.body.local.email;
-                user.local.firstName = req.body.local.firstName;
-                user.local.lastName = req.body.local.lastName;
-                user.local.admin = req.body.local.admin;
-                if(req.body.local.password != ''){
-                    user.local.password = user.generateHash(req.body.local.password);
+                if(req.body.local){
+                  if(req.body.local.email) user.local.email = req.body.local.email;
+                  if(req.body.local.firstName)user.local.firstName = req.body.local.firstName;
+                  if(req.body.local.lastName)user.local.lastName = req.body.local.lastName;
+                  user.local.admin = req.body.local.admin ? (req.body.local.admin) : false;
+                  if(req.body.local.password) user.local.password = user.generateHash(req.body.local.password);
                 }
-                user.other.instrument = req.body.other.instrument;
+                if(req.body.sizes){
+                  if(req.body.sizes.sex) user.sizes.sex = req.body.sizes.sex;
+                  if(req.body.sizes.chest) user.sizes.chest = req.body.sizes.chest;
+                  if(req.body.sizes.armlength) user.sizes.armlength = req.body.sizes.armlength;
+                  if(req.body.sizes.waist) user.sizes.waist = req.body.sizes.waist;
+                  if(req.body.sizes.seat) user.sizes.seat = req.body.sizes.seat;
+                  if(req.body.sizes.outseam) user.sizes.outseam = req.body.sizes.outseam;
+                  if(req.body.sizes.hat) user.sizes.hat = req.body.sizes.hat;
+                  if(req.body.sizes.glove) user.sizes.glove = req.body.sizes.glove;
+                  if(req.body.sizes.shoe) user.sizes.shoe = req.body.sizes.shoe;
+                  if(req.body.sizes.tshirt) user.sizes.tshirt = req.body.sizes.tshirt;
+                }
+                if(req.body.other){
+                  if(req.body.other.instrument) user.other.instrument = req.body.other.instrument;
+                }
                 user.save(function(err) {
                     if (err)
                         throw err;
@@ -92,7 +106,7 @@ module.exports = {
                 console.log("Not Found");
             }
         });
-        
+
     },
 
     // Delete user
