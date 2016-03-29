@@ -4,17 +4,20 @@ angular.module('bandApp',['ngRoute'])
     .config(function($routeProvider,$locationProvider){
         $routeProvider
             .when('/users',{
-                templateUrl: 'partial/users.jade',
+                templateUrl: 'partial/users',
                 controller: 'usersController'
             })
             .when('/maintenance_request',{
-                templateUrl: 'partial/maintenance_request.jade',
+                templateUrl: 'partial/maintenance_request',
                 controller: 'maintenanceController'
             })
             .when('/logout',{
-                templateUrl: 'partial/logout.jade',
+                templateUrl: 'partial/logout',
                 controller: 'logout'
             })
+            .otherwise({
+              templateUrl: 'partial/oops'
+            });
         $locationProvider.html5Mode(true);
     }).controller('logout',function($scope,$window){
         $window.location.href = '/auth/logout';

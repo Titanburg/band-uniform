@@ -12,13 +12,18 @@ block content
         a.navbar-brand(href="#") Band Uniform
       .collapse.navbar-collapse(id='band-navbar')
         ul.nav.navbar-nav.navbar-left
-          li
-            a(href='/users' Users) Users
+          // Admin Only
+          - if(user.admin)
+            li
+              a(href='/users' Users) Users
+          // User only
+          
+          // All
           li
             a(href='/maintenance_request' Maintenance) Maintenance
         ul.nav.navbar-nav.navbar-right
           li
-            a(href='#')= user.name
+            a(href='#')= user.email
           li
             a(href='/logout') Logout
   .content(ng-view)
