@@ -6,7 +6,8 @@ module.exports = function(app,passport){
 
   app.get('/',initIsLoggedIn, function(req,res,next){
     // res.redirect('/auth/login');
-    res.render('index',{title:'Band Uniform Management Utility',user:{name:req.user.local.firstName}});
+
+    res.render('index',{title:'Band Uniform Management Utility',user:{_id:req.user.local.id,name:req.user.local.firstName,email:req.user.local.email,admin:req.user.local.admin}});
   });
 
   app.use('/auth',auth);
@@ -19,6 +20,7 @@ module.exports = function(app,passport){
       switch(req.params.name){
         case 'users':
         case 'maintenance_request':
+        case 'account':
           res.render('partials/admin/' + req.params.name);
           break;
         default:
@@ -28,7 +30,8 @@ module.exports = function(app,passport){
       // user
       switch(req.params.name){
         case 'maintenance_request':
-          res.render('partials/admin/' + req.params.name);
+        case 'account':
+          res.render('partials/user/' + req.params.name);
           break;
         default:
           res.render('partials/oops');
@@ -39,7 +42,8 @@ module.exports = function(app,passport){
   });
 
   app.get('/*',isLoggedIn,function(req,res,next){
-    res.render('index',{title:'Band Uniform Management Utility',user:{email:req.user.local.email,admin:req.user.local.admin}});
+    console.log(JSON.stringify(req.user));
+    res.render('index',{title:'Band Uniform Management Utility',user:{_id:req.user.id,name:req.user.local.firstName,email:req.user.local.email,admin:req.user.local.admin}});
   });
 
   function isLoggedIn(req, res, next) {
