@@ -1,81 +1,84 @@
-h1 User Account
-//- form.form-horizontal
-//-   .simpleView
-//-     h3 User Info
-//-     .form-group
-//-       label.col-sm-3.control-label First name
-//-       .col-sm-9
-//-         input.form-control(type='text' ng-model='user.local.firstName')
-//-     .form-group
-//-       label.col-sm-3.control-label Last name
-//-       .col-sm-9
-//-         input.form-control(type='text' ng-model='user.local.lastName')
-//-     .form-group
-//-       label.col-sm-3.control-label Email
-//-       .col-sm-9
-//-         input.form-control(type='email' ng-model='user.local.email')
-//-     .form-group
-//-       label.col-sm-3.control-label Admin
-//-       .col-sm-9
-//-         input(type='checkbox' ng-model='user.local.admin')
-//-     hr
-//-     h3 Password
-//-     .form-group
-//-       label.col-sm-3.control-label New Password
-//-       .col-sm-9
-//-         input(type='password' ng-model='user.local.password')
-//-     .form-group
-//-       label.col-sm-3.control-label Confirm
-//-       .col-sm-9
-//-         input(type='password' ng-model='confirmPass')
-//-   .advancedView(ng-hide='simpleView')
-//-     hr
-//-     h3 Sizes
-//-     .form-group
-//-       label.col-sm-3.control-label Sex
-//-       .col-sm-9
-//-         input(type='text' ng-model='user.sizes.sex')
-//-     .form-group
-//-       label.col-sm-3.control-label Chest
-//-       .col-sm-9
-//-         input(type='text' ng-model='user.sizes.chest')
-//-     .form-group
-//-       label.col-sm-3.control-label Arm Length
-//-       .col-sm-9
-//-         input(type='text' ng-model='user.sizes.armlength')
-//-     .form-group
-//-       label.col-sm-3.control-label Waist
-//-       .col-sm-9
-//-         input(type='text' ng-model='user.sizes.waist')
-//-     .form-group
-//-       label.col-sm-3.control-label Seat
-//-       .col-sm-9
-//-         input(type='text' ng-model='user.sizes.seat')
-//-     .form-group
-//-       label.col-sm-3.control-label Outseam
-//-       .col-sm-9
-//-         input(type='text' ng-model='user.sizes.outseam')
-//-     .form-group
-//-       label.col-sm-3.control-label Hat
-//-       .col-sm-9
-//-         input(type='text' ng-model='user.sizes.hat')
-//-     .form-group
-//-       label.col-sm-3.control-label Glove
-//-       .col-sm-9
-//-         input(type='text' ng-model='user.sizes.glove')
-//-     .form-group
-//-       label.col-sm-3.control-label Shoe
-//-       .col-sm-9
-//-         input(type='text' ng-model='user.sizes.shoe')
-//-     .form-group
-//-       label.col-sm-3.control-label T-shirt
-//-       .col-sm-9
-//-         input(type='text' ng-model='user.sizes.tshirt')
-//-         
-//-     hr
-//-     h3 Other
-//-     .form-group
-//-       label.col-sm-3.control-label Instrument
-//-       .col-sm-9
-//-         input(type='text' ng-model='user.other.instrument')
-//-   
+.row
+    .col-md-6.col-md-offset-3(ng-init='getUser(#{JSON.stringify(user)})')
+        h1 {{user.local.firstName}} {{user.local.lastName}}
+        form.form-horizontal
+            .simpleView
+                h3 User Info
+                .form-group
+                   label.col-sm-3.control-label First name
+                   .col-sm-9
+                        input.form-control(type='text' ng-model='user.local.firstName')
+                .form-group
+                   label.col-sm-3.control-label Last name
+                   .col-sm-9
+                        input.form-control(type='text' ng-model='user.local.lastName')
+                .form-group
+                   label.col-sm-3.control-label Email
+                   .col-sm-9
+                        input.form-control(type='email' ng-model='user.local.email')
+                .form-group
+                   label.col-sm-3.control-label Admin
+                   .col-sm-9
+                        input(type='checkbox' ng-model='user.local.admin')
+                hr
+                h3 Password
+                .form-group
+                    label.col-sm-3.control-label New Password
+                    .col-sm-9
+                        input(type='password' ng-model='user.local.password')
+                .form-group
+                    label.col-sm-3.control-label Confirm
+                    .col-sm-9
+                        input(type='password' ng-model='confirmPass')
+                hr
+                h3 Sizes
+                .form-group
+                    label.col-sm-3.control-label Sex
+                    .col-sm-9
+                        input(type='text' ng-model='user.sizes.sex')
+                .form-group
+                    label.col-sm-3.control-label Chest
+                    .col-sm-9
+                        input(type='text' ng-model='user.sizes.chest')
+                .form-group
+                    label.col-sm-3.control-label Arm Length
+                    .col-sm-9
+                        input(type='text' ng-model='user.sizes.armlength')
+                .form-group
+                    label.col-sm-3.control-label Waist
+                    .col-sm-9
+                        input(type='text' ng-model='user.sizes.waist')
+                .form-group
+                    label.col-sm-3.control-label Seat
+                    .col-sm-9
+                        input(type='text' ng-model='user.sizes.seat')
+                .form-group
+                    label.col-sm-3.control-label Outseam
+                    .col-sm-9
+                        input(type='text' ng-model='user.sizes.outseam')
+                .form-group
+                    label.col-sm-3.control-label Hat
+                    .col-sm-9
+                        input(type='text' ng-model='user.sizes.hat')
+                .form-group
+                    label.col-sm-3.control-label Glove
+                    .col-sm-9
+                        input(type='text' ng-model='user.sizes.glove')
+                .form-group
+                    label.col-sm-3.control-label Shoe
+                    .col-sm-9
+                        input(type='text' ng-model='user.sizes.shoe')
+                .form-group
+                    label.col-sm-3.control-label T-shirt
+                    .col-sm-9
+                        input(type='text' ng-model='user.sizes.tshirt')
+                 
+                hr
+                h3 Other
+                .form-group
+                    label.col-sm-3.control-label Instrument
+                    .col-sm-9
+                        input(type='text' ng-model='user.other.instrument')
+            hr 
+            button.btn.btn-primary(type='button' ng-click='sendUser()') Save Changes
+       
