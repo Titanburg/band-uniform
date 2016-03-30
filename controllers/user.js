@@ -77,13 +77,13 @@ module.exports = {
                 if(req.body.sizes){
                   if(req.body.sizes.sex) user.sizes.sex = req.body.sizes.sex;
                   if(req.body.sizes.chest) user.sizes.chest = req.body.sizes.chest;
-                  if(req.body.sizes.armlength) user.sizes.armlength = req.body.sizes.armlength;
-                  if(req.body.sizes.waist) user.sizes.waist = req.body.sizes.waist;
-                  if(req.body.sizes.seat) user.sizes.seat = req.body.sizes.seat;
-                  if(req.body.sizes.outseam) user.sizes.outseam = req.body.sizes.outseam;
-                  if(req.body.sizes.hat) user.sizes.hat = req.body.sizes.hat;
+                  if(req.body.sizes.armlength) user.sizes.armlength = parseInt(req.body.sizes.armlength);
+                  if(req.body.sizes.waist) user.sizes.waist = parseInt(req.body.sizes.waist);
+                  if(req.body.sizes.seat) user.sizes.seat = parseInt(req.body.sizes.seat);
+                  if(req.body.sizes.outseam) user.sizes.outseam = parseInt(req.body.sizes.outseam);
+                  if(req.body.sizes.hat) user.sizes.hat = parseInt(req.body.sizes.hat);
                   if(req.body.sizes.glove) user.sizes.glove = req.body.sizes.glove;
-                  if(req.body.sizes.shoe) user.sizes.shoe = req.body.sizes.shoe;
+                  if(req.body.sizes.shoe) user.sizes.shoe = parseInt(req.body.sizes.shoe);
                   if(req.body.sizes.tshirt) user.sizes.tshirt = req.body.sizes.tshirt;
                 }
                 if(req.body.other){

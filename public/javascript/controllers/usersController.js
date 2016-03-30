@@ -4,11 +4,16 @@
 angular.module('bandApp')
     .controller('usersController',function($scope,$http){
         $scope.title = "Users";
-        $scope.creating = false;
-        $scope.user = {};
-        $scope.users = [];
+        
+        // Users information
+        $scope.user = {}; // Used for selected user
+        $scope.users = []; // Used for all users
+        
         $scope.confirmPass = '';
         $scope.simpleView = true;
+        
+        // Userd to detect if a new user is being created
+        $scope.creating = false;
 
         // Ordering
         $scope.order = 'local.firstName';
@@ -27,8 +32,8 @@ angular.module('bandApp')
         $scope.toggleMode = function(){
           $scope.simpleView = !$scope.simpleView;
         };
-        $scope.simpleOff = function(){
-          $scope.simpleView = false;
+        $scope.simpleOn = function(){
+          $scope.simpleView = true;
         };
         $scope.editSelection = function(index){
           $scope.selection = index;
@@ -40,6 +45,7 @@ angular.module('bandApp')
         // Crud Functions
         $scope.createUser = function(){
             $scope.creating = true;
+            //Clear all data in user variable. This is for security.
             $scope.user = {};
         };
         $scope.getUsers = function(){
@@ -81,8 +87,6 @@ angular.module('bandApp')
 
             //Disable creating variable to allow
             $scope.creating = false;
-            //Clear all data in user variable. This is for security.
-            $scope.user = {};
             //Clear confirmPass variable for security
             $scope.confirmPass = '';
 
