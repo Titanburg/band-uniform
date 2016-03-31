@@ -92,54 +92,78 @@
                       hr
                       h3 Sizes
                       .form-group
-                        label.col-sm-3.control-label Sex
-                        .col-sm-9
-                          input(type='text' ng-model='user.sizes.sex')
+                          label.col-sm-3.control-label Sex
+                          .col-sm-9
+                              label.radio-inline
+                                  input(type='radio' name='sex' value='true' ng-model='user.sizes.sex')
+                                  | M
+                              label.radio-inline
+                                  input(type='radio' name='sex' value='false' ng-model='user.sizes.sex')
+                                  | F
                       .form-group
-                        label.col-sm-3.control-label Chest
-                        .col-sm-9
-                          input(type='text' ng-model='user.sizes.chest')
+                          label.col-sm-3.control-label Chest
+                          .col-sm-9
+                              .input-group
+                                  span.input-group-addon #
+                                  input.form-control(type='text' ng-model='user.sizes.chest')
                       .form-group
-                        label.col-sm-3.control-label Arm Length
-                        .col-sm-9
-                          input(type='text' ng-model='user.sizes.armlength')
+                          label.col-sm-3.control-label Arm Length
+                          .col-sm-9
+                              .input-group
+                                  span.input-group-addon #
+                                  input.form-control(type='text' ng-model='user.sizes.armlength')
                       .form-group
-                        label.col-sm-3.control-label Waist
-                        .col-sm-9
-                          input(type='text' ng-model='user.sizes.waist')
+                          label.col-sm-3.control-label Waist
+                          .col-sm-9
+                              .input-group
+                                  span.input-group-addon #
+                                  input.form-control(type='text' ng-model='user.sizes.waist')
                       .form-group
-                        label.col-sm-3.control-label Seat
-                        .col-sm-9
-                          input(type='text' ng-model='user.sizes.seat')
+                          label.col-sm-3.control-label Seat
+                          .col-sm-9
+                              .input-group
+                                  span.input-group-addon #
+                                  input.form-control(type='text' ng-model='user.sizes.seat')
                       .form-group
-                        label.col-sm-3.control-label Outseam
-                        .col-sm-9
-                          input(type='text' ng-model='user.sizes.outseam')
+                          label.col-sm-3.control-label Outseam
+                          .col-sm-9
+                              .input-group
+                                  span.input-group-addon #
+                                  input.form-control(type='text' ng-model='user.sizes.outseam')
                       .form-group
-                        label.col-sm-3.control-label Hat
-                        .col-sm-9
-                          input(type='text' ng-model='user.sizes.hat')
+                          label.col-sm-3.control-label Shoe
+                          .col-sm-9
+                              .input-group
+                                  span.input-group-addon #
+                                  input.form-control(type='text' ng-model='user.sizes.shoe')
                       .form-group
-                        label.col-sm-3.control-label Glove
-                        .col-sm-9
-                          input(type='text' ng-model='user.sizes.glove')
+                          label.col-sm-3.control-label Hat
+                          .col-sm-9
+                              select.form-control(type='text' ng-model='user.sizes.hat')
+                                  option S
+                                  option M
+                                  option L
                       .form-group
-                        label.col-sm-3.control-label Shoe
-                        .col-sm-9
-                          input(type='text' ng-model='user.sizes.shoe')
+                          label.col-sm-3.control-label Glove
+                          .col-sm-9
+                              select.form-control(type='text' ng-model='user.sizes.glove')
+                                  option S
+                                  option M
+                                  option L
                       .form-group
-                        label.col-sm-3.control-label T-shirt
-                        .col-sm-9
-                          input(type='text' ng-model='user.sizes.tshirt')
-                          
+                          label.col-sm-3.control-label T-shirt
+                          .col-sm-9
+                              select.form-control(type='text' ng-model='user.sizes.tshirt')
+                                  option S
+                                  option M
+                                  option L
                       hr
                       h3 Other
                       .form-group
-                        label.col-sm-3.control-label Instrument
-                        .col-sm-9
-                          input(type='text' ng-model='user.other.instrument')
-                    
-                  
+                          label.col-sm-3.control-label Instrument
+                          .col-sm-9
+                              select.form-control(type='text' ng-model='user.other.instrument')
+                                  option(ng-repeat='instrument in instruments') {{instrument.name}}
               .modal-footer
                 a.btn.pull-left(ng-click='toggleMode()') Advanced 
                 button.btn.btn-default(type='button' ng-click='simpleOff()' data-dismiss='modal') Close
