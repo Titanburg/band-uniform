@@ -25,60 +25,86 @@
                 .form-group
                     label.col-sm-3.control-label New Password
                     .col-sm-9
-                        input(type='password' ng-model='user.local.password')
+                        input.form-control(type='password' ng-model='user.local.password')
                 .form-group
                     label.col-sm-3.control-label Confirm
                     .col-sm-9
-                        input(type='password' ng-model='confirmPass')
+                        input.form-control(type='password' ng-model='confirmPass')
                 hr
                 h3 Sizes
                 .form-group
                     label.col-sm-3.control-label Sex
                     .col-sm-9
-                        input(type='text' ng-model='user.sizes.sex')
+                        label.radio-inline
+                            input(type='radio' name='sex' value='true' ng-model='user.sizes.sex')
+                            | M
+                        label.radio-inline
+                            input(type='radio' name='sex' value='false' ng-model='user.sizes.sex')
+                            | F
                 .form-group
                     label.col-sm-3.control-label Chest
                     .col-sm-9
-                        input(type='text' ng-model='user.sizes.chest')
+                        .input-group
+                            span.input-group-addon #
+                            input.form-control(type='text' ng-model='user.sizes.chest')
                 .form-group
                     label.col-sm-3.control-label Arm Length
                     .col-sm-9
-                        input(type='text' ng-model='user.sizes.armlength')
+                        .input-group
+                            span.input-group-addon #
+                            input.form-control(type='text' ng-model='user.sizes.armlength')
                 .form-group
                     label.col-sm-3.control-label Waist
                     .col-sm-9
-                        input(type='text' ng-model='user.sizes.waist')
+                        .input-group
+                            span.input-group-addon #
+                            input.form-control(type='text' ng-model='user.sizes.waist')
                 .form-group
                     label.col-sm-3.control-label Seat
                     .col-sm-9
-                        input(type='text' ng-model='user.sizes.seat')
+                        .input-group
+                            span.input-group-addon #
+                            input.form-control(type='text' ng-model='user.sizes.seat')
                 .form-group
                     label.col-sm-3.control-label Outseam
                     .col-sm-9
-                        input(type='text' ng-model='user.sizes.outseam')
-                .form-group
-                    label.col-sm-3.control-label Hat
-                    .col-sm-9
-                        input(type='text' ng-model='user.sizes.hat')
-                .form-group
-                    label.col-sm-3.control-label Glove
-                    .col-sm-9
-                        input(type='text' ng-model='user.sizes.glove')
+                        .input-group
+                            span.input-group-addon #
+                            input.form-control(type='text' ng-model='user.sizes.outseam')
                 .form-group
                     label.col-sm-3.control-label Shoe
                     .col-sm-9
-                        input(type='text' ng-model='user.sizes.shoe')
+                        .input-group
+                            span.input-group-addon #
+                            input.form-control(type='text' ng-model='user.sizes.shoe')
+                .form-group
+                    label.col-sm-3.control-label Hat
+                    .col-sm-9
+                        select.form-control(type='text' ng-model='user.sizes.hat')
+                            option S
+                            option M
+                            option L
+                .form-group
+                    label.col-sm-3.control-label Glove
+                    .col-sm-9
+                        select.form-control(type='text' ng-model='user.sizes.glove')
+                            option S
+                            option M
+                            option L
                 .form-group
                     label.col-sm-3.control-label T-shirt
                     .col-sm-9
-                        input(type='text' ng-model='user.sizes.tshirt')
-                 
+                        select.form-control(type='text' ng-model='user.sizes.tshirt')
+                            option S
+                            option M
+                            option L
                 hr
                 h3 Other
                 .form-group
                     label.col-sm-3.control-label Instrument
                     .col-sm-9
-                        input(type='text' ng-model='user.other.instrument')
-            hr 
+                        select.form-control(type='text' ng-model='user.other.instrument')
+                            option(ng-repeat='instrument in instruments') {{instrument.name}}
+            hr
             button.btn.btn-primary(type='button' ng-click='sendUser()') Save Changes
        

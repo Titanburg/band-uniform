@@ -22,6 +22,13 @@ angular.module('bandApp')
         $scope.selection = 1;
         $scope.filter = '';
 
+        // Instrument List
+        $scope.instruments = [
+            {name:'Woodwinds'},
+            {name:'Sousas'},
+            {name:'Percussion'},
+        ]
+
         // Helper Functions
         $scope.setOrder = function(order){
           $scope.order= 'local.' + order;
