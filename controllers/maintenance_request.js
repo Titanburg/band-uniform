@@ -10,7 +10,7 @@ module.exports = {
         });
     },
 
-        // *** post ALL requestss *** //
+        // *** post ALL requests *** //
     newRequest : function(req, res) {
       var newRequest = new Request({
         firstName: req.body.firstName,
