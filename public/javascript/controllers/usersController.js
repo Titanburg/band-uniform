@@ -36,6 +36,16 @@ angular.module('bandApp')
         $scope.isSelected = function(index){
           return $scope.selection == index;
         };
+        $scope.invalidPassword = function(){
+          if($scope.user.local)
+            return $scope.user.local.password === '';
+          return true;
+        };
+        $scope.diffPassword = function(){
+          if($scope.user.local)
+            return $scope.user.local.password !== $scope.confirmPass;
+          return true;
+        };
 
         // Crud Functions
         $scope.createUser = function(){
@@ -59,7 +69,9 @@ angular.module('bandApp')
                 console.log(err);
             });
         };
-        $scope.sendUser = function(){
+        $scope.sendUser = function(isValid){
+          alert(isValid);
+          if(isValid){
             // If creating is true send new user
             if($scope.creating === true){
                $http.post('/api/user',$scope.user)
@@ -85,7 +97,9 @@ angular.module('bandApp')
             $scope.user = {};
             //Clear confirmPass variable for security
             $scope.confirmPass = '';
+          }else{
 
+          }
         };
         $scope.deleteUser = function(user){
           $http.get('/api/user/delete/' + user._id )

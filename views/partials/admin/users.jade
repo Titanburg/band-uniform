@@ -59,35 +59,41 @@
                   //- .row
                   //-   .col-sm-3
                   //-     img.img-thumbnail.pull-right(width='50px' height='50px')
-                  form.form-horizontal
+                  form.form-horizontal(name='userForm' novalidate)
                     .simpleView
                       h3 User Info
-                      .form-group
+                      .form-group(ng-class='{"has-error":userForm.firstName.$invalid}')
                         label.col-sm-3.control-label First name
                         .col-sm-9
-                          input.form-control(type='text' ng-model='user.local.firstName')
-                      .form-group
+                          input.form-control(type='text' name='firstName' ng-model='user.local.firstName' required)
+                      .form-group(ng-class='{"has-error":userForm.lastName.$invalid}')
                         label.col-sm-3.control-label Last name
                         .col-sm-9
-                          input.form-control(type='text' ng-model='user.local.lastName')
-                      .form-group
+                          input.form-control(type='text' name='lastName' ng-model='user.local.lastName' required)
+                      .form-group(ng-class='{"has-error":userForm.email.$invalid}')
                         label.col-sm-3.control-label Email
                         .col-sm-9
-                          input.form-control(type='email' ng-model='user.local.email')
+                          input.form-control(type='email' name='email' ng-model='user.local.email' required)
                       .form-group
                         label.col-sm-3.control-label Admin
                         .col-sm-9
                           input(type='checkbox' ng-model='user.local.admin')
                       hr
                       h3 Password
-                      .form-group
+                      .form-group.has-feedback(ng-class='{"has-error":invalidPassword()}')
                         label.col-sm-3.control-label New Password
                         .col-sm-9
-                          input(type='password' ng-model='user.local.password')
-                      .form-group
+                          input.form-control(type='password' ng-required='invalidPassword()' ng-model='user.local.password')
+                          span.glyphicon.glyphicon-remove.form-control-feedback(ng-show='invalidPassword()')
+                          span.glyphicon.glyphicon-ok.icon-success.form-control-feedback(ng-hide='invalidPassword()')
+                          p {{user.local}}
+                      .form-group.has-feedback(ng-class='{"has-error":diffPassword()}')
                         label.col-sm-3.control-label Confirm
                         .col-sm-9
-                          input(type='password' ng-model='confirmPass')
+                          input.form-control(type='password' ng-model='confirmPass')
+                          span.glyphicon.glyphicon-remove.form-control-feedback(ng-show='diffPassword()')
+                          span.glyphicon.glyphicon-ok.icon-success.form-control-feedback(ng-hide='diffPassword()')
+                          p {{confirmPass}}
                     .advancedView(ng-hide='simpleView')
                       hr
                       h3 Sizes
@@ -167,4 +173,4 @@
               .modal-footer
                 a.btn.pull-left(ng-click='toggleMode()') Advanced 
                 button.btn.btn-default(type='button' ng-click='simpleOff()' data-dismiss='modal') Close
-                button.btn.btn-primary(type='button' ng-click='sendUser()' data-dismiss='modal') Save Changes
+                button.btn.btn-primary(type='button' ng-disabled='userForm.$invalid' ng-click='sendUser(userForm.$valid)' data-dismiss='modal') Save Changes
