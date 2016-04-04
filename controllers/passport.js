@@ -2,6 +2,15 @@
 var LocalStrategy   = require('passport-local').Strategy;
 var User = require('../models/user');
 
+function stripUser(user){
+  var newUser ={};
+  newUser.local = user.local.toObject();
+  delete newUser.local.password;
+  newUser.id = user.id;
+  console.log(JSON.stringify(newUser));
+  return user;
+}
+
 module.exports = function(passport){
 
   passport.serializeUser(function(user, done) {
@@ -54,7 +63,7 @@ module.exports = function(passport){
                     return done(null, false, req.flash('loginMessage', 'No user found.'));
                 if (!user.validPassword(password))
                     return done(null, false, req.flash('loginMessage', 'Oops! Wrong password.'));
-                return done(null, user);
+                return done(null, stripUser(user));
             });
 
         }));

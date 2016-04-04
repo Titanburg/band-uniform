@@ -68,14 +68,18 @@ module.exports = {
 
     // Get single user from database
     getUser : function(req,res){
-        console.log("getUser called:",req.params.id);
-        User.findOne({_id:req.params.id},function(err,user){
-            if(err) {
-                console.log("Err",err);
-            }
-            user.local.password = '';
-            res.json(user);
-        });
+      console.log('user',JSON.stringify(req.user));
+      var id = req.params.id;
+      if(req.user && !req.user.local.admin){
+        id = req.user.id;
+      }
+      User.findOne({_id:id},function(err,user){
+          if(err) {
+              console.log("Err",err);
+          }
+          user.local.password="";
+          res.json(user);
+      });
     },
 
     // Edit existing user
