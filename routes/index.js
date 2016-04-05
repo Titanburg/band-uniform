@@ -42,7 +42,6 @@ module.exports = function(app,passport){
     }else{
       // user
       switch(req.params.name){
-        case 'instruments':
         case 'maintenance_request':
         case 'account':
           res.render('partials/user/' + req.params.name,jadeVariables);
