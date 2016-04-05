@@ -12,7 +12,7 @@ module.exports = {
             users.forEach(function(user){
                 user.local.password = '';
             });
-            console.log(JSON.stringify(users));
+            //console.log(JSON.stringify(users));
             res.json(users);
         });
     },
