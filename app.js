@@ -42,6 +42,7 @@
 
       // Seed mongoose
       require('./database/seeds/banduniforms_1.0.js');
+      require('./database/seeds/users_1.0.js');
     }
   });
 
