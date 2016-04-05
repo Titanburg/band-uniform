@@ -4,14 +4,14 @@
 angular.module('bandApp')
     .controller('usersController',function($scope,$http){
         $scope.title = "Users";
-        
+
         // Users information
         $scope.user = {}; // Used for selected user
         $scope.users = []; // Used for all users
-        
-        $scope.confirmPass = '';
+
+        $scope.newPass = '';
         $scope.simpleView = true;
-        
+
         // Userd to detect if a new user is being created
         $scope.creating = false;
 
@@ -22,12 +22,11 @@ angular.module('bandApp')
         $scope.selection = 1;
         $scope.filter = '';
 
-        // Instrument List
         $scope.instruments = [
-            {name:'Woodwinds'},
-            {name:'Sousas'},
-            {name:'Percussion'},
-        ]
+          {name:'Woodwinds'},
+          {name:'Sousas'},
+          {name:'Percussion'}
+        ];
 
         // Helper Functions
         $scope.setOrder = function(order){
@@ -39,21 +38,35 @@ angular.module('bandApp')
         $scope.toggleMode = function(){
           $scope.simpleView = !$scope.simpleView;
         };
-        $scope.simpleOn = function(){
+        $scope.simpleOff = function(){
           $scope.simpleView = true;
         };
         $scope.editSelection = function(index){
           $scope.selection = index;
+          $scope.newPass = '';
+          $scope.user.local.password = '';
         };
         $scope.isSelected = function(index){
           return $scope.selection == index;
+        };
+        $scope.invalidPassword = function(){
+          if($scope.user.local){
+            if($scope.creating)
+              return $scope.user.local.password === '';
+            return false;
+          }
+          return true;
+        };
+        $scope.diffPassword = function(){
+          if($scope.user.local)
+            return $scope.user.local.password !== $scope.newPass;
+          return true;
         };
 
         // Crud Functions
         $scope.createUser = function(){
             $scope.creating = true;
-            //Clear all data in user variable. This is for security.
-            $scope.user = {};
+            $scope.user = {local:{admin:false}};
         };
         $scope.getUsers = function(){
           $http.get('/api/user')
@@ -72,7 +85,8 @@ angular.module('bandApp')
                 console.log(err);
             });
         };
-        $scope.sendUser = function(){
+        $scope.sendUser = function(isValid){
+          if(isValid){
             // If creating is true send new user
             if($scope.creating === true){
                $http.post('/api/user',$scope.user)
@@ -94,9 +108,16 @@ angular.module('bandApp')
 
             //Disable creating variable to allow
             $scope.creating = false;
-            //Clear confirmPass variable for security
-            $scope.confirmPass = '';
+            //Clear all data in user variable. This is for security.
+            $scope.user = {};
+            //Clear newPass variable for security
+            $scope.newPass = '';
 
+            $('#editUser').modal('hide');
+
+          }else{
+
+          }
         };
         $scope.deleteUser = function(user){
           $http.get('/api/user/delete/' + user._id )
