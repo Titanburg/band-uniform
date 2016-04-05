@@ -24,7 +24,11 @@ module.exports = {
         if(err) {
           res.json({'ERROR': err});
         } else {
-          res.json({'SUCCESS': newJumpsuit});
+          Jumpsuit.find({},function(err,jumpsuits){
+              if(err) return;
+              console.log(jumpsuits);
+              res.json(jumpsuits);
+          });
         }
       });
     },
@@ -52,7 +56,11 @@ module.exports = {
           if(err) {
             res.json({'ERROR': err});
           } else {
-            res.json({'UPDATED': jumpsuit});
+            Jumpsuit.find({},function(err,jumpsuits){
+                if(err) return;
+                console.log(jumpsuits);
+                res.json(jumpsuits);
+            });
           }
         });
       });
