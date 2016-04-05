@@ -27,6 +27,7 @@
 
   // Initialize App
   var app = express();
+  var sessionStore = new session.MemoryStore;
 
 ///////////////////////////////////////////////////////////////////
 // Database Setup                                                //
@@ -41,6 +42,8 @@
 
       // Seed mongoose
       require('./database/seeds/banduniforms_1.0.js');
+      require('./database/seeds/instruments_1.0.js');
+      require('./database/seeds/users_1.0.js');
     }
   });
 
@@ -64,7 +67,17 @@
   app.use(cookieParser());
 
   // Passport setup
-  app.use(session({secret:'thisisasuperdupersecret',cookie:{_expires:60000}}));
+  // TODO: Delete next line after code review
+  // app.use(session({secret:'thisisasuperdupersecret',cookie:{_expires:60000}}));
+  app.use(session({
+    secret: 'thisisasuperdupersecret',
+    cookie: { maxAge: 60000000000 },
+    name: 'band-uniform',
+    store: sessionStore, // connect-mongo session store TODO: Make this applicable to Postgres?
+    proxy: true,
+    resave: true,
+    saveUninitialized: true
+  }));
   app.use(passport.initialize());
   app.use(passport.session());
   app.use(flash());
@@ -73,7 +86,6 @@
   app.use('/bower_components',express.static(path.join(__dirname,'/bower_components')));
   app.use('/fonts',express.static(path.join(__dirname,'/bower_components/bootstrap/fonts')));
   app.use(express.static(path.join(__dirname, 'public')));
-
 
 ///////////////////////////////////////////////////////////////////
 //  Add Routes                                                   //
@@ -86,6 +98,12 @@
 ///////////////////////////////////////////////////////////////////
 //  Error Handlers                                               //
 ///////////////////////////////////////////////////////////////////
+
+  // // Middleware for connect-flash messages
+  // app.use(function(req, res, next){
+  //   res.locals.messages = req.flash();
+  //   next();
+  // });
 
   // catch 404 and forward to error handler
   app.use(function(req, res, next) {
@@ -119,4 +137,8 @@
   });
 
 
+
+// Confirm application started
+console.log('Band-Uniform:  Application Started ...');
+console.log('---------------------------------------------------------------------------------------------------');
 module.exports = app;

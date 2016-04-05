@@ -1,0 +1,117 @@
+.row
+    .col-md-6.col-md-offset-3(ng-init='getUser(#{JSON.stringify(user)})')
+        h1 {{user.local.firstName}} {{user.local.lastName}}
+        form.form-horizontal(name='userForm')
+          .simpleView
+            h3 User Info
+            .form-group(ng-class='{"has-error":userForm.firstName.$invalid}')
+              label.col-sm-3.control-label First name
+              .col-sm-9
+                input.form-control(type='text' name='firstName' ng-model='user.local.firstName' required)
+            .form-group(ng-class='{"has-error":userForm.lastName.$invalid}')
+              label.col-sm-3.control-label Last name
+              .col-sm-9
+                input.form-control(type='text' name='lastName' ng-model='user.local.lastName' required)
+            .form-group(ng-class='{"has-error":userForm.email.$invalid}')
+              label.col-sm-3.control-label Email
+              .col-sm-9
+                input.form-control(type='email' name='email' ng-model='user.local.email' required)
+            hr
+            h3 Password
+            .form-group.has-feedback(ng-class='{"has-error":invalidPassword()}')
+              label.col-sm-3.control-label New Password
+              .col-sm-9
+                input.form-control(type='password' ng-required='invalidPassword()' ng-model='newPass')
+                span.glyphicon.glyphicon-remove.form-control-feedback(ng-show='invalidPassword()')
+                span.glyphicon.glyphicon-ok.icon-success.form-control-feedback(ng-hide='invalidPassword()')
+            .form-group.has-feedback(ng-class='{"has-error":diffPassword()}')
+              label.col-sm-3.control-label Confirm
+              .col-sm-9
+                input.form-control(type='password' ng-model='user.local.password')
+                span.glyphicon.glyphicon-remove.form-control-feedback(ng-show='diffPassword()')
+                span.glyphicon.glyphicon-ok.icon-success.form-control-feedback(ng-hide='diffPassword()')
+            hr
+            h3 Sizes
+            .form-group
+                label.col-sm-3.control-label Sex
+                .col-sm-9
+                    label.radio-inline
+                        input(type='radio' name='sex' value='Male' ng-model='user.sizes.sex')
+                        | Male
+                    label.radio-inline
+                        input(type='radio' name='sex' value='Female' ng-model='user.sizes.sex')
+                        | Female
+                    label.radio-inline
+                        input(type='radio' name='sex' value='Other' ng-model='user.sizes.sex')
+                        | Other
+            .form-group
+                label.col-sm-3.control-label Chest
+                .col-sm-9
+                    .input-group
+                        input.form-control(type='number' name='chest' min='20' max='40' ng-model='user.sizes.chest')
+                        span.input-group-addon # inches
+            .form-group
+                label.col-sm-3.control-label Arm Length
+                .col-sm-9
+                    .input-group
+                        input.form-control(type='number' name='armlength' min='20' max='40' ng-model='user.sizes.armlength')
+                        span.input-group-addon # inches
+            .form-group
+                label.col-sm-3.control-label Waist
+                .col-sm-9
+                    .input-group
+                        input.form-control(type='number' name='waist' min='20' max='40' ng-model='user.sizes.waist')
+                        span.input-group-addon # inches
+            .form-group
+                label.col-sm-3.control-label Seat
+                .col-sm-9
+                    .input-group
+                        input.form-control(type='number' name='seat' min='20' max='40' ng-model='user.sizes.seat')
+                        span.input-group-addon # inches
+            .form-group
+                label.col-sm-3.control-label Outseam
+                .col-sm-9
+                    .input-group
+                        input.form-control(type='number' name='outseam' min='20' max='40' ng-model='user.sizes.outseam')
+                        span.input-group-addon # inches
+            .form-group
+                label.col-sm-3.control-label Shoe
+                .col-sm-9
+                    .input-group
+                        input.form-control(type='number' name='shoe' min='0' ng-model='user.sizes.shoe')
+                        span.input-group-addon # inches
+            .form-group
+                label.col-sm-3.control-label Hat
+                .col-sm-9
+                    select.form-control(type='text' ng-model='user.sizes.hat')
+                        option Small
+                        option Medium
+                        option Large
+                        option X-Large
+            .form-group
+                label.col-sm-3.control-label Glove
+                .col-sm-9
+                    select.form-control(type='text' ng-model='user.sizes.glove')
+                        option Small
+                        option Medium
+                        option Large
+            .form-group
+                label.col-sm-3.control-label T-shirt
+                .col-sm-9
+                    select.form-control(type='text' ng-model='user.sizes.tshirt')
+                        option Small
+                        option Medium
+                        option Large
+                        option X-Large
+                        option XX-Large
+                        option XXX-Large
+            hr
+            h3 Other
+            .form-group
+                label.col-sm-3.control-label Instrument
+                .col-sm-9
+                    select.form-control(type='text' ng-model='user.other.instrument')
+                        option(ng-repeat='instrument in instruments') {{instrument.name}}
+            hr
+            button.btn.btn-primary(type='button' ng-disabled='userForm.$invalid' ng-click='sendUser(userForm.$valid)') Save Changes
+       

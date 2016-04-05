@@ -1,0 +1,231 @@
+.uniform(ng-init='getJackets();getJumpsuits();getUrequests()')
+    .container-fluid
+        .row
+            .col-sm-10.col-sm-offset-1
+                .panel.panel-default(ng-show="requestSelect")
+                    .panel-heading
+                        h3 Requests
+                    .panel-body
+                        ul.nav.nav-pills
+                          li(ng-class='{active: isActive(requestSelect)}')
+                            a(href="#" ng-click='selectType("requests")') Requests
+                          li(ng-class='{active: isActive(jacketSelect)}')
+                            a(href="#" ng-click='selectType("jackets")') Jackets
+                          li(ng-class='{active: isActive(jumpsuitSelect)}')
+                            a(href="#" ng-click='selectType("jumpsuits")') Jumpsuits
+                        table.table.table-hover
+                          thead
+                            tr
+                              th ID
+                              th Jacket
+                              th Jumpsuit
+                              th Complete  
+                          tbody
+                          tr(ng-repeat='urequest in urequests')
+                            td {{urequest.userNumber}}
+                            td {{urequest.jacketNumber}}
+                            td {{urequest.jumpsuitNumber}}
+                            td {{urequest.complete}}
+                            td  
+                                a.btn(data-toggle='modal' data-target='#editUrequest' ng-click='getUrequest(urequest)')
+                                  span.glyphicon.glyphicon-cog
+                                a.btn(ng-click='deleteUrequest(urequest)')
+                                  span.glyphicon.glyphicon-trash.text-danger    
+                    .panel-footer
+                      button.btn.btn-success(data-toggle='modal' data-target='#editUrequest' type='button' ng-click='createUrequest()') Add Request
+                      
+                      
+                .panel.panel-default(ng-show="jumpsuitSelect")
+                    .panel-heading
+                        h3 Jumpsuits
+                    .panel-body  
+                        ul.nav.nav-pills
+                          li(ng-class='{active: isActive(requestSelect)}')
+                            a(href="#" ng-click='selectType("requests")') Requests
+                          li(ng-class='{active: isActive(jacketSelect)}')
+                            a(href="#" ng-click='selectType("jackets")') Jackets
+                          li(ng-class='{active: isActive(jumpsuitSelect)}')
+                            a(href="#" ng-click='selectType("jumpsuits")') Jumpsuits
+                        table.table.table-hover
+                          thead
+                            tr
+                              th ID
+                              th Size
+                              th Sex
+                              th Available
+                              th
+                          tbody
+                            tr(ng-repeat='jumpsuit in jumpsuits')
+                              td {{jumpsuit.number}}
+                              td {{jumpsuit.waist}}/{{jumpsuit.seat}}/{{jumpsuit.outseam}}
+                              td {{jumpsuit.sex}}
+                              td {{jumpsuit.available}}
+                              td  
+                                a.btn(data-toggle='modal' data-target='#editJumpsuit' ng-click='getJumpsuit(jumpsuit)')
+                                  span.glyphicon.glyphicon-cog
+                                a.btn(ng-click='deleteJumpsuit(jumpsuit)')
+                                  span.glyphicon.glyphicon-trash.text-danger    
+                    .panel-footer
+                      button.btn.btn-success(data-toggle='modal' data-target='#editJumpsuit' type='button' ng-click='createJumpsuit()') Add Jumpsuit
+                    
+                .panel.panel-default(ng-show="jacketSelect")
+                    .panel-heading
+                        h3 Jackets
+                    .panel-body
+                        ul.nav.nav-pills
+                          li(ng-class='{active: isActive(requestSelect)}')
+                            a(href="#" ng-click='selectType("requests")') Requests
+                          li(ng-class='{active: isActive(jacketSelect)}')
+                            a(href="#" ng-click='selectType("jackets")') Jackets
+                          li(ng-class='{active: isActive(jumpsuitSelect)}')
+                            a(href="#" ng-click='selectType("jumpsuits")') Jumpsuits
+                        table.table.table-hover
+                          thead
+                            tr
+                              th ID
+                              th Size
+                              th Sex
+                              th Available
+                              th
+                          tbody
+                            tr(ng-repeat='jacket in jackets | orderBy:number')
+                              td {{jacket.number}}
+                              td {{jacket.chest}}{{jacket.armlength}}
+                              td {{jacket.sex}}
+                              td {{jacket.available}}
+                              td  
+                                a.btn(data-toggle='modal' data-target='#editJacket' ng-click='getJacket(jacket)')
+                                  span.glyphicon.glyphicon-cog
+                                a.btn(ng-click='deleteJacket(jacket)')
+                                  span.glyphicon.glyphicon-trash.text-danger    
+                    .panel-footer
+                      button.btn.btn-success(data-toggle='modal' data-target='#editJacket' type='button' ng-click='createJacket()') Add Jacket
+                      
+    .modal.fade(id='editUrequest' tabindex='-1' role='dialog')
+      .modal-dialog
+          .modal-content
+              .modal-header
+                button.close(type='button' data-dismiss='modal' aria-label="Close")
+                  span(aria-hidden='true')
+                h4.modal-title Edit Jacket
+              .modal-body
+                  //- .row
+                  //-   .col-sm-3
+                  //-     img.img-thumbnail.pull-right(width='50px' height='50px')
+                  form.form-horizontal
+                    .for
+                    .form-group
+                      label.col-sm-3.control-label User Number
+                      .col-sm-9
+                        input.form-control(type='number' ng-model='urequest.userNumber')
+                    .form-group
+                      label.col-sm-3.control-label Jacket
+                      .col-sm-9
+                        select.form-control(ng-model='urequest.jacketNumber')
+                          option(ng-repeat='jacket in jackets | orderBy:number' value="{{jacket.number}}") {{jacket.chest}}{{jacket.armlength}}
+                    .form-group
+                      label.col-sm-3.control-label Jumpsuit
+                      .col-sm-9
+                        select.form-control(ng-model='urequest.jumpsuitNumber')
+                          option(ng-repeat='jumpsuit in jumpsuits | orderBy:number' value="{{jumpsuit.number}}") {{jumpsuit.waist}}/{{jumpsuit.seat}}/{{jumpsuit.outseam}}
+                    .form-group
+                      label.col-sm-3.control-label Complete
+                      .col-sm-9
+                        input(type='checkbox' ng-model='urequest.complete')
+                        
+              .modal-footer
+                a.btn.pull-left(ng-click='toggleMode()') Advanced 
+                button.btn.btn-default(type='button' data-dismiss='modal') Close
+                button.btn.btn-primary(type='button' ng-click='sendUrequest()' data-dismiss='modal') Save Changes
+                        
+
+    .modal.fade(id='editJumpsuit' tabindex='-1' role='dialog')
+      .modal-dialog
+          .modal-content
+              .modal-header
+                button.close(type='button' data-dismiss='modal' aria-label="Close")
+                  span(aria-hidden='true')
+                h4.modal-title Edit Jacket
+              .modal-body
+                  //- .row
+                  //-   .col-sm-3
+                  //-     img.img-thumbnail.pull-right(width='50px' height='50px')
+                  form.form-horizontal
+                    .for
+                    .form-group
+                      label.col-sm-3.control-label Number
+                      .col-sm-9
+                        input.form-control(type='number' ng-model='jumpsuit.number')
+                    .form-group
+                      label.col-sm-3.control-label Waist
+                      .col-sm-9
+                        input.form-control(type='number' ng-model='jumpsuit.waist')
+                    .form-group
+                      label.col-sm-3.control-label Seat
+                      .col-sm-9
+                        input.form-control(type='number' ng-model='jumpsuit.seat')
+                    .form-group
+                      label.col-sm-3.control-label Outseam
+                      .col-sm-9
+                        input.form-control(type='number' ng-model='jumpsuit.outseam')
+                    .form-group
+                      label.col-sm-3.control-label Sex
+                      .col-sm-9
+                        input.form-control(type='text' ng-model='jumpsuit.sex')
+                    .form-group
+                      label.col-sm-3.control-label Availability
+                      .col-sm-9
+                        label Available:  
+                          input(type='radio' name="avail" ng-model='jumpsuit.available' value="true")
+                      .col-sm-9
+                        label Unavailable:  
+                          input(type='radio' name="avail" ng-model='jumpsuit.available' value="false")
+                        
+    
+              .modal-footer
+                a.btn.pull-left(ng-click='toggleMode()') Advanced 
+                button.btn.btn-default(type='button' data-dismiss='modal') Close
+                button.btn.btn-primary(type='button' ng-click='sendJumpsuit()' data-dismiss='modal') Save Changes
+                
+    .modal.fade(id='editJacket' tabindex='-1' role='dialog')
+      .modal-dialog
+          .modal-content
+              .modal-header
+                button.close(type='button' data-dismiss='modal' aria-label="Close")
+                  span(aria-hidden='true')
+                h4.modal-title Edit Jacket
+              .modal-body
+                  //- .row
+                  //-   .col-sm-3
+                  //-     img.img-thumbnail.pull-right(width='50px' height='50px')
+                  form.form-horizontal
+                    .for
+                    .form-group
+                      label.col-sm-3.control-label Number
+                      .col-sm-9
+                        input.form-control(type='number' ng-model='jacket.number')
+                    .form-group
+                      label.col-sm-3.control-label Chest
+                      .col-sm-9
+                        input.form-control(type='number' ng-model='jacket.chest')
+                    .form-group
+                      label.col-sm-3.control-label Armlength
+                      .col-sm-9
+                        input.form-control(type='text' ng-model='jacket.armlength')
+                    .form-group
+                      label.col-sm-3.control-label Sex
+                      .col-sm-9
+                        input.form-control(type='text' ng-model='jacket.sex')
+                    .form-group
+                      label.col-sm-3.control-label Availability
+                      .col-sm-9
+                        label Available:  
+                          input(type='radio' name="avail" ng-model='jacket.available' value="true")
+                      .col-sm-9
+                        label Unavailable:  
+                          input(type='radio' name="avail" ng-model='jacket.available' value="false")
+    
+              .modal-footer
+                a.btn.pull-left(ng-click='toggleMode()') Advanced 
+                button.btn.btn-default(type='button' data-dismiss='modal') Close
+                button.btn.btn-primary(type='button' ng-click='sendJacket()' data-dismiss='modal') Save Changes
