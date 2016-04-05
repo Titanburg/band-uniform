@@ -14,7 +14,7 @@ module.exports = function(app,passport){
   app.use('/api',isLoggedIn,api);
 
   app.get('/partial/:name', isLoggedIn,function(req,res,next){
-    
+
     var jadeVariables = {
       title:'Band Uniform Management Utility',
       user: {
@@ -24,13 +24,14 @@ module.exports = function(app,passport){
         admin:req.user.local.admin
       }
     }
-    
+
     // Check which type of user [user, admin]
     if(req.user && req.user.local.admin){
       // admin
       switch(req.params.name){
         case 'users':
         case 'maintenance_request':
+        case 'uniform':
         case 'account':
           res.render('partials/admin/' + req.params.name,jadeVariables);
           break;
