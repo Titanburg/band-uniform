@@ -1,50 +1,57 @@
 extends layout
 
 block content
-  .login-page
-    .login-overlay
-    .login-bar
-      img(src="/images/mblogo.png", width='200px', alt="MB Man Logo")
-      p.h1 Band Uniform Management Utility
-      form(name='login', class="login-input", action='/auth/login', method='post')
-        -if(messages.length > 0)
-          .alert.alert-danger=messages
-        br
-        input(type='email', class="text", name='email', placeholder='Email')
-        br
-        input(type='password', class="text", name='password', placeholder='Password')
-        br
-        input(type='submit', class="signin-btn", value='Sign In')
-        button(type='button', class="reqacc-btn" data-toggle='modal', data-target='#myModal')
-          | Request Account
-      #myModal.modal.fade(tabindex='-1', role='dialog', aria-labelledby='myModalLabel')
-        .modal-dialog(role='document')
-          .modal-content
-            .modal-header
-              button.close(type='button', data-dismiss='modal', aria-label='Close')
-                span(aria-hidden='true') x
-              h4#myModalLabel.modal-title Account Sign Up Form
-            .modal-body
-              form(action='/auth/signup' method='post')
-                .form-group
-                  input(type='text' class="text", name='email', placeholder='Email')
-                .form-group
-                  input(type='password' class="text", name='password' placeholder='Password')
-                button(type='submit' class="signup-btn") Submit
-            .modal-footer
-              | .
-      .group-name
-        h2.muted
-          | Created by Titanburg
-      .creators
-        p.muted
+  .container-fluid.login-page
+    .containter-fluid.login-overlay
+    .row-fluid.login-bar
+      .row
+        .col-sm-offset-3.col-sm-6
+          img(src="/images/mblogo.png", width='200px', alt="MB Man Logo")
+      .row
+        .col-sm-12
+          p.h1 Band Uniform Management Utility
+      .row
+        .col-sm-offset-1.col-sm-10
+          form(name='login', class="login-input", action='/auth/login', method='post')
+            -if(messages.length > 0)
+              .alert.alert-danger=messages
+            br
+            input(type='email', class="text", name='email', placeholder='Email')
+            br
+            input(type='password', class="text", name='password', placeholder='Password')
+            br
+            input(type='submit', class="signin-btn", value='Sign In')
+            button(type='button', class="reqacc-btn" data-toggle='modal', data-target='#myModal')
+              | Request Account
+          #myModal.modal.fade(tabindex='-1', role='dialog', aria-labelledby='myModalLabel')
+            .modal-dialog(role='document')
+              .modal-content
+                .modal-header
+                  button.close(type='button', data-dismiss='modal', aria-label='Close')
+                    span(aria-hidden='true') x
+                  h4#myModalLabel.modal-title Account Sign Up Form
+                .modal-body
+                  form(action='/auth/signup' method='post')
+                    .form-group
+                      input(type='text' class="text", name='email', placeholder='Email')
+                    .form-group
+                      input(type='password' class="text", name='password' placeholder='Password')
+                    button(type='submit' class="signup-btn") Submit
+                .modal-footer
+                  | .
+      .row
+        .col-sm-12
+          h2.muted
+            | Created by Titanburg
+      .row
+        .row
+          |Kirk Powell
+        .row
           | Kyle Walter
-          br
-          | Kirk Powell
-          br
+        .row
           | Kaitlyn Jarret
-          br
+        .row
           | Andrew Korous
-      .copyright
+      .row.copyright
         p.muted
-          | Copyright © 2016 Titanburg Technologies
+          | Copyright (c) 2016 Titanburg Technologies
