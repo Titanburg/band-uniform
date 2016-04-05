@@ -45,6 +45,7 @@ angular.module('bandApp')
           $scope.selection = index;
           $scope.newPass = '';
           $scope.user.local.password = '';
+          $scope.user.sizes.sex='Male';
         };
         $scope.isSelected = function(index){
           return $scope.selection == index;
@@ -66,7 +67,7 @@ angular.module('bandApp')
         // Crud Functions
         $scope.createUser = function(){
             $scope.creating = true;
-            $scope.user = {local:{admin:false}};
+            $scope.user = {local:{admin:false},sizes:{sex:false}};
         };
         $scope.getUsers = function(){
           $http.get('/api/user')

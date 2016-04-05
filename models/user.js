@@ -9,14 +9,14 @@ var userSchema  = mongoose.Schema({
             required: true
         },
         password: {
-            type: String,
-            validate: [
-                function(password) {
-                    return password.length >= 6;
-                },
-                'Password needs to be at least 6 characters long.'
-            ],
-            required: true
+            type: String
+            // validate: [
+            //     function(password) {
+            //         return password.length >= 6;
+            //     },
+            //     'Password needs to be at least 6 characters long.'
+            // ],
+            // required: true
         },
         admin: Boolean,
         firstName: {
@@ -35,8 +35,8 @@ var userSchema  = mongoose.Schema({
     },
     sizes: {
         sex: {
-            type: String,
-            enum: ['Male', 'Female', 'Other']
+            type: String
+            // enum: ['Male', 'Female', 'Other']
         },
         chest: Number,
         armlength: Number,
