@@ -18,6 +18,7 @@ module.exports = function(app,passport){
       // admin
       switch(req.params.name){
         case 'users':
+        case 'instruments':
         case 'maintenance_request':
           res.render('partials/admin/' + req.params.name);
           break;
@@ -27,6 +28,7 @@ module.exports = function(app,passport){
     }else{
       // user
       switch(req.params.name){
+        case 'instruments':
         case 'maintenance_request':
           res.render('partials/admin/' + req.params.name);
           break;

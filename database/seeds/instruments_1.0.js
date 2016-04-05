@@ -65,6 +65,21 @@ data : [
   {name:'Drums',jacket:1,jumpsuit:1,hat:1,gloves:1}
 ]});
 
+// Instruments Model and Data
+seed.push({name:'Instruments',model : require('../../models/instruments.js'),
+data : [
+  {name:'Piccolos',group:'Woodwinds',jacket:1,jumpsuit:1,hat:1,gloves:1},
+  {name:'Clarinets',group:'Woodwinds',jacket:1,jumpsuit:1,hat:1,gloves:1},
+  {name:'Saxophones',group:'Woodwinds',jacket:1,jumpsuit:1,hat:1,gloves:1},
+  {name:'Trumpets',group:'Woodwinds',jacket:1,jumpsuit:1,hat:1,gloves:1},
+  {name:'Mellophones',group:'Woodwinds',jacket:1,jumpsuit:1,hat:1,gloves:1},
+  {name:'Baritones',group:'Woodwinds',jacket:1,jumpsuit:1,hat:1,gloves:1},
+  {name:'Trombones',group:'Woodwinds',jacket:1,jumpsuit:1,hat:1,gloves:1},
+  {name:'Sousaphones',group:'Sousas',jacket:3,jumpsuit:3,hat:3,gloves:3},
+  {name:'Percussion',group:'Percussion',jacket:1,jumpsuit:1,hat:1,gloves:0},
+  {name:'Drums',group:'Drum Majors',jacket:2,jumpsuit:1,hat:1,gloves:2}
+]});
+
 // Seed
 
 seed.forEach(function(model){

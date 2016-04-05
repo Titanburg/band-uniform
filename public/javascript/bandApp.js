@@ -11,12 +11,16 @@ angular.module('bandApp',['ngRoute'])
                 templateUrl: 'partial/maintenance_request',
                 controller: 'maintenanceController'
             })
+            .when('/instruments',{
+                templateUrl: 'partial/instruments',
+                controller: 'instrumentsController'
+            })
             .when('/logout',{
                 templateUrl: 'partial/logout',
                 controller: 'logout'
             })
             .otherwise({
-              templateUrl: 'partial/oops'
+                templateUrl: 'partial/oops'
             });
         $locationProvider.html5Mode(true);
     }).controller('logout',function($scope,$window){

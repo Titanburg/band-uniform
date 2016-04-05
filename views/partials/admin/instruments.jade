@@ -1,7 +1,4 @@
-//
-   Created by Kyle Walter on 2/29/2016.
-
-.users(ng-init='getUsers()')
+.instruments(ng-init='getInstruments()')
     .container-fluid
         .row
             .col-sm-10.col-sm-offset-1
@@ -13,48 +10,41 @@
                           li.active(role='presentation')
                             a(href="#" ng-click='setFilter()') All
                           li(role='presentation')
-                            a(href="#" ng-click='setFilter("true")') Admin
-                          li(role='presentation')
                             a(href='#' ng-click='setFilter("Woodwinds")') Woodwinds
                           li(role='presentation')
                             a(href='#' ng-click='setFilter("Sousas")') Sousas
                           li(role='presentation')
                             a(href='#' ng-click='setFilter("Percussion")') Percussion
+                          li(role='presentation')
+                            a(href='#' ng-click='setFilter("Drum-Majors")') Drum Majors
                         table.table.table-hover
                           thead
                             tr
-                              th First Name
-                                a.btn(ng-click='setOrder("firstName")')
+                              th Name
+                                a.btn(ng-click='setOrder("name")')
                                   span.glyphicon.glyphicon-sort-by-alphabet
-                              th Last Name
-                                a.btn(ng-click='setOrder("lastName")')
+                              th Group
+                                a.btn(ng-click='setOrder("group")')
                                   span.glyphicon.glyphicon-sort-by-alphabet
-                              th Email
-                                a.btn(ng-click='setOrder("email")')
-                                  span.glyphicon.glyphicon-sort-by-alphabet
-                              th Admin
-                                a.btn(ng-click='setOrder("admin")')
-                                  span.glyphicon.glyphicon-sort-by-alphabet
+                              th Actions
                           tbody
-                            tr(ng-repeat='user in users | orderBy:order | filter:filter')
-                              td {{user.local.firstName}}
-                              td {{user.local.lastName}}
-                              td {{user.local.email}}
-                              td {{user.local.admin}}
+                            tr(ng-repeat='instrument in instruments | orderBy:order | filter:filter')
+                              td {{instrument.local.name}}
+                              td {{instrument.local.group}}
                               td  
-                                a.btn(data-toggle='modal' data-target='#editUser' ng-click='getUser(user)')
+                                a.btn(data-toggle='modal' data-target='#editInstrument' ng-click='getInstrument(instrument)')
                                   span.glyphicon.glyphicon-cog
-                                a.btn(ng-click='deleteUser(user)')
+                                a.btn(ng-click='deleteInstrument(instrument)')
                                   span.glyphicon.glyphicon-trash.text-danger
                     .panel-footer
-                      button.btn.btn-success(data-toggle='modal' data-target='#editUser' type='button' ng-click='createUser()') Add User
-    .modal.fade(id='editUser' tabindex='-1' role='dialog')
+                      button.btn.btn-success(data-toggle='modal' data-target='#editInstrument' type='button' ng-click='createInstrument()') Add Instrument
+    .modal.fade(id='editInstrument' tabindex='-1' role='dialog')
       .modal-dialog
           .modal-content
               .modal-header
                 button.close(type='button' data-dismiss='modal' aria-label="Close")
                   span(aria-hidden='true')
-                h4.modal-title Edit {{user.local.firstName + ' ' + user.local.lastName}}
+                h4.modal-title Edit {{instrument.local.name}}
               .modal-body
                   //- .row
                   //-   .col-sm-3
@@ -62,37 +52,29 @@
                   form.form-horizontal
                     .for
                     .form-group
-                      label.col-sm-3.control-label First name
+                      label.col-sm-3.control-label Name
                       .col-sm-9
-                        input.form-control(type='text' ng-model='user.local.firstName')
+                        input.form-control(type='text' ng-model='instrument.local.name')
                     .form-group
-                      label.col-sm-3.control-label Last name
+                      label.col-sm-3.control-label Group
                       .col-sm-9
-                        input.form-control(type='text' ng-model='user.local.lastName')
+                        input.form-control(type='text' ng-model='instrument.local.group')
                     .form-group
-                      label.col-sm-3.control-label Email
+                      label.col-sm-3.control-label Jacket
                       .col-sm-9
-                        input.form-control(type='email' ng-model='user.local.email')
+                        input.form-control(type='checkbox' ng-model='instrument.local.jacket')
                     .form-group
-                      label.col-sm-3.control-label Admin
+                      label.col-sm-3.control-label Jumpsuit
                       .col-sm-9
-                        input(type='checkbox' ng-model='user.local.admin')
-                    hr
+                        input.form-control(type='checkbox' ng-model='instrument.local.jumpsuit')
                     .form-group
-                      label.col-sm-3.control-label New Password
+                      label.col-sm-3.control-label Hat
                       .col-sm-9
-                        input(type='password' ng-model='user.local.password')
+                        input.form-control(type='checkbox' ng-model='instrument.local.hat')
                     .form-group
-                      label.col-sm-3.control-label Confirm
+                      label.col-sm-3.control-label Gloves
                       .col-sm-9
-                        input(type='password' ng-model='confirmPass')
-                    hr(ng-hide='simpleView')
-                    .form-group(ng-hide='simpleView')
-                      label.col-sm-3.control-label Instrument
-                      .col-sm-9
-                        input(type='text' ng-model='user.other.instrument')
-                  
+                        input.form-control(type='checkbox' ng-model='instrument.local.gloves')
               .modal-footer
-                a.btn.pull-left(ng-click='toggleMode()') Advanced 
                 button.btn.btn-default(type='button' data-dismiss='modal') Close
-                button.btn.btn-primary(type='button' ng-click='sendUser()' data-dismiss='modal') Save Changes
+                button.btn.btn-primary(type='button' ng-click='sendInstrument()' data-dismiss='modal') Save Changes
