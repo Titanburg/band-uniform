@@ -6,8 +6,12 @@ import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.JsonReader;
 import android.view.View;
+import android.widget.ArrayAdapter;
 import android.widget.Button;
+import android.widget.ListView;
 import android.widget.TextView;
+
+import com.google.gson.Gson;
 
 import java.io.BufferedReader;
 import java.io.IOException;
@@ -15,6 +19,7 @@ import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.net.MalformedURLException;
 import java.net.URL;
+import java.util.List;
 
 import javax.net.ssl.HttpsURLConnection;
 
@@ -22,8 +27,10 @@ import org.json.*;
 
 public class MainActivity extends AppCompatActivity {
 
-    TextView usersTextView;
-    Button getUsersButton;
+    ListView usersListView;
+    ArrayAdapter<User> listViewAdapter;
+    Button refreshButton;
+    User[] users;
 
 
     @Override
@@ -34,90 +41,73 @@ public class MainActivity extends AppCompatActivity {
         StrictMode.ThreadPolicy policy = new StrictMode.ThreadPolicy.Builder().permitAll().build();
         StrictMode.setThreadPolicy(policy);
 
-        usersTextView = (TextView)findViewById(R.id.usersTextView);
-        getUsersButton = (Button)findViewById(R.id.getUsersButton);
-        getUsersButton.setOnClickListener(userButtonClick);
+        usersListView = (ListView)findViewById(R.id.listView);
+        refreshButton = (Button)findViewById(R.id.refreshButton);
+
+        getUsers();
+        listViewAdapter = new ArrayAdapter<User>(this,R.layout.user_row,users);
+        usersListView.setAdapter(listViewAdapter);
+        refreshButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+
+
+                getUsers();
+
+                listViewAdapter.notifyDataSetChanged();
+            }
+        });
 
     }
 
-   private View.OnClickListener userButtonClick = new View.OnClickListener() {
-       @Override
-       public void onClick(View v) {
-            usersTextView.setText(getUsers());
 
 
-           String https_url = "https://titanburg.me/api/user";
-           URL url;
-           try {
 
-               url = new URL(https_url);
-               HttpsURLConnection con = (HttpsURLConnection)url.openConnection();
+    private void print_content(HttpsURLConnection con){
+        String message = "";
+        if(con!=null){
+            try {
+
+               System.out.println("****** Content of the URL ********");
+               BufferedReader br =
+                       new BufferedReader(
+                               new InputStreamReader(con.getInputStream()));
+               String input;
+
+               while ((input = br.readLine()) != null){
+                   message += (input);
+               }
+               br.close();
+
+               Gson gson = new Gson();
+               users = gson.fromJson(message,User[].class);
+
+           } catch (IOException e) {
+               e.printStackTrace();
+           }
+       };
+    }
+
+    private void getUsers(){
+
+        String https_url = "https://titanburg.me/api/user";
+        URL url;
+        try {
+
+            url = new URL(https_url);
+            HttpsURLConnection con = (HttpsURLConnection)url.openConnection();
 
 //               //dumpl all cert info
 //               print_https_cert(con);
 
-               //dump all the content
-               print_content(con);
+            //dump all the content
+            print_content(con);
 
+        } catch (MalformedURLException e) {
+            e.printStackTrace();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
 
-
-           } catch (MalformedURLException e) {
-               e.printStackTrace();
-           } catch (IOException e) {
-               e.printStackTrace();
-           }
-
-       }
-
-       private void print_content(HttpsURLConnection con){
-           String message = "";
-           if(con!=null){
-
-               try {
-
-                   System.out.println("****** Content of the URL ********");
-                   BufferedReader br =
-                           new BufferedReader(
-                                   new InputStreamReader(con.getInputStream()));
-
-                   String input;
-
-                   while ((input = br.readLine()) != null){
-                       message += (input + "\n");
-                   }
-                   br.close();
-
-
-
-               } catch (IOException e) {
-                   e.printStackTrace();
-               }
-
-//               try (InputStream is = con.getInputStream()){
-//                        JsonReader rdr = Json {
-//
-//                        JSONObject obj = rdr.readObject();
-//                        JsonArray results = obj.getJsonArray("data");
-//                        for (JsonObject result : results.getValuesAs(JsonObject.class)) {
-//                                System.out.print(result.getJsonObject("from").getString("name"));
-//                                System.out.print(": ");
-//                                System.out.println(result.getString("message", ""));
-//                                System.out.println("-----------");
-//                            }
-//                    }
-//               }catch(IOException e){
-//                   e.printStackTrace();
-//               }
-
-           }
-
-       }
-
-
-
-   };
-
-    private String getUsers(){
-        return "Users";
     }
 }

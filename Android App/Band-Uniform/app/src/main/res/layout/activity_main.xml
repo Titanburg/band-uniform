@@ -10,22 +10,21 @@
     android:paddingBottom="@dimen/activity_vertical_margin"
     tools:context="me.titanburg.band_uniform.MainActivity">
 
-    <TextView
+    <ListView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Test"
-        android:id="@+id/usersTextView"
-        android:layout_alignParentLeft="true"
-        android:layout_alignParentStart="true"
-        android:layout_alignParentTop="true" />
+        android:id="@+id/listView"
+        android:layout_alignParentTop="true"
+        android:layout_centerHorizontal="true" />
 
     <Button
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Get Users"
-        android:id="@+id/getUsersButton"
-        android:layout_alignParentBottom="true"
-        android:layout_centerHorizontal="true"
-        android:clickable="false"
-        android:onClick="userButtonClick" />
+        android:text="Refresh"
+        android:id="@+id/refreshButton"
+        android:background="@drawable/round_button"
+        android:layout_alignBottom="@+id/listView"
+        android:layout_alignParentRight="true"
+        android:layout_alignParentEnd="true" />
+
 </RelativeLayout>
