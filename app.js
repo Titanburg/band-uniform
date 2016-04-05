@@ -71,7 +71,7 @@
   // app.use(session({secret:'thisisasuperdupersecret',cookie:{_expires:60000}}));
   app.use(session({
     secret: 'thisisasuperdupersecret',
-    cookie: { maxAge: 60000 },
+    cookie: { maxAge: 60000000000 },
     name: 'band-uniform',
     store: sessionStore, // connect-mongo session store TODO: Make this applicable to Postgres?
     proxy: true,
