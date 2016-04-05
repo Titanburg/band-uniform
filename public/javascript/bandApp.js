@@ -15,6 +15,10 @@ angular.module('bandApp',['ngRoute'])
               templateUrl: 'partial/maintenance_request',
               controller: 'maintenanceController'
             })
+            .when('/uniform',{
+                templateUrl: 'partial/uniform.jade',
+                controller: 'uniformController'
+            })
             .when('/logout',{
               templateUrl: 'partial/logout',
               controller: 'logout'
