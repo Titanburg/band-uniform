@@ -4,12 +4,31 @@ angular.module('bandApp')
       $scope.creating = false;
       $scope.jacket = {};
       $scope.jackets = [];
-
       $scope.jumpsuit = {};
       $scope.jumpsuits = [];
+      $scope.requestSelect = true;
+      $scope.jacketSelect = false;
+      $scope.jumpsuitSelect = false;
+
+      $scope.selectType = function(type){
+        if("requests"===type){
+          $scope.requestSelect = true;
+          $scope.jacketSelect = false;
+          $scope.jumpsuitSelect = false;
+        }else if ("jackets"===type) {
+          $scope.requestSelect = false;
+          $scope.jacketSelect = true;
+          $scope.jumpsuitSelect = false;
+        }else {
+          $scope.requestSelect = false;
+          $scope.jacketSelect = false;
+          $scope.jumpsuitSelect = true;
+        }
+      };
+
 
       $scope.getJumpsuits = function(){
-        $http.get('/api/maintenance_jumpsuit')
+        $http.get('/api/jumpsuit')
           .success(function(data){
             $scope.jumpsuits = data;
           }).error(function(err){
@@ -23,7 +42,7 @@ angular.module('bandApp')
       };
 
       $scope.getJumpsuits = function(){
-        $http.get('/api/maintenance_jumpsuit')
+        $http.get('/api/jumpsuit')
           .success(function(data){
             console.log(data);
             $scope.jumpsuits = data;
@@ -33,7 +52,7 @@ angular.module('bandApp')
       };
 
       $scope.getJumpsuit = function(jumpsuit){
-          $http.get('/api/maintenance_jumpsuit/' + jumpsuit._id )
+          $http.get('/api/jumpsuit/' + jumpsuit._id )
               .success(function(data){
                   $scope.jumpsuit = data;
               }).error(function(err){
@@ -44,7 +63,7 @@ angular.module('bandApp')
       $scope.sendJumpsuit = function(){
           // If creating is true send new user
           if($scope.creating === true){
-             $http.post('/api/maintenance_jumpsuit',$scope.jumpsuit)
+             $http.post('/api/jumpsuit',$scope.jumpsuit)
                  .success(function(data){
                    $scope.jumpsuits = data;
                  }).error(function(err){
@@ -53,7 +72,7 @@ angular.module('bandApp')
           }
           // If creating is false edit existing user
           else{
-            $http.post('/api/maintenance_jumpsuit/' + $scope.jumpsuit._id,$scope.jumpsuit)
+            $http.post('/api/jumpsuit/' + $scope.jumpsuit._id,$scope.jumpsuit)
                 .success(function(data){
                   $scope.jumpsuits = data;
                 }).error(function(err){
@@ -68,7 +87,7 @@ angular.module('bandApp')
       };
 
       $scope.deleteJumpsuit = function(jumpsuit){
-          $http.get('/api/maintenance_jumpsuit/delete/' + jumpsuit._id )
+          $http.get('/api/jumpsuit/delete/' + jumpsuit._id )
           .success(function(data){
             $scope.jumpsuits = data;
           }).error(function(err){
@@ -76,7 +95,7 @@ angular.module('bandApp')
         });
       };
 
-      
+
       $scope.getJackets = function(){
         $http.get('/api/jacket')
           .success(function(data){

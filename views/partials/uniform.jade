@@ -2,10 +2,46 @@
     .container-fluid
         .row
             .col-sm-10.col-sm-offset-1
-                .panel.panel-default(ng-init='getJackets()')
+                .panel.panel-default(ng-show="requestSelect")
                     .panel-heading
-                        h3 {{title}}
+                        h3 Requests
                     .panel-body
+                        ul.nav.nav-pills
+                          li.active
+                            a(href="#" ng-click='selectType("requests")') Requests
+                          li
+                            a(href="#" ng-click='selectType("jackets")') Jackets
+                          li
+                            a(href="#" ng-click='selectType("jumpsuits")') Jumpsuits
+                        table.table.table-hover
+                          thead
+                            tr
+                              th ID
+                              th Assigned
+                          tbody
+                            tr
+                              td request test
+                              td hello
+                              td  
+                                a.btn(data-toggle='modal' data-target='#editJacket' ng-click='getJacket(jacket)')
+                                  span.glyphicon.glyphicon-cog
+                                a.btn(ng-click='deleteJacket(jacket)')
+                                  span.glyphicon.glyphicon-trash.text-danger    
+                    .panel-footer
+                      button.btn.btn-success(data-toggle='modal' data-target='#editJacket' type='button' ng-click='createJacket()') Add Jacket
+                      
+                      
+                .panel.panel-default(ng-init='getJumpsuits()' ng-show="jumpsuitSelect")
+                    .panel-heading
+                        h3 Jumpsuits
+                    .panel-body  
+                        ul.nav.nav-pills
+                          li.active
+                            a(href="#" ng-click='selectType("requests")') Requests
+                          li
+                            a(href="#" ng-click='selectType("jackets")') Jackets
+                          li
+                            a(href="#" ng-click='selectType("jumpsuits")') Jumpsuits
                         table.table.table-hover
                           thead
                             tr
@@ -15,23 +51,30 @@
                               th Available
                               th
                           tbody
-                            tr(ng-repeat='jumpsuit in jumpsuits | orderBy:number')
+                            tr(ng-repeat='jumpsuit in jumpsuits')
                               td {{jumpsuit.number}}
-                              td {{jumpsuit.waist}}
+                              td {{jumpsuit.waist}}/{{jumpsuit.seat}}/{{jumpsuit.outseam}}
                               td {{jumpsuit.sex}}
                               td {{jumpsuit.available}}
                               td  
-                                a.btn(data-toggle='modal' data-target='#editJacket' ng-click='getJacket(jacket)')
+                                a.btn(data-toggle='modal' data-target='#editJumpsuit' ng-click='getJumpsuit(jumpsuit)')
                                   span.glyphicon.glyphicon-cog
-                                a.btn(ng-click='deleteJacket(jacket)')
+                                a.btn(ng-click='deleteJumpsuit(jumpsuit)')
                                   span.glyphicon.glyphicon-trash.text-danger    
                     .panel-footer
-                      button.btn.btn-success(data-toggle='modal' data-target='#editJacket' type='button' ng-click='createJacket()') Add Jacket
-                      
-                .panel.panel-default(ng-init='getJumpsuits()')
+                      button.btn.btn-success(data-toggle='modal' data-target='#editJumpsuit' type='button' ng-click='createJumpsuit()') Add Jumpsuit
+                    
+                .panel.panel-default(ng-init='getJackets()' ng-show="jacketSelect")
                     .panel-heading
-                        h3 {{title}}
+                        h3 Jackets
                     .panel-body
+                        ul.nav.nav-pills
+                          li.active
+                            a(href="#" ng-click='selectType("requests")') Requests
+                          li
+                            a(href="#" ng-click='selectType("jackets")') Jackets
+                          li
+                            a(href="#" ng-click='selectType("jumpsuits")') Jumpsuits
                         table.table.table-hover
                           thead
                             tr
@@ -43,7 +86,7 @@
                           tbody
                             tr(ng-repeat='jacket in jackets | orderBy:number')
                               td {{jacket.number}}
-                              td {{jacket.armlength}}
+                              td {{jacket.chest}}{{jacket.armlength}}
                               td {{jacket.sex}}
                               td {{jacket.available}}
                               td  
@@ -53,7 +96,8 @@
                                   span.glyphicon.glyphicon-trash.text-danger    
                     .panel-footer
                       button.btn.btn-success(data-toggle='modal' data-target='#editJacket' type='button' ng-click='createJacket()') Add Jacket
-    .modal.fade(id='editJumpsuit' tabindex='-1' role='dialog')
+                      
+    .modal.fade(id='editJacket' tabindex='-1' role='dialog')
       .modal-dialog
           .modal-content
               .modal-header
@@ -75,7 +119,7 @@
                       .col-sm-9
                         input.form-control(type='text' ng-model='jacket.chest')
                     .form-group
-                      label.col-sm-3.control-label armlength
+                      label.col-sm-3.control-label Armlength
                       .col-sm-9
                         input.form-control(type='text' ng-model='jacket.armlength')
                     .form-group
@@ -86,6 +130,49 @@
                       label.col-sm-3.control-label Available
                       .col-sm-9
                         input(type='checkbox' ng-model='jacket.available')
+    
+              .modal-footer
+                a.btn.pull-left(ng-click='toggleMode()') Advanced 
+                button.btn.btn-default(type='button' data-dismiss='modal') Close
+                button.btn.btn-primary(type='button' ng-click='sendJacket()' data-dismiss='modal') Save Changes
+
+    .modal.fade(id='editJumpsuit' tabindex='-1' role='dialog')
+      .modal-dialog
+          .modal-content
+              .modal-header
+                button.close(type='button' data-dismiss='modal' aria-label="Close")
+                  span(aria-hidden='true')
+                h4.modal-title Edit Jacket
+              .modal-body
+                  //- .row
+                  //-   .col-sm-3
+                  //-     img.img-thumbnail.pull-right(width='50px' height='50px')
+                  form.form-horizontal
+                    .for
+                    .form-group
+                      label.col-sm-3.control-label Number
+                      .col-sm-9
+                        input.form-control(type='text' ng-model='jumpsuit.number')
+                    .form-group
+                      label.col-sm-3.control-label Waist
+                      .col-sm-9
+                        input.form-control(type='text' ng-model='jumpsuit.waist')
+                    .form-group
+                      label.col-sm-3.control-label Seat
+                      .col-sm-9
+                        input.form-control(type='text' ng-model='jumpsuit.seat')
+                    .form-group
+                      label.col-sm-3.control-label Outseam
+                      .col-sm-9
+                        input.form-control(type='text' ng-model='jumpsuit.outseam')
+                    .form-group
+                      label.col-sm-3.control-label Sex
+                      .col-sm-9
+                        input.form-control(type='email' ng-model='jumpsuit.sex')
+                    .form-group
+                      label.col-sm-3.control-label Available
+                      .col-sm-9
+                        input(type='checkbox' ng-model='jumpsuit.available')
     
               .modal-footer
                 a.btn.pull-left(ng-click='toggleMode()') Advanced 

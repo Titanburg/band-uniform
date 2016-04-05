@@ -15,8 +15,9 @@ module.exports = {
       var newJumpsuit = new Jumpsuit({
         number: req.body.number,
         sex: req.body.sex,
-        chest: req.body.chest,
-        armlength: req.body.armlength,
+        waist: req.body.waist,
+        seat: req.body.seat,
+        outseam: req.body.outseam,
         available: req.body.available
       });
       newJumpsuit.save(function(err) {
@@ -43,8 +44,9 @@ module.exports = {
       Jumpsuit.findById(req.params.id, function(err, jumpsuit) {
         jumpsuit.number = req.body.number;
         jumpsuit.sex = req.body.sex;
-        jumpsuit.chest = req.body.chest;
-        jumpsuit.armlength = req.body.armlength;
+        jumpsuit.waist = req.body.waist;
+        jumpsuit.seat = req.body.seat;
+        jumpsuit.outseam = req.body.outseam;
         jumpsuit.available = req.body.available;
         jumpsuit.save(function(err) {
           if(err) {
