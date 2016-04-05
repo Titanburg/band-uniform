@@ -13,7 +13,7 @@ module.exports = {
 
     // Create new instrument in database
     newInstrument : function(req,res){
-        Instrument.findOne({'local.name':req.body.local.name},function(err,instrument){
+        Instrument.findOne({'name':req.body.name},function(err,instrument){
             console.log(instrument);
             if(err) return;
             if(instrument){
@@ -22,8 +22,8 @@ module.exports = {
             }else{
                 console.log(instrument);
                 var newInstrument = new Instrument();
-                newInstrument.local.name = req.body.local.name;
-                newInstrument.local.group = req.body.local.group;
+                newInstrument.name = req.body.name;
+                newInstrument.group = req.body.group;
                 newInstrument.save(function(err) {
                     if (err)
                         throw err;
@@ -40,7 +40,7 @@ module.exports = {
     // Get single instrument from database
     getInstrument : function(req,res){
         console.log("getInstrument called:",req.params.id)
-        Instrument.findOne({_id:req.params.id},function(err,user){
+        Instrument.findOne({_id:req.params.id},function(err,instrument){
             if(err) {
                 console.log("Err",err);
             }
@@ -53,8 +53,8 @@ module.exports = {
         Instrument.findOne({_id:req.params.id},function(err,instrument){
             if(err) return;
             if(instrument){
-                instrument.local.name = req.body.local.name;
-                instrument.local.group = req.body.local.group;
+                instrument.name = req.body.name;
+                instrument.group = req.body.group;
                 instrument.save(function(err) {
                     if (err)
                         throw err;
@@ -73,7 +73,7 @@ module.exports = {
 
     // Delete instrument
     deleteInstrument :function(req,res){
-      Instrument.findOne({_id:req.params.id},function(err,user){
+      Instrument.findOne({_id:req.params.id},function(err,instrument){
         if(err)
             throw err;
         instrument.remove(function(err,remove){

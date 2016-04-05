@@ -87,7 +87,7 @@ seed.forEach(function(model){
     model.model.findOne({number: data.number},function(err,d){
       if(err) return error;
       if(d){
-        console.log('Mongoose:      ' + model.name + ' ' + data.number + ' already seeded');
+        console.log('Mongoose:      ' + model.name + ' ' + data.name + ' already seeded');
       }else{
         var entry = new model.model();
         for(var key in data){
