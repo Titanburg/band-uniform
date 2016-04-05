@@ -22,7 +22,11 @@ module.exports = {
         if(err) {
           res.json({'ERROR': err});
         } else {
-          res.json({'SUCCESS': newUrequest});
+          Urequest.find({},function(err,urequests){
+              if(err) return;
+              console.log(urequests);
+              res.json(urequests);
+          });
         }
       });
     },
@@ -48,7 +52,11 @@ module.exports = {
           if(err) {
             res.json({'ERROR': err});
           } else {
-            res.json({'UPDATED': urequest});
+            Urequest.find({},function(err,urequests){
+                if(err) return;
+                console.log(urequests);
+                res.json(urequests);
+            });
           }
         });
       });

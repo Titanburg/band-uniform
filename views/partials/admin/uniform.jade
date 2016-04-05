@@ -173,9 +173,14 @@
                       .col-sm-9
                         input.form-control(type='text' ng-model='jumpsuit.sex')
                     .form-group
-                      label.col-sm-3.control-label Available
+                      label.col-sm-3.control-label Availability
                       .col-sm-9
-                        input(type='checkbox' ng-model='jumpsuit.available')
+                        label Available:  
+                          input(type='radio' name="avail" ng-model='jumpsuit.available' value="true")
+                      .col-sm-9
+                        label Unavailable:  
+                          input(type='radio' name="avail" ng-model='jumpsuit.available' value="false")
+                        
     
               .modal-footer
                 a.btn.pull-left(ng-click='toggleMode()') Advanced 
@@ -212,9 +217,13 @@
                       .col-sm-9
                         input.form-control(type='text' ng-model='jacket.sex')
                     .form-group
-                      label.col-sm-3.control-label Available
+                      label.col-sm-3.control-label Availability
                       .col-sm-9
-                        input(type='checkbox' ng-model='jacket.available')
+                        label Available:  
+                          input(type='radio' name="avail" ng-model='jacket.available' value="true")
+                      .col-sm-9
+                        label Unavailable:  
+                          input(type='radio' name="avail" ng-model='jacket.available' value="false")
     
               .modal-footer
                 a.btn.pull-left(ng-click='toggleMode()') Advanced 

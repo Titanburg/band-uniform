@@ -23,7 +23,11 @@ module.exports = {
         if(err) {
           res.json({'ERROR': err});
         } else {
-          res.json({'SUCCESS': newJacket});
+          Jacket.find({},function(err,jackets){
+              if(err) return;
+              console.log(jackets);
+              res.json(jackets);
+          });
         }
       });
     },
@@ -50,7 +54,11 @@ module.exports = {
           if(err) {
             res.json({'ERROR': err});
           } else {
-            res.json({'UPDATED': jacket});
+            Jacket.find({},function(err,jackets){
+                if(err) return;
+                console.log(jackets);
+                res.json(jackets);
+            });
           }
         });
       });
