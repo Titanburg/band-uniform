@@ -16,7 +16,7 @@
                           li(role='presentation')
                             a(href='#' ng-click='setFilter("Percussion")') Percussion
                           li(role='presentation')
-                            a(href='#' ng-click='setFilter("Drum-Majors")') Drum Majors
+                            a(href='#' ng-click='setFilter("Drum Majors")') Drum Majors
                         table.table.table-hover
                           thead
                             tr
@@ -29,8 +29,8 @@
                               th Actions
                           tbody
                             tr(ng-repeat='instrument in instruments | orderBy:order | filter:filter')
-                              td {{instrument.local.name}}
-                              td {{instrument.local.group}}
+                              td {{instrument.name}}
+                              td {{instrument.group}}
                               td  
                                 a.btn(data-toggle='modal' data-target='#editInstrument' ng-click='getInstrument(instrument)')
                                   span.glyphicon.glyphicon-cog
@@ -44,7 +44,7 @@
               .modal-header
                 button.close(type='button' data-dismiss='modal' aria-label="Close")
                   span(aria-hidden='true')
-                h4.modal-title Edit {{instrument.local.name}}
+                h4.modal-title Edit {{instrument.name}}
               .modal-body
                   //- .row
                   //-   .col-sm-3
@@ -54,27 +54,27 @@
                     .form-group
                       label.col-sm-3.control-label Name
                       .col-sm-9
-                        input.form-control(type='text' ng-model='instrument.local.name')
+                        input.form-control(type='text' ng-model='instrument.name')
                     .form-group
                       label.col-sm-3.control-label Group
                       .col-sm-9
-                        input.form-control(type='text' ng-model='instrument.local.group')
+                        input.form-control(type='text' ng-model='instrument.group')
                     .form-group
                       label.col-sm-3.control-label Jacket
                       .col-sm-9
-                        input.form-control(type='checkbox' ng-model='instrument.local.jacket')
+                        input.form-control(type='checkbox' ng-model='instrument.jacket')
                     .form-group
                       label.col-sm-3.control-label Jumpsuit
                       .col-sm-9
-                        input.form-control(type='checkbox' ng-model='instrument.local.jumpsuit')
+                        input.form-control(type='checkbox' ng-model='instrument.jumpsuit')
                     .form-group
                       label.col-sm-3.control-label Hat
                       .col-sm-9
-                        input.form-control(type='checkbox' ng-model='instrument.local.hat')
+                        input.form-control(type='checkbox' ng-model='instrument.hat')
                     .form-group
                       label.col-sm-3.control-label Gloves
                       .col-sm-9
-                        input.form-control(type='checkbox' ng-model='instrument.local.gloves')
+                        input.form-control(type='checkbox' ng-model='instrument.gloves')
               .modal-footer
                 button.btn.btn-default(type='button' data-dismiss='modal') Close
                 button.btn.btn-primary(type='button' ng-click='sendInstrument()' data-dismiss='modal') Save Changes

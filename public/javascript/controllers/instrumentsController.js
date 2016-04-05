@@ -4,13 +4,12 @@ angular.module('bandApp')
         $scope.creating = false;
         $scope.instrument = {};
         $scope.instruments = [];
-        $scope.order = 'local.group';
+        $scope.order = 'group';
         $scope.filter = '';
-        $scope.simpleView = true;
 
         // Helper Functions
         $scope.setOrder = function(order){
-          $scope.order= 'local.' + order;
+          $scope.order = order;
         };
         $scope.setFilter = function(filter){
           $scope.filter = filter ;
