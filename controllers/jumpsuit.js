@@ -42,12 +42,12 @@ module.exports = {
     // *** edit SINGLE jumpsuit *** //
     editJumpsuit : function(req, res) {
       Jumpsuit.findById(req.params.id, function(err, jumpsuit) {
-        jumpsuit.number = req.body.number;
-        jumpsuit.sex = req.body.sex;
-        jumpsuit.waist = req.body.waist;
-        jumpsuit.seat = req.body.seat;
-        jumpsuit.outseam = req.body.outseam;
-        jumpsuit.available = req.body.available;
+        if(req.body.number) jumpsuit.number = parseInt(req.body.number);
+        if(req.body.sex) jumpsuit.sex = req.body.sex;
+        if(req.body.waist) jumpsuit.waist = parseInt(req.body.waist);
+        if(req.body.seat) jumpsuit.seat = parseInt(req.body.seat);
+        if(req.body.outseam) jumpsuit.outseam = parseInt(req.body.outseam);
+        if(req.body.available) jumpsuit.available = req.body.available;
         jumpsuit.save(function(err) {
           if(err) {
             res.json({'ERROR': err});

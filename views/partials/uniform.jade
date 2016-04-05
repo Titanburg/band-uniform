@@ -117,7 +117,7 @@
                     .form-group
                       label.col-sm-3.control-label User Number
                       .col-sm-9
-                        input.form-control(type='text' ng-model='urequest.userNumber')
+                        input.form-control(type='number' ng-model='urequest.userNumber')
                     .form-group
                       label.col-sm-3.control-label Jacket
                       .col-sm-9
@@ -155,23 +155,23 @@
                     .form-group
                       label.col-sm-3.control-label Number
                       .col-sm-9
-                        input.form-control(type='text' ng-model='jumpsuit.number')
+                        input.form-control(type='number' ng-model='jumpsuit.number')
                     .form-group
                       label.col-sm-3.control-label Waist
                       .col-sm-9
-                        input.form-control(type='text' ng-model='jumpsuit.waist')
+                        input.form-control(type='number' ng-model='jumpsuit.waist')
                     .form-group
                       label.col-sm-3.control-label Seat
                       .col-sm-9
-                        input.form-control(type='text' ng-model='jumpsuit.seat')
+                        input.form-control(type='number' ng-model='jumpsuit.seat')
                     .form-group
                       label.col-sm-3.control-label Outseam
                       .col-sm-9
-                        input.form-control(type='text' ng-model='jumpsuit.outseam')
+                        input.form-control(type='number' ng-model='jumpsuit.outseam')
                     .form-group
                       label.col-sm-3.control-label Sex
                       .col-sm-9
-                        input.form-control(type='email' ng-model='jumpsuit.sex')
+                        input.form-control(type='text' ng-model='jumpsuit.sex')
                     .form-group
                       label.col-sm-3.control-label Available
                       .col-sm-9
@@ -180,7 +180,7 @@
               .modal-footer
                 a.btn.pull-left(ng-click='toggleMode()') Advanced 
                 button.btn.btn-default(type='button' data-dismiss='modal') Close
-                button.btn.btn-primary(type='button' ng-click='sendJacket()' data-dismiss='modal') Save Changes
+                button.btn.btn-primary(type='button' ng-click='sendJumpsuit()' data-dismiss='modal') Save Changes
                 
     .modal.fade(id='editJacket' tabindex='-1' role='dialog')
       .modal-dialog
@@ -198,11 +198,11 @@
                     .form-group
                       label.col-sm-3.control-label Number
                       .col-sm-9
-                        input.form-control(type='text' ng-model='jacket.number')
+                        input.form-control(type='number' ng-model='jacket.number')
                     .form-group
                       label.col-sm-3.control-label Chest
                       .col-sm-9
-                        input.form-control(type='text' ng-model='jacket.chest')
+                        input.form-control(type='number' ng-model='jacket.chest')
                     .form-group
                       label.col-sm-3.control-label Armlength
                       .col-sm-9
@@ -210,7 +210,7 @@
                     .form-group
                       label.col-sm-3.control-label Sex
                       .col-sm-9
-                        input.form-control(type='email' ng-model='jacket.sex')
+                        input.form-control(type='text' ng-model='jacket.sex')
                     .form-group
                       label.col-sm-3.control-label Available
                       .col-sm-9

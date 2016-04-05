@@ -41,11 +41,11 @@ module.exports = {
     // *** edit SINGLE jacket *** //
     editJacket : function(req, res) {
       Jacket.findById(req.params.id, function(err, jacket) {
-        jacket.number = req.body.number;
-        jacket.sex = req.body.sex;
-        jacket.chest = req.body.chest;
-        jacket.armlength = req.body.armlength;
-        jacket.available = req.body.available;
+        if(req.body.number) jacket.number = parseInt(req.body.number)
+        if(req.body.sex)jacket.sex = req.body.sex;
+        if(req.body.chest) jacket.chest = parseInt(req.body.chest)
+        if(req.body.armlength) jacket.armlength = req.body.armlength;
+        if(req.body.available) jacket.available = req.body.available;
         jacket.save(function(err) {
           if(err) {
             res.json({'ERROR': err});
