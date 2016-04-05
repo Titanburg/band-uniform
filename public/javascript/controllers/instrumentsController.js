@@ -21,7 +21,7 @@ angular.module('bandApp')
             $scope.user = {};
         };
         $scope.getInstruments = function(){
-          $http.get('/api/instrument')
+          $http.get('/api/instruments')
             .success(function(data){
               console.log(data);
               $scope.instruments = data;
@@ -30,7 +30,7 @@ angular.module('bandApp')
             });
         };
         $scope.getInstrument = function(user){
-            $http.get('/api/instrument/' + instrument._id )
+            $http.get('/api/instruments/' + instrument._id )
                 .success(function(data){
                     $scope.instrument = data;
                 }).error(function(err){
@@ -40,7 +40,7 @@ angular.module('bandApp')
         $scope.sendInstrument = function(){
             // If creating is true send new user
             if($scope.creating === true){
-               $http.post('/api/instrument',$scope.instrument)
+               $http.post('/api/instruments',$scope.instrument)
                    .success(function(data){
                      $scope.instruments = data;
                    }).error(function(err){
@@ -49,20 +49,20 @@ angular.module('bandApp')
             }
             // If creating is false edit existing user
             else{
-              $http.post('/api/instrument/' + $scope.instrument._id,$scope.instrument)
+              $http.post('/api/instruments/' + $scope.instrument._id,$scope.instrument)
                   .success(function(data){
                     $scope.instruments = data;
                   }).error(function(err){
                   console.log(err);
               });
-            }       
-            //Disable creating variable to allow 
+            }
+            //Disable creating variable to allow
             $scope.creating = false;
             //Clear all data in instrument variable. This is for security.
             $scope.instrument = {};
         };
         $scope.deleteInstrument = function(instrument){
-          $http.get('/api/instrument/delete/' + instrument._id )
+          $http.get('/api/instruments/delete/' + instrument._id )
               .success(function(data){
                 $scope.instruments = data;
               }).error(function(err){
