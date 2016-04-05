@@ -100,10 +100,13 @@
                           .col-sm-9
                               label.radio-inline
                                   input(type='radio' name='sex' value='true' ng-model='user.sizes.sex')
-                                  | M
+                                  | Male
                               label.radio-inline
                                   input(type='radio' name='sex' value='false' ng-model='user.sizes.sex')
-                                  | F
+                                  | Female
+                              label.radio-inline
+                                  input(type='radio' name='sex' value='false' ng-model='user.sizes.sex')
+                                  | Other
                       .form-group
                           label.col-sm-3.control-label Chest
                           .col-sm-9
@@ -144,27 +147,27 @@
                           label.col-sm-3.control-label Hat
                           .col-sm-9
                               select.form-control(type='text' ng-model='user.sizes.hat')
-                                  option S
-                                  option M
-                                  option L
-                                  option XL
+                                  option Small
+                                  option Medium
+                                  option Large
+                                  option X-Large
                       .form-group
                           label.col-sm-3.control-label Glove
                           .col-sm-9
                               select.form-control(type='text' ng-model='user.sizes.glove')
-                                  option S
-                                  option M
-                                  option L
+                                  option Small
+                                  option Medium
+                                  option Large
                       .form-group
                           label.col-sm-3.control-label T-shirt
                           .col-sm-9
                               select.form-control(type='text' ng-model='user.sizes.tshirt')
-                                  option S
-                                  option M
-                                  option L
-                                  option XL
-                                  option XXL
-                                  option XXXL
+                                  option Small
+                                  option Medium
+                                  option Large
+                                  option X-Large
+                                  option XX-Large
+                                  option XXX-Large
                       hr
                       h3 Other
                       .form-group
