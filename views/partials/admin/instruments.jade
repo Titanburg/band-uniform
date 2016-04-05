@@ -1,0 +1,80 @@
+.instruments(ng-init='getInstruments()')
+    .container-fluid
+        .row
+            .col-sm-10.col-sm-offset-1
+                .panel.panel-default
+                    .panel-heading
+                        h3 {{title}}
+                    .panel-body
+                        ul.nav.nav-pills
+                          li.active(role='presentation')
+                            a(href="#" ng-click='setFilter()') All
+                          li(role='presentation')
+                            a(href='#' ng-click='setFilter("Woodwinds")') Woodwinds
+                          li(role='presentation')
+                            a(href='#' ng-click='setFilter("Sousas")') Sousas
+                          li(role='presentation')
+                            a(href='#' ng-click='setFilter("Percussion")') Percussion
+                          li(role='presentation')
+                            a(href='#' ng-click='setFilter("Drum-Majors")') Drum Majors
+                        table.table.table-hover
+                          thead
+                            tr
+                              th Name
+                                a.btn(ng-click='setOrder("name")')
+                                  span.glyphicon.glyphicon-sort-by-alphabet
+                              th Group
+                                a.btn(ng-click='setOrder("group")')
+                                  span.glyphicon.glyphicon-sort-by-alphabet
+                              th Actions
+                          tbody
+                            tr(ng-repeat='instrument in instruments | orderBy:order | filter:filter')
+                              td {{instrument.local.name}}
+                              td {{instrument.local.group}}
+                              td  
+                                a.btn(data-toggle='modal' data-target='#editInstrument' ng-click='getInstrument(instrument)')
+                                  span.glyphicon.glyphicon-cog
+                                a.btn(ng-click='deleteInstrument(instrument)')
+                                  span.glyphicon.glyphicon-trash.text-danger
+                    .panel-footer
+                      button.btn.btn-success(data-toggle='modal' data-target='#editInstrument' type='button' ng-click='createInstrument()') Add Instrument
+    .modal.fade(id='editInstrument' tabindex='-1' role='dialog')
+      .modal-dialog
+          .modal-content
+              .modal-header
+                button.close(type='button' data-dismiss='modal' aria-label="Close")
+                  span(aria-hidden='true')
+                h4.modal-title Edit {{instrument.local.name}}
+              .modal-body
+                  //- .row
+                  //-   .col-sm-3
+                  //-     img.img-thumbnail.pull-right(width='50px' height='50px')
+                  form.form-horizontal
+                    .for
+                    .form-group
+                      label.col-sm-3.control-label Name
+                      .col-sm-9
+                        input.form-control(type='text' ng-model='instrument.local.name')
+                    .form-group
+                      label.col-sm-3.control-label Group
+                      .col-sm-9
+                        input.form-control(type='text' ng-model='instrument.local.group')
+                    .form-group
+                      label.col-sm-3.control-label Jacket
+                      .col-sm-9
+                        input.form-control(type='checkbox' ng-model='instrument.local.jacket')
+                    .form-group
+                      label.col-sm-3.control-label Jumpsuit
+                      .col-sm-9
+                        input.form-control(type='checkbox' ng-model='instrument.local.jumpsuit')
+                    .form-group
+                      label.col-sm-3.control-label Hat
+                      .col-sm-9
+                        input.form-control(type='checkbox' ng-model='instrument.local.hat')
+                    .form-group
+                      label.col-sm-3.control-label Gloves
+                      .col-sm-9
+                        input.form-control(type='checkbox' ng-model='instrument.local.gloves')
+              .modal-footer
+                button.btn.btn-default(type='button' data-dismiss='modal') Close
+                button.btn.btn-primary(type='button' ng-click='sendInstrument()' data-dismiss='modal') Save Changes
