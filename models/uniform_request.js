@@ -7,7 +7,8 @@ var schema   = new mongoose.Schema({
     hatNumber         : Number,
     gloves            : Boolean,
     shoes             : Boolean,
-    tshirt            : Boolean
+    tshirt            : Boolean,
+    complete          : Boolean
 });
 
-module.exports = mongoose.model('Request', schema);
+module.exports = mongoose.model('Urequest', schema);

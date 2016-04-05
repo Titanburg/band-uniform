@@ -6,9 +6,15 @@ angular.module('bandApp')
       $scope.jackets = [];
       $scope.jumpsuit = {};
       $scope.jumpsuits = [];
+      $scope.urequest = {};
+      $scope.urequests = [];
       $scope.requestSelect = true;
       $scope.jacketSelect = false;
       $scope.jumpsuitSelect = false;
+
+      $scope.isActive = function(item) {
+        return item;
+      };
 
       $scope.selectType = function(type){
         if("requests"===type){
@@ -25,7 +31,6 @@ angular.module('bandApp')
           $scope.jumpsuitSelect = true;
         }
       };
-
 
       $scope.getJumpsuits = function(){
         $http.get('/api/jumpsuit')
@@ -159,6 +164,74 @@ angular.module('bandApp')
           $http.get('/api/jacket/delete/' + jacket._id )
           .success(function(data){
             $scope.jackets = data;
+          }).error(function(err){
+          console.log(err);
+        });
+      };
+
+      $scope.getUrequests = function(){
+        $http.get('/api/uniform_request')
+          .success(function(data){
+            $scope.urequests = data;
+          }).error(function(err){
+            console.log(err);
+          });
+      };
+
+      $scope.createUrequest = function(){
+          $scope.creating = true;
+          $scope.urequest = {};
+      };
+
+      $scope.getUrequests = function(){
+        $http.get('/api/uniform_request')
+          .success(function(data){
+            console.log(data);
+            $scope.urequests = data;
+          }).error(function(err){
+            console.log(err);
+          });
+      };
+
+      $scope.getUrequest = function(urequest){
+          $http.get('/api/uniform_request/' + urequest._id )
+              .success(function(data){
+                  $scope.urequest = data;
+              }).error(function(err){
+              console.log(err);
+          });
+      };
+
+      $scope.sendUrequest = function(){
+          // If creating is true send new user
+          if($scope.creating === true){
+             $http.post('/api/uniform_request',$scope.urequest)
+                 .success(function(data){
+                   $scope.urequests = data;
+                 }).error(function(err){
+                 console.log(err);
+             });
+          }
+          // If creating is false edit existing user
+          else{
+            $http.post('/api/uniform_request/' + $scope.urequest._id,$scope.urequest)
+                .success(function(data){
+                  $scope.urequests = data;
+                }).error(function(err){
+                console.log(err);
+            });
+          }
+
+          //Disable creating variable to allow
+          $scope.creating = false;
+          //Clear all data in user variable. This is for security.
+          $scope.urequest = {};
+      };
+
+      $scope.deleteUrequest = function(urequest){
+          $http.get('/api/uniform_request/delete/' + urequest._id )
+          .success(function(data){
+            $scope.urequests = data;
           }).error(function(err){
           console.log(err);
         });
