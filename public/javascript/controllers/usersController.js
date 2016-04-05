@@ -2,7 +2,7 @@
  * Created by Kyle Walter on 2/29/2016.
  */
 angular.module('bandApp')
-    .controller('usersController',['$scope','','',function($scope,$http,$modal){
+    .controller('usersController',function($scope,$http){
         $scope.title = "Users";
         $scope.creating = false;
         $scope.user = {};
@@ -108,6 +108,8 @@ angular.module('bandApp')
             //Clear newPass variable for security
             $scope.newPass = '';
 
+            $('#editUser').modal('hide');
+
           }else{
 
           }
@@ -121,4 +123,4 @@ angular.module('bandApp')
           });
         };
 
-    }]);
+    });
