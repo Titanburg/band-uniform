@@ -35,12 +35,16 @@
                               th Admin
                                 a.btn(ng-click='setOrder("admin")')
                                   span.glyphicon.glyphicon-sort-by-alphabet
+                              th Active
+                                a.btn(ng-click='setOrder("active")')
+                                  span.glyphicon.glyphicon-sort-by-alphabet
                           tbody
                             tr(ng-repeat='user in users | orderBy:order | filter:filter')
                               td {{user.local.firstName}}
                               td {{user.local.lastName}}
                               td {{user.local.email}}
                               td {{user.local.admin}}
+                              td {{user.local.active}}
                               td  
                                 a.btn(data-toggle='modal' data-target='#editUser' ng-click='getUser(user)')
                                   span.glyphicon.glyphicon-cog

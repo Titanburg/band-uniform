@@ -33,16 +33,17 @@ module.exports = function(passport){
               User.findOne({ 'local.email' :  username }, function(err, user) {
                   if (err) return done(err);
                   if (user) {
-                      return done(null, false, req.flash('signupMessage', 'That email is already taken.'));
+                      return done(null, false, req.flash('loginMessage', 'That email is already taken.'));
                   } else {
                       var newUser            = new User();
                       newUser.local.email    = username;
                       newUser.local.password    = newUser.generateHash(password);
                       newUser.local.admin       = false;
+                      newUser.local.active      = false;
                       newUser.save(function(err) {
                           if (err)
                               throw err;
-                          return done(null, newUser);
+                          return done(null, false, req.flash('loginMessage', 'Account request sent. Waiting on admin to accept account request'));
                       });
                   }
               });
@@ -63,6 +64,8 @@ module.exports = function(passport){
                     return done(null, false, req.flash('loginMessage', 'No user found.'));
                 if (!user.validPassword(password))
                     return done(null, false, req.flash('loginMessage', 'Oops! Wrong password.'));
+                if (!user.local.active)
+                    return done(null,false,req.flash('loginMessage','Admin has not accepted user request.'));
                 return done(null, stripUser(user));
             });
 
