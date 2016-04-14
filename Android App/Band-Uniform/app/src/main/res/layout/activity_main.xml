@@ -25,6 +25,8 @@
         android:background="@drawable/round_button"
         android:layout_alignBottom="@+id/listView"
         android:layout_alignParentRight="true"
-        android:layout_alignParentEnd="true" />
+        android:layout_alignParentEnd="true"
+        android:clickable="true"
+        android:onClick="refreshButton" />
 
 </RelativeLayout>

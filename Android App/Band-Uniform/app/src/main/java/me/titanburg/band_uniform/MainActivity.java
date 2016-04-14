@@ -5,6 +5,7 @@ import android.os.StrictMode;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.JsonReader;
+import android.util.Log;
 import android.view.View;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
@@ -47,17 +48,14 @@ public class MainActivity extends AppCompatActivity {
         getUsers();
         listViewAdapter = new ArrayAdapter<User>(this,R.layout.user_row,users);
         usersListView.setAdapter(listViewAdapter);
-        refreshButton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
 
 
-                getUsers();
+    }
 
-                listViewAdapter.notifyDataSetChanged();
-            }
-        });
-
+    public void refreshButton(View v){
+        getUsers();
+        Log.i("Test",users[0].toString());
+        listViewAdapter.notifyDataSetChanged();
     }
 
 
