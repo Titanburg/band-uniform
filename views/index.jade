@@ -1,7 +1,7 @@
 extends layout
 
 block content
-  nav.navbar.navbar-default(ng-controller='navbarController')
+  nav.navbar.navbar-default(ng-controller='navbarController' ng-init='updateAll()')
     .container-fluid
       .navbar-header
         button.navbar-toggle.collapsed(type='button' data-toggle='collapse' data-target='#band-navbar' aria-expanded='false')
@@ -16,7 +16,7 @@ block content
           - if(user.admin)
             li
               a(href='/users' Users) Users &nbsp;
-                span.badge {{}}
+                span.badge {{requests}}
             li
               a(href='/instruments' Instruments) Instruments  
             li 

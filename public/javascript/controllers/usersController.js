@@ -2,7 +2,7 @@
  * Created by Kyle Walter on 2/29/2016.
  */
 angular.module('bandApp')
-    .controller('usersController',function($scope,$http){
+    .controller('usersController',function($scope,$http,share){
         $scope.title = "Users";
 
         // Users information
@@ -74,6 +74,11 @@ angular.module('bandApp')
             .success(function(data){
               console.log(data);
               $scope.users = data;
+              var count = 0;
+              data.forEach(function(user){
+                if(!user.local.active) count++;
+              });
+              share.setRequest(count);
             }).error(function(err){
               console.log(err);
             });
