@@ -27,8 +27,8 @@ var userSchema  = mongoose.Schema({
             type: String,
             match: /[a-zA-Z]*/
         },
-        active: {
-          type: Boolean
+        state: {
+          type: Number,
         }
     },
     uniform:{

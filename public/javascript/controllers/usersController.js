@@ -16,11 +16,11 @@ angular.module('bandApp')
         $scope.creating = false;
 
         // Ordering
-        $scope.order = 'local.firstName';
+        $scope.order = 'local.state';
 
         // Filtering
         $scope.selection = 1;
-        $scope.filter = '';
+        $scope.filter = '2';
 
         $scope.instruments = [
           {name:'Woodwinds'},
@@ -64,6 +64,13 @@ angular.module('bandApp')
           return true;
         };
 
+        $scope.activateUser = function(user,state){
+            $scope.getUser(user,function(){
+                $scope.user.local.state = state;
+                $scope.sendUser(true);
+            });
+        };
+
         // Crud Functions
         $scope.createUser = function(){
             $scope.creating = true;
@@ -83,12 +90,13 @@ angular.module('bandApp')
               console.log(err);
             });
         };
-        $scope.getUser = function(user){
+        $scope.getUser = function(user,callback){
             $http.get('/api/user/' + user._id )
                 .success(function(data){
                     $scope.user = data;
+                    callback(null);
                 }).error(function(err){
-                console.log(err);
+                callback(err);
             });
         };
         $scope.sendUser = function(isValid){

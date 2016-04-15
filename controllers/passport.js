@@ -39,7 +39,7 @@ module.exports = function(passport){
                       newUser.local.email    = username;
                       newUser.local.password    = newUser.generateHash(password);
                       newUser.local.admin       = false;
-                      newUser.local.active      = false;
+                      newUser.local.state      = 0;
                       newUser.save(function(err) {
                           if (err)
                               throw err;
@@ -64,8 +64,10 @@ module.exports = function(passport){
                     return done(null, false, req.flash('loginMessage', 'No user found.'));
                 if (!user.validPassword(password))
                     return done(null, false, req.flash('loginMessage', 'Oops! Wrong password.'));
-                if (!user.local.active)
-                    return done(null,false,req.flash('loginMessage','Admin has not accepted user request.'));
+                if (user.local.active == 0)
+                    return done(null,false,req.flash('loginMessage','Admin has not enabled your account yet.'));
+                if (user.local.active == 2)
+                    return done(null,false,req.flash('loginMessage','Account disabled'));
                 return done(null, stripUser(user));
             });
 
