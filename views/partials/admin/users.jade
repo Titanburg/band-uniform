@@ -10,18 +10,8 @@
                         h3 {{title}}
                     .panel-body
                         ul.nav.nav-pills
-                            li(role='presentation' ng-class='{active:isSelected(1)}')
-                                a(href="#" ng-click='setFilter("filter.state=1"));editSelection(1)') Active
-                            li(role='presentation' ng-class='{active:isSelected(2)}')
-                                a(href="#" ng-click='setFilter("true");editSelection(2)') Admin
-                            li(role='presentation' ng-class='{active:isSelected(3)}')
-                                a(href='#' ng-click='setFilter("Woodwinds");editSelection(3)') Woodwinds
-                            li(role='presentation' ng-class='{active:isSelected(4)}')
-                                a(href='#' ng-click='setFilter("Sousas");editSelection(4)') Sousas
-                            li(role='presentation' ng-class='{active:isSelected(5)}')
-                                a(href='#' ng-click='setFilter("Percussion");editSelection(5)') Percussion
-                            li(role='presentation' ng-class='{active:isSelected(6)}')
-                                a(href="#" ng-click='setFilter();editSelection(6)') All
+                            li(role='presentation' ng-repeat='filter in filters' ng-class='{active:isSelected(filter.id)}')
+                                a(href="#" ng-click='setFilter(filter.filter);editSelection(filter.id)') {{filter.name}}
                         table.table.table-hover
                             thead
                                 tr

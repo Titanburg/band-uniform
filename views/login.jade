@@ -33,6 +33,10 @@ block content
                 .modal-body
                   form(action='/auth/signup' method='post')
                     .form-group
+                      input(type='text' class="text", name='firstName', placeholder='First Name')
+                    .form-group
+                      input(type='text' class="text", name='lastName', placeholder='Last Name')
+                    .form-group
                       input(type='text' class="text", name='email', placeholder='Email')
                     .form-group
                       input(type='password' class="text", name='password' placeholder='Password')

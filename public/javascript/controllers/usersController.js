@@ -20,20 +20,74 @@ angular.module('bandApp')
 
         // Filtering
         $scope.selection = 1;
-        $scope.filter = '2';
+        $scope.filter = {local:{state:1}};
 
         $scope.instruments = [
-          {name:'Woodwinds'},
+          {name:'Winds'},
           {name:'Sousas'},
           {name:'Percussion'}
         ];
+        
+        $scope.filters = [
+            {
+              id:1,
+              name:'Active',
+              filter:{
+                local:{
+                  state:1
+                }
+              }
+            },
+            {
+              id:2,
+              name:'Admin',
+              filter:{
+                local:{
+                  admin:true
+                }
+              }
+              
+            },
+            {
+              id:3,
+              name:'Winds',
+              filter:{
+                other:{
+                  instrument:'Winds'
+                }
+              }
+            },
+            {
+              id:4,
+              name:'Sousas',
+              filter:{
+                other:{
+                  instrument:'Sousas'
+                }
+              }
+            },
+            {
+              id:5,
+              name:'Percussion',
+              filter:{
+                other:{
+                  instrument:'Percussion'
+                }
+              }
+            },
+            {
+              id:6,
+              name:'All',
+              filter:{}
+            }
+          ]
 
         // Helper Functions
         $scope.setOrder = function(order){
           $scope.order= 'local.' + order;
         };
         $scope.setFilter = function(filter){
-          $scope.filter = filter ;
+          $scope.filter = filter;
         };
         $scope.toggleMode = function(){
           $scope.simpleView = !$scope.simpleView;
@@ -43,9 +97,9 @@ angular.module('bandApp')
         };
         $scope.editSelection = function(index){
           $scope.selection = index;
-          $scope.newPass = '';
-          $scope.user.local.password = '';
-          $scope.user.sizes.sex='Male';
+          // $scope.newPass = '';
+          // $scope.user.local.password = '';
+          // $scope.user.sizes.sex='Male';
         };
         $scope.isSelected = function(index){
           return $scope.selection == index;

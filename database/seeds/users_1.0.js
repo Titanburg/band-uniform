@@ -11,7 +11,7 @@ User.findOne({'local.email':'admin@siu.edu'},function(err,user){if(err) return;
         adminUser.local.admin = true;
         adminUser.local.firstName = 'Anaitirkyle';
         adminUser.local.lastName = 'Koarrowelter';
-        adminUser.local.active = true;
+        adminUser.local.state = 1;
         adminUser.save(function(err) {
             if (err)
                 throw err;

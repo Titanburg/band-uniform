@@ -36,6 +36,8 @@ module.exports = function(passport){
                       return done(null, false, req.flash('loginMessage', 'That email is already taken.'));
                   } else {
                       var newUser            = new User();
+                      newUser.local.firstName = req.body.firstName;
+                      newUser.local.lastName = req.body.lastName;
                       newUser.local.email    = username;
                       newUser.local.password    = newUser.generateHash(password);
                       newUser.local.admin       = false;
@@ -56,6 +58,7 @@ module.exports = function(passport){
             passwordField : 'password',
             passReqToCallback : true // allows us to pass back the entire request to the callback
         },
+        
         function(req, username, password, done) { // callback with email and password from our form
             User.findOne({ 'local.email' : username }, function(err, user) {
                 if (err)
@@ -64,9 +67,9 @@ module.exports = function(passport){
                     return done(null, false, req.flash('loginMessage', 'No user found.'));
                 if (!user.validPassword(password))
                     return done(null, false, req.flash('loginMessage', 'Oops! Wrong password.'));
-                if (user.local.active == 0)
+                if (user.local.state == 0)
                     return done(null,false,req.flash('loginMessage','Admin has not enabled your account yet.'));
-                if (user.local.active == 2)
+                if (user.local.state == 2)
                     return done(null,false,req.flash('loginMessage','Account disabled'));
                 return done(null, stripUser(user));
             });
