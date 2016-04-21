@@ -49,7 +49,7 @@
                                     td
                                         a.btn(data-toggle='modal' data-target='#editUser' ng-click='getUser(user)')
                                             span.glyphicon.glyphicon-cog
-                                        a.btn(ng-click='deleteUser(user)')
+                                        a.btn(data-toggle='modal' data-target='#deleteUser' ng-click='getUser(user)')
                                             span.glyphicon.glyphicon-trash.text-danger
                     .panel-footer
                         button.btn.btn-success(data-toggle='modal' data-target='#editUser' type='button' ng-click='createUser()') Add User
@@ -80,10 +80,10 @@
                                 label.col-sm-3.control-label Admin
                                 .col-sm-9
                                     input(type='checkbox' ng-model='user.local.admin')
-                            .form-group
+                            .form-group(ng-class='{"has-error":userForm.state.$invalid}')
                                 label.col-sm-3.control-label State
                                 .col-sm-9
-                                    select.form-control(type='text' ng-model='user.local.state')
+                                    select.form-control(type='text' name='state' ng-model='user.local.state' required)
                                         option(value='0') Pending
                                         option(value='1') Enabled
                                         option(value='2') Disabled
@@ -188,3 +188,15 @@
                     a.btn.pull-left(ng-click='toggleMode()') Advanced
                     button.btn.btn-default(type='button' ng-click='simpleOff()' data-dismiss='modal') Close
                     button.btn.btn-primary(type='button' ng-disabled='userForm.$invalid' ng-click='sendUser(userForm.$valid)' data-dismiss='modal') Save Changes
+    .modal.fade(id='deleteUser' tabindex='-1' role='dialog')
+        .modal-dialog
+            .modal-content
+                .modal-header
+                  button.close(type='button' data-dismiss='modal' aria-label="Close")
+                  span(aria-hidden='true')
+                  h4.modal-title Edit Delete {{user.local.firstName}} {{user.local.lastName}} ?
+                .modal-body
+                  h3 Are you sure you want to delete {{user.local.firstName}} {{user.local.lastName}} ?
+                .modal-footer
+                  a.btn.btn-danger(data-dismiss='modal' ng-click='deleteUser(user)') Permentally Delete
+                  
