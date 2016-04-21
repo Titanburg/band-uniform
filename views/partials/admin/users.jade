@@ -81,12 +81,12 @@
                                 .col-sm-9
                                     input(type='checkbox' ng-model='user.local.admin')
                             .form-group
-                                label.col-sm-3.control-label Admin
+                                label.col-sm-3.control-label State
                                 .col-sm-9
                                     select.form-control(type='text' ng-model='user.local.state')
-                                        option(value=0) Pending
-                                        option(value=1) Enabled
-                                        option(value=2) Disabled
+                                        option(value='0') Pending
+                                        option(value='1') Enabled
+                                        option(value='2') Disabled
                             hr
                             h3 Password
                             .form-group.has-feedback(ng-class='{"has-error":invalidPassword()}')
@@ -184,7 +184,6 @@
                                 .col-sm-9
                                     select.form-control(type='text' ng-model='user.other.instrument')
                                         option(ng-repeat='instrument in instruments') {{instrument.name}}
-                        p {{user}}
                 .modal-footer
                     a.btn.pull-left(ng-click='toggleMode()') Advanced
                     button.btn.btn-default(type='button' ng-click='simpleOff()' data-dismiss='modal') Close

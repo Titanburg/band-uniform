@@ -27,29 +27,38 @@ angular.module('bandApp')
           {name:'Sousas'},
           {name:'Percussion'}
         ];
-        
+
         $scope.filters = [
             {
               id:1,
               name:'Active',
               filter:{
                 local:{
-                  state:1
+                  state:1,
                 }
               }
             },
             {
               id:2,
+              name:'Pending',
+              filter:{
+                local:{
+                  state:0,
+                }
+              }
+            },
+            {
+              id:3,
               name:'Admin',
               filter:{
                 local:{
                   admin:true
                 }
               }
-              
+
             },
             {
-              id:3,
+              id:4,
               name:'Winds',
               filter:{
                 other:{
@@ -58,7 +67,7 @@ angular.module('bandApp')
               }
             },
             {
-              id:4,
+              id:5,
               name:'Sousas',
               filter:{
                 other:{
@@ -67,7 +76,7 @@ angular.module('bandApp')
               }
             },
             {
-              id:5,
+              id:6,
               name:'Percussion',
               filter:{
                 other:{
@@ -76,7 +85,7 @@ angular.module('bandApp')
               }
             },
             {
-              id:6,
+              id:7,
               name:'All',
               filter:{}
             }
@@ -148,6 +157,7 @@ angular.module('bandApp')
             $http.get('/api/user/' + user._id )
                 .success(function(data){
                     $scope.user = data;
+                    if($scope.user.local && $scope.user.local.state) $scope.user.local.state = $scope.user.local.state.toString();
                     callback(null);
                 }).error(function(err){
                 callback(err);
