@@ -41,8 +41,9 @@ public class MainActivity extends AppCompatActivity {
         refreshButton = (Button)findViewById(R.id.refreshButton);
 
         getUsers();
-        listViewAdapter = new ArrayAdapter<User>(this,R.layout.user_row,users);
-        usersListView.setAdapter(listViewAdapter);
+        getUsers();
+//        listViewAdapter = new ArrayAdapter<User>(this,R.layout.user_row,users);
+//        usersListView.setAdapter(listViewAdapter);
 
 
     }
@@ -72,8 +73,10 @@ public class MainActivity extends AppCompatActivity {
                }
                br.close();
 
-               Gson gson = new Gson();
-               users = gson.fromJson(message,User[].class);
+               System.out.println(message);
+
+//               Gson gson = new Gson();
+//               users = gson.fromJson(message,User[].class);
 
            } catch (IOException e) {
                e.printStackTrace();

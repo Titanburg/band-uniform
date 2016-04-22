@@ -7,11 +7,12 @@ import me.titanburg.band_uniform.JSON.User;
 /**
  * Created by kyle on 4/19/16.
  */
-public class TitanburgAPI {
+public class TitanburgAPI extends HttpsConnectionBuilder {
 
     User[] users;
 
-    private String httpsString;
-    private URL titanburgURL;
-    private
+    public TitanburgAPI(String type,String httpsString){
+        super(httpsString);
+    }
+
 }
