@@ -5,6 +5,7 @@ import android.os.StrictMode;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
+import android.widget.EditText;
 
 import com.google.gson.Gson;
 
@@ -29,6 +30,9 @@ import me.titanburg.band_uniform.JSON.User;
 
 public class LoginActivity extends AppCompatActivity {
 
+    private EditText email;
+    private EditText password;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -39,6 +43,11 @@ public class LoginActivity extends AppCompatActivity {
 
         CookieManager cookieManager = new CookieManager();
         CookieHandler.setDefault(cookieManager);
+
+        email = (EditText)findViewById(R.id.emailEditText);
+        password = (EditText)findViewById(R.id.passwordEditText);
+
+
     }
 
     public void loginButton(View view){
@@ -46,8 +55,8 @@ public class LoginActivity extends AppCompatActivity {
         String https_url = "https://titanburg.me/auth/login";
         URL url;
         HashMap<String, String> postDataParams = new HashMap<String,String>();
-        postDataParams.put("email","admin@siu.edu");
-        postDataParams.put("password","heykirk");
+        postDataParams.put("email",email.getText().toString());
+        postDataParams.put("password",password.getText().toString());
 
 
         String response = "";
@@ -82,50 +91,7 @@ public class LoginActivity extends AppCompatActivity {
                 response="";
             }
 
-            conn.disconnect();
-            System.out.println(conn.getRequestProperties());
-
         } catch (Exception e) {
-            e.printStackTrace();
-        }
-
-
-        https_url = "https://titanburg.me/api/user";
-        try {
-
-            url = new URL(https_url);
-            HttpsURLConnection con = (HttpsURLConnection)url.openConnection();
-
-
-            String message = "";
-            if(con!=null){
-                try {
-
-                    System.out.println("****** Content of the URL ********");
-                    BufferedReader br =
-                            new BufferedReader(
-                                    new InputStreamReader(con.getInputStream()));
-                    String input;
-
-                    while ((input = br.readLine()) != null){
-                        message += (input);
-                    }
-                    br.close();
-
-                    System.out.println(message);
-
-               Gson gson = new Gson();
-               User[] users = gson.fromJson(message,User[].class);
-                    System.out.println(users.toString());
-
-                } catch (IOException e) {
-                    e.printStackTrace();
-                }
-            }
-
-        } catch (MalformedURLException e) {
-            e.printStackTrace();
-        } catch (IOException e) {
             e.printStackTrace();
         }
 
