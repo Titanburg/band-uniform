@@ -50,6 +50,8 @@ public class LoginActivity extends AppCompatActivity {
         email = (EditText)findViewById(R.id.emailEditText);
         password = (EditText)findViewById(R.id.passwordEditText);
 
+        gson = new Gson();
+
 
     }
 
@@ -102,7 +104,7 @@ public class LoginActivity extends AppCompatActivity {
         System.out.println(response);
         status = gson.fromJson(response,Status.class);
 
-        switch (status.login){
+        switch (status.status){
             case "SUCCESS":
                 Intent i = new Intent(view.getContext(), MainActivity.class);
                 startActivity(i);
