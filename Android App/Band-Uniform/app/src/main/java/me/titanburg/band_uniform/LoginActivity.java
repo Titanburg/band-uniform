@@ -99,6 +99,7 @@ public class LoginActivity extends AppCompatActivity {
         } catch (Exception e) {
             e.printStackTrace();
         }
+        System.out.println(response);
         status = gson.fromJson(response,Status.class);
 
         switch (status.login){
