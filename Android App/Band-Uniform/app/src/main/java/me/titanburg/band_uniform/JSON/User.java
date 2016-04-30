@@ -23,11 +23,11 @@ public class User {
 
 class Local {
 
-    String email;
-    String firstName;
-    String lastName;
-    String admin;
-    String password;
+    protected String email;
+    protected String firstName;
+    protected String lastName;
+    protected String admin;
+    protected String password;
 //    String hasRequested;
 //    String state;
 

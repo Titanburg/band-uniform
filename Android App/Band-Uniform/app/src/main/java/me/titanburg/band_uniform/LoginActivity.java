@@ -26,12 +26,15 @@ import java.util.Map;
 
 import javax.net.ssl.HttpsURLConnection;
 
+import me.titanburg.band_uniform.JSON.Status;
 import me.titanburg.band_uniform.JSON.User;
 
 public class LoginActivity extends AppCompatActivity {
 
     private EditText email;
     private EditText password;
+    private Gson gson;
+    private Status status;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -54,9 +57,11 @@ public class LoginActivity extends AppCompatActivity {
 
         String https_url = "https://titanburg.me/auth/login";
         URL url;
+
         HashMap<String, String> postDataParams = new HashMap<String,String>();
         postDataParams.put("email",email.getText().toString());
         postDataParams.put("password",password.getText().toString());
+        postDataParams.put("type","android");
 
 
         String response = "";
@@ -94,9 +99,18 @@ public class LoginActivity extends AppCompatActivity {
         } catch (Exception e) {
             e.printStackTrace();
         }
+        status = gson.fromJson(response,Status.class);
 
-        Intent i = new Intent(view.getContext(), MainActivity.class);
-        startActivity(i);
+        switch (status.login){
+            case "SUCCESS":
+                Intent i = new Intent(view.getContext(), MainActivity.class);
+                startActivity(i);
+                break;
+            case "FAILURE":
+
+                break;
+        }
+
     }
 
     private String getPostDataString(HashMap<String, String> params) throws UnsupportedEncodingException {
