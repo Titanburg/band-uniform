@@ -26,19 +26,19 @@ module.exports = function(passport){
     if (err) { return next(err); }
     if (!user) {
       if(req.body.type === 'android')
-        return res.json({Status:{
-          login:'FAILURE',
+        return res.json({
+          status:'FAILURE',
           message:req.flash('loginMessage')
-        }});
+        });
       return res.redirect('/auth/login');
     }
     req.logIn(user, function(err) {
       if (err) { return next(err); }
       if(req.body.type === 'android')
-        return res.json({Status:{
-          login:'SUCCESS',
+        return res.json({
+          status:'SUCCESS',
           message:''
-        }});
+        });
       return res.redirect('/users');
     });
   })(req, res, next);
