@@ -25,12 +25,14 @@ module.exports = function(passport){
     console.log(req.body);
     if (err) { return next(err); }
     if (!user) {
-      if(req.body.type === mobile)
-        return res.json('{status:FAILURE}');
+      if(req.body.type === 'android')
+        return res.json({status:'FAILURE'});
       return res.redirect('/auth/login');
     }
     req.logIn(user, function(err) {
       if (err) { return next(err); }
+      if(req.body.type === 'android')
+        return res.json({status:'SUCCESS'});
       return res.redirect('/users');
     });
   })(req, res, next);
