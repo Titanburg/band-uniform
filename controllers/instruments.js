@@ -22,8 +22,12 @@ module.exports = {
             }else{
                 console.log(instrument);
                 var newInstrument = new Instrument();
-                newInstrument.name = req.body.name;
-                newInstrument.group = req.body.group;
+                newinstrument.name = req.body.name;
+                newinstrument.gloves = req.body.gloves;
+                newinstrument.group = req.body.group;
+                newinstrument.hat = req.body.hat;
+                newinstrument.jacket = req.body.jacket;
+                newinstrument.jumpsuit = req.body.jumpsuit;
                 newInstrument.save(function(err) {
                     if (err)
                         throw err;
