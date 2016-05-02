@@ -18,7 +18,7 @@ angular.module('bandApp')
         // Crud Functions
         $scope.createInstrument = function(){
             $scope.creating = true;
-            $scope.user = {};
+            $scope.instrument = {};
         };
         $scope.getInstruments = function(){
           $http.get('/api/instruments')
@@ -29,7 +29,7 @@ angular.module('bandApp')
               console.log(err);
             });
         };
-        $scope.getInstrument = function(user){
+        $scope.getInstrument = function(instrument){
             $http.get('/api/instruments/' + instrument._id )
                 .success(function(data){
                     $scope.instrument = data;
@@ -37,8 +37,8 @@ angular.module('bandApp')
                 console.log(err);
             });
         };
-        $scope.sendInstrument = function(){
-            // If creating is true send new user
+        $scope.sendInstrument = function(instrument){
+            // If creating is true send new instrument
             if($scope.creating === true){
                $http.post('/api/instruments',$scope.instrument)
                    .success(function(data){
@@ -47,7 +47,7 @@ angular.module('bandApp')
                    console.log(err);
                });
             }
-            // If creating is false edit existing user
+            // If creating is false edit existing instrument
             else{
               $http.post('/api/instruments/' + $scope.instrument._id,$scope.instrument)
                   .success(function(data){
@@ -60,6 +60,8 @@ angular.module('bandApp')
             $scope.creating = false;
             //Clear all data in instrument variable. This is for security.
             $scope.instrument = {};
+            //Hide input modal
+            $('#editInstrument').modal.hide;
         };
         $scope.deleteInstrument = function(instrument){
           $http.get('/api/instruments/delete/' + instrument._id )

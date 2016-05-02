@@ -33,9 +33,9 @@
                               td {{instrument.group}}
                               td  
                                 a.btn(data-toggle='modal' data-target='#editInstrument' ng-click='getInstrument(instrument)')
-                                  span.glyphicon.glyphicon-cog
+                                  span.glyphicon.glyphicon-cog  Edit
                                 a.btn(ng-click='deleteInstrument(instrument)')
-                                  span.glyphicon.glyphicon-trash.text-danger
+                                  span.glyphicon.glyphicon-trash.text-danger  Delete
                     .panel-footer
                       button.btn.btn-success(data-toggle='modal' data-target='#editInstrument' type='button' ng-click='createInstrument()') Add Instrument
     .modal.fade(id='editInstrument' tabindex='-1' role='dialog')
@@ -56,9 +56,13 @@
                       .col-sm-9
                         input.form-control(type='text' ng-model='instrument.name')
                     .form-group
-                      label.col-sm-3.control-label Group
+                      label.col-sm-3.control-label Instrument Group
                       .col-sm-9
-                        input.form-control(type='text' ng-model='instrument.group')
+                        select.form-control(type='text' name='group' ng-model='instrument.group' required)
+                          option(value='Woodwinds') Woodwinds
+                          option(value='Percussion') Percussion
+                          option(value='Drum Majors') Drum Majors
+                          option(value='Sousas') Sousas
                     .form-group
                       label.col-sm-3.control-label Jacket
                       .col-sm-9
@@ -77,4 +81,4 @@
                         input.form-control(type='checkbox' ng-model='instrument.gloves')
               .modal-footer
                 button.btn.btn-default(type='button' data-dismiss='modal') Close
-                button.btn.btn-primary(type='button' ng-click='sendInstrument()' data-dismiss='modal') Save Changes
+                button.btn.btn-primary(type='button' ng-click='sendInstrument(instrument)' data-dismiss='modal') Save Changes

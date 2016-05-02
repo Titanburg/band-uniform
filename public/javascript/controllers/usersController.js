@@ -25,7 +25,8 @@ angular.module('bandApp')
         $scope.instruments = [
           {name:'Woodwinds'},
           {name:'Sousas'},
-          {name:'Percussion'}
+          {name:'Percussion'},
+          {name:'Drum Majors'}
         ];
 
         // Helper Functions
