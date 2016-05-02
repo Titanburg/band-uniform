@@ -33,4 +33,15 @@ angular.module('bandApp',['ngRoute'])
         $locationProvider.html5Mode(true);
     }).controller('logout',function($scope,$window){
         $window.location.href = '/auth/logout';
+    }).factory('share',function(){
+      var requests = 0;
+      return {
+        setRequest: function(value){
+          console.log('set ',value);
+          requests = value;
+        },
+        getRequests: function(){
+          return requests;
+        }
+      };
     });

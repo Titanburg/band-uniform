@@ -33,6 +33,7 @@ module.exports = {
                     if(req.body.local.lastName)newUser.local.lastName = req.body.local.lastName;
                     newUser.local.admin = req.body.local.admin ? (req.body.local.admin) : false;
                     if(req.body.local.password) newUser.local.password = newUser.generateHash(req.body.local.password);
+                    if(req.body.local.state) newUser.local.state = parseInt(req.body.local.state);
                 }
                 if(req.body.sizes){
                     if(req.body.sizes.sex) newUser.sizes.sex = req.body.sizes.sex;
@@ -93,6 +94,7 @@ module.exports = {
                   if(req.body.local.lastName)user.local.lastName = req.body.local.lastName;
                   user.local.admin = req.body.local.admin ? (req.body.local.admin) : false;
                   if(req.body.local.password) user.local.password = user.generateHash(req.body.local.password);
+                  if(req.body.local.state) user.local.state = parseInt(req.body.local.state);
                 }
                 if(req.body.sizes){
                     if(req.body.sizes.sex) user.sizes.sex = req.body.sizes.sex;
