@@ -38,6 +38,7 @@ angular.module('bandApp')
             });
         };
         $scope.sendInstrument = function(instrument){
+            console.log(instrument);
             // If creating is true send new instrument
             if($scope.creating === true){
                $http.post('/api/instruments',$scope.instrument)
@@ -70,6 +71,9 @@ angular.module('bandApp')
               }).error(function(err){
               console.log(err);
           });
+        };
+        $scope.editInstrument = function(instrument){
+          console.log("Attempt to Edit!");
         };
 
     });

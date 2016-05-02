@@ -54,7 +54,11 @@ module.exports = {
             if(err) return;
             if(instrument){
                 instrument.name = req.body.name;
+                instrument.gloves = req.body.gloves;
                 instrument.group = req.body.group;
+                instrument.hat = req.body.hat;
+                instrument.jacket = req.body.jacket;
+                instrument.jumpsuit = req.body.jumpsuit;
                 instrument.save(function(err) {
                     if (err)
                         throw err;

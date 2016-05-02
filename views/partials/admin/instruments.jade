@@ -33,9 +33,9 @@
                               td {{instrument.group}}
                               td  
                                 a.btn(data-toggle='modal' data-target='#editInstrument' ng-click='getInstrument(instrument)')
-                                  span.glyphicon.glyphicon-cog  Edit
+                                  span.glyphicon.glyphicon-cog
                                 a.btn(ng-click='deleteInstrument(instrument)')
-                                  span.glyphicon.glyphicon-trash.text-danger  Delete
+                                  span.glyphicon.glyphicon-trash.text-danger
                     .panel-footer
                       button.btn.btn-success(data-toggle='modal' data-target='#editInstrument' type='button' ng-click='createInstrument()') Add Instrument
     .modal.fade(id='editInstrument' tabindex='-1' role='dialog')
