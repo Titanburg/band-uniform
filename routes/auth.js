@@ -4,7 +4,7 @@ module.exports = function(passport){
   var router = express.Router();
   /* GET users listing. */
   router.post('/signup',passport.authenticate('local-signup', {
-    successRedirect: '//auth/login', // redirect to the secure profile section
+    successRedirect: '/auth/login', // redirect to the secure profile section
     failureRedirect: '/auth/login', // redirect back to the signup page if there is an error
     failureFlash: true // allow flash messages
   }));
