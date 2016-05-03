@@ -9,6 +9,9 @@ angular.module('bandApp')
         $scope.user = {}; // Used for selected user
         $scope.users = []; // Used for all users
 
+        $scope.urequest = {};
+        $scope.urequests = [];
+
         $scope.newPass = '';
         $scope.simpleView = true;
 
@@ -99,7 +102,7 @@ angular.module('bandApp')
               name:'All',
               filter:{}
             }
-          ]
+          ];
 
         // Helper Functions
         $scope.setOrder = function(order){
@@ -140,9 +143,29 @@ angular.module('bandApp')
         $scope.activateUser = function(user,state){
             $scope.getUser(user,function(){
                 $scope.user.local.state = state;
-                $scope.sendUser(true);
+                $scope.sendUser(true, user);
+                  // ,function(){
+                  // console.log('her saved');
+                // });
+                // console.log("plssss pls1");
             });
+            // console.log("plssss pls");
+            // $scope.sendEmailConfirmation(user);
         };
+
+        // $scope.sendEmailConfirmation = function(user) {
+        //   console.log(user);
+        //   $http({
+        //     method: 'POST',
+        //     url: '/api/user/sendConfirmation',
+        //     data: user,
+        //     headers: {'Content-Type': 'application/json'}
+        //   }).success(function(data){
+        //       console.log("I think email sent? ...maybe??");
+        //     }).error(function(error){
+        //       console.log(error);
+        //     });
+        // };
 
         // Crud Functions
         $scope.createUser = function(){
@@ -168,20 +191,22 @@ angular.module('bandApp')
                 .success(function(data){
                     $scope.user = data;
                     if($scope.user.local && $scope.user.local.state) $scope.user.local.state = $scope.user.local.state.toString();
-                    callback(null);
+                    callback();
                 }).error(function(err){
                 callback(err);
             });
         };
-        $scope.sendUser = function(isValid){
+        $scope.sendUser = function(isValid, user,callback){
           if(isValid){
             // If creating is true send new user
             if($scope.creating === true){
                $http.post('/api/user',$scope.user)
                    .success(function(data){
                      $scope.users = data;
+                    //  callback();
                    }).error(function(err){
                    console.log(err);
+                   callback(err);
                });
             }
             // If creating is false edit existing user
@@ -189,8 +214,10 @@ angular.module('bandApp')
               $http.post('/api/user/' + $scope.user._id,$scope.user)
                   .success(function(data){
                     $scope.users = data;
+                    // callback();
                   }).error(function(err){
                   console.log(err);
+                  callback(err);
               });
             }
 
@@ -207,10 +234,40 @@ angular.module('bandApp')
 
           }
         };
+
         $scope.deleteUser = function(user){
           $http.get('/api/user/delete/' + user._id )
               .success(function(data){
                 $scope.users = data;
+              }).error(function(err){
+              console.log(err);
+          });
+        };
+
+        $scope.bestMatch = function(id){
+            $http.post('/api/uniform_request/'+ id)
+                .success(function(data){
+                    $scope.urequest = data;
+                }).error(function(err){
+                console.log(err);
+            });
+        };
+
+        $scope.sendUrequest = function(){
+          $scope.urequest={
+            userNumber        : $scope.user._id,
+            jacketNumber      : '1',
+            jumpsuitNumber    : '1',
+            chest             : $scope.user.sizes.chest,
+            armlength         : $scope.user.sizes.armlength,
+            waist             : $scope.user.sizes.waist,
+            seat              : $scope.user.sizes.seat,
+            outseam           : $scope.user.sizes.outseam,
+            complete          : false
+          };
+          $http.post('/api/uniform_request',$scope.urequest)
+              .success(function(data){
+                console.log($scope.urequest);
               }).error(function(err){
               console.log(err);
           });

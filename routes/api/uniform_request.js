@@ -2,6 +2,7 @@ var express = require('express');
 var router = express.Router();
 var controller = require('../../controllers/uniform_request.js');
 
+router.post('/:id',controller.bestMatch);
 router.get('/',controller.getUrequests);
 router.post('/',controller.newUrequest);
 router.get('/:id',controller.getUrequest);

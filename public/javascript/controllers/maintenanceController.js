@@ -15,9 +15,9 @@ angular.module('bandApp')
             });
         };
 
-        $scope.createRequest = function(){
+        $scope.createRequest = function(firstName,lastName,email){
             $scope.creating = true;
-            $scope.request = {};
+            $scope.request = {firstName:firstName,lastName:lastName,email:email};
         };
 
         $scope.getRequests = function(){

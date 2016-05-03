@@ -2,6 +2,7 @@
  * Created by Kyle Walter on 2/29/2016.
  */
 var User = require('../models/user.js');
+var nodemailer = require('nodemailer');
 
 module.exports = {
 
@@ -86,6 +87,7 @@ module.exports = {
     // Edit existing user
     editUser : function(req,res){
         User.findOne({_id:req.params.id},function(err,user){
+            console.log("user:",req.body);
             if(err) return;
             if(user){
                 if(req.body.local){
@@ -95,6 +97,10 @@ module.exports = {
                   user.local.admin = req.body.local.admin ? (req.body.local.admin) : false;
                   if(req.body.local.password) user.local.password = user.generateHash(req.body.local.password);
                   if(req.body.local.state) user.local.state = parseInt(req.body.local.state);
+                }
+                if(req.body.uniform){
+                    if(req.body.uniform.jacket) user.uniform.jacket = req.body.uniform.jacket;
+                    if(req.body.uniform.jumpsuit) user.uniform.jumpsuit = req.body.uniform.jumpsuit;
                 }
                 if(req.body.sizes){
                     if(req.body.sizes.sex) user.sizes.sex = req.body.sizes.sex;
@@ -112,6 +118,7 @@ module.exports = {
                 if(req.body.other){
                     if(req.body.other.instrument) user.other.instrument = req.body.other.instrument;
                 }
+                console.log(user.uniform);
                 user.save(function(err) {
                     if (err)
                         throw err;
@@ -151,4 +158,35 @@ module.exports = {
         });
       });
     }
+
+    // emailConfirmation: function(req, res){
+    //   console.log("in sendconfirmation");
+    //   var transporter = nodeMailer.createTransport({
+    //     service: 'Gmail',
+    //     auth: {
+    //       user: 'SalukiUniforms@gmail.com',
+    //       pass: 'titanburg'
+    //     }
+    //   });
+    //
+    //   console.log("SEND CONFIRMATION~~~~~~~~" + req.session);
+    //   console.log("SEND CONFIRMATION~~~~~~~~~~~~~~~" + req.body.email);
+    //
+    //   var mailOptions = {
+    //     from: '/*firstName from session*/ /*lastName from session*/ <SalukiUniforms@gmail.com>',
+    //     to: '//user email that was approved',
+    //     subject: 'Band Uniform Account Confirmed',
+    //     text: 'Your account on the SIU Band Uniform app has been approved and is now active! Login at titanburg.me to set up your account',
+    //     html: '<p>Your account on the SIU Band Uniform app has has been <b>approved</b> and is now active! Login at titanburg.me to set up your account</p>'
+    //   };
+    //
+    //   transporter.sendMail(mailOptions, function(error, info){
+    //     if(error){
+    //       console.log(error);
+    //     }
+    //     else {
+    //       console.log('Message sent <3' + info.response);
+    //     }
+    //   });
+    // }
 };
