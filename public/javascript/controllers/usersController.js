@@ -177,7 +177,7 @@ angular.module('bandApp')
                 .success(function(data){
                     $scope.user = data;
                     if($scope.user.local && $scope.user.local.state) $scope.user.local.state = $scope.user.local.state.toString();
-                    callback();
+                    //callback();
                 }).error(function(err){
                 callback(err);
             });
