@@ -130,7 +130,7 @@ angular.module('bandApp')
         $scope.activateUser = function(user,state){
             $scope.getUser(user,function(){
                 $scope.user.local.state = state;
-                $scope.sendUser(true);
+                $scope.sendUser(true, user);
             });
         };
 
@@ -163,7 +163,7 @@ angular.module('bandApp')
                 callback(err);
             });
         };
-        $scope.sendUser = function(isValid){
+        $scope.sendUser = function(isValid, user){
           if(isValid){
             // If creating is true send new user
             if($scope.creating === true){
@@ -179,6 +179,10 @@ angular.module('bandApp')
               $http.post('/api/user/' + $scope.user._id,$scope.user)
                   .success(function(data){
                     $scope.users = data;
+                    $http.post('/sendConfirmation', user)
+                      .success(function(data){
+                        console.log("I think email sent? ...maybe??");
+                      });
                   }).error(function(err){
                   console.log(err);
               });

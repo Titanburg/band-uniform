@@ -13,7 +13,7 @@ router.get('/:id',controller.getUser);
 router.post('/:id',controller.editUser);
 router.get('/delete/:id',isAdmin,controller.deleteUser);
 
-router.post('/confirm', function(req, res, next){
+router.post('/sendConfirmation', function(req, res, next){
   var transporter = nodeMailer.createTransport({
     service: 'Gmail',
     auth: {
@@ -22,12 +22,15 @@ router.post('/confirm', function(req, res, next){
     }
   });
 
+  console.log(req.session);
+  console.log(req.body.email);
+
   var mailOptions = {
-    from: /*firstName from session*/ /*lastName from session*/ <SalukiUniforms@gmail.com>,
-    to: //user email that was approved
-    subject: 'Band Uniform Account Confrimed',
-    text: 'Your account on the SIU Band Uniform app has been approved and is now active!',
-    html: '<p> Your account on the SIU Band Uniform app has has been approved and is now active!</p>'
+    from: '/*firstName from session*/ /*lastName from session*/ <SalukiUniforms@gmail.com>',
+    to: '//user email that was approved',
+    subject: 'Band Uniform Account Confirmed',
+    text: 'Your account on the SIU Band Uniform app has been approved and is now active! Login at titanburg.me to set up your account',
+    html: '<p>Your account on the SIU Band Uniform app has has been <b>approved</b> and is now active! Login at titanburg.me to set up your account</p>'
   };
 
   transporter.sendMail(mailOptions, function(error, info){
