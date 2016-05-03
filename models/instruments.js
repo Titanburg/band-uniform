@@ -4,10 +4,10 @@ var mongoose = require('mongoose');
 var schema   = new mongoose.Schema({
 	name          : String,
 	group         : String,
-	jacket        : Number,
-	jumpsuit      : Number,
-	hat           : Number,
-    gloves        : Number
+	jacket        : Boolean,
+	jumpsuit      : Boolean,
+	hat           : Boolean,
+    gloves        : Boolean
 });
 
 module.exports = mongoose.model('Instruments', schema);

@@ -25,7 +25,8 @@ angular.module('bandApp')
         $scope.instruments = [
           {name:'Winds'},
           {name:'Sousas'},
-          {name:'Percussion'}
+          {name:'Percussion'},
+          {name:'Drum Majors'}
         ];
 
         $scope.filters = [
