@@ -25,7 +25,8 @@
                             td {{urequest.userNumber}}
                             td {{urequest.jacketNumber}}
                             td {{urequest.jumpsuitNumber}}
-                            td {{urequest.complete}}
+                            td 
+                                button.btn.btn-success(type='button' ng-click='sendUser(urequest)') Work
                             td  
                                 a.btn(data-toggle='modal' data-target='#editUrequest' ng-click='getUrequest(urequest)')
                                   span.glyphicon.glyphicon-cog

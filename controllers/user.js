@@ -94,6 +94,10 @@ module.exports = {
                   user.local.admin = req.body.local.admin ? (req.body.local.admin) : false;
                   if(req.body.local.password) user.local.password = user.generateHash(req.body.local.password);
                 }
+                if(req.body.uniform){
+                    if(req.body.uniform.jacket) user.uniform.jacket = req.body.uniform.jacket;
+                    if(req.body.uniform.jumpsuit) user.uniform.jumpsuit = req.body.uniform.jumpsuit;
+                }
                 if(req.body.sizes){
                     if(req.body.sizes.sex) user.sizes.sex = req.body.sizes.sex;
                     if(req.body.sizes.chest) user.sizes.chest = req.body.sizes.chest;
@@ -110,6 +114,7 @@ module.exports = {
                 if(req.body.other){
                     if(req.body.other.instrument) user.other.instrument = req.body.other.instrument;
                 }
+                console.log(user.uniform);
                 user.save(function(err) {
                     if (err)
                         throw err;

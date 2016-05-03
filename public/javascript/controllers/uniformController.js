@@ -247,4 +247,21 @@ angular.module('bandApp')
         });
       };
 
+      $scope.sendUser = function(urequest){
+        $scope.urequest=urequest;
+        $scope.user={
+          uniform:{
+            jacket: $scope.urequest.jacketNumber,
+            jumpsuit: $scope.urequest.jumpsuitNumber
+          }
+        };
+        console.log($scope.user);
+        $http.post('/api/user/' + $scope.urequest.userNumber,$scope.user)
+            .success(function(data){
+              $scope.users = data;
+            }).error(function(err){
+            console.log(err);
+            });
+      };
+
   });

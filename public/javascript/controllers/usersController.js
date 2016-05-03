@@ -133,6 +133,15 @@ angular.module('bandApp')
           });
         };
 
+        $scope.bestMatch = function(id){
+            $http.post('/api/uniform_request/'+ id)
+                .success(function(data){
+                    $scope.urequest = data;
+                }).error(function(err){
+                console.log(err);
+            });
+        };
+
         $scope.sendUrequest = function(){
           $scope.urequest={
             userNumber        : $scope.user._id,
