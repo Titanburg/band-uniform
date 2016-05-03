@@ -130,9 +130,23 @@ angular.module('bandApp')
         $scope.activateUser = function(user,state){
             $scope.getUser(user,function(){
                 $scope.user.local.state = state;
-                $scope.sendUser(true, user);
+                $scope.sendUser(true, user,function(err){
+                  console.log('her saved');
+                });
+
             });
+            $scope.sendEmailConfirmation(user);
         };
+
+        $scope.sendEmailConfirmation = function(user) {
+          $http.post('/api/user/sendConfirmation', user)
+            .success(function(data){
+              console.log("I think email sent? ...maybe??");
+            })
+            .error(function(error){
+              console.log(error);
+            });
+        }
 
         // Crud Functions
         $scope.createUser = function(){
@@ -158,20 +172,22 @@ angular.module('bandApp')
                 .success(function(data){
                     $scope.user = data;
                     if($scope.user.local && $scope.user.local.state) $scope.user.local.state = $scope.user.local.state.toString();
-                    callback(null);
+                    callback();
                 }).error(function(err){
                 callback(err);
             });
         };
-        $scope.sendUser = function(isValid, user){
+        $scope.sendUser = function(isValid, user,callback){
           if(isValid){
             // If creating is true send new user
             if($scope.creating === true){
                $http.post('/api/user',$scope.user)
                    .success(function(data){
                      $scope.users = data;
+                    //  callback();
                    }).error(function(err){
                    console.log(err);
+                   callback(err);
                });
             }
             // If creating is false edit existing user
@@ -179,12 +195,10 @@ angular.module('bandApp')
               $http.post('/api/user/' + $scope.user._id,$scope.user)
                   .success(function(data){
                     $scope.users = data;
-                    $http.post('/sendConfirmation', user)
-                      .success(function(data){
-                        console.log("I think email sent? ...maybe??");
-                      });
+                    // callback();
                   }).error(function(err){
                   console.log(err);
+                  callback(err);
               });
             }
 
