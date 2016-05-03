@@ -24,8 +24,8 @@ module.exports = function(passport){
 
   // Signup
   passport.use('local-signup', new LocalStrategy({
-          usernameField : 'email',
-          passwordField : 'password',
+          usernameField : 'newemail',
+          passwordField : 'newpassword',
           passReqToCallback : true
       },
       function(req, username, password, done) {
@@ -65,6 +65,8 @@ module.exports = function(passport){
                     return done(err);
                 if (!user)
                     return done(null, false, req.flash('loginMessage', 'No user found.'));
+                if (!user.local.email)
+                    return done(null, false, req.flash('loginMessage', 'No Email.'));
                 if (!user.validPassword(password))
                     return done(null, false, req.flash('loginMessage', 'Oops! Wrong password.'));
                 if (user.local.state == 0)
