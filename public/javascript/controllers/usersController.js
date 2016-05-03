@@ -63,10 +63,10 @@ angular.module('bandApp')
             },
             {
               id:4,
-              name:'Winds',
+              name:'Woodwinds',
               filter:{
                 other:{
-                  instrument:'Winds'
+                  instrument:'Woodwinds'
                 }
               }
             },
@@ -89,11 +89,20 @@ angular.module('bandApp')
               }
             },
             {
-              id:7,
+              id:6,
+              name:'Drum Majors',
+              filter:{
+                other:{
+                  instrument:'Drum Majors'
+                }
+              }
+            },
+            {
+              id:8,
               name:'All',
               filter:{}
             }
-          ]
+          ];
 
         // Helper Functions
         $scope.setOrder = function(order){
@@ -134,28 +143,29 @@ angular.module('bandApp')
         $scope.activateUser = function(user,state){
             $scope.getUser(user,function(){
                 $scope.user.local.state = state;
-                $scope.sendUser(true, user,function(err){
+                $scope.sendUser(true, user);
+                  // ,function(){
                   // console.log('her saved');
-                });
+                // });
                 // console.log("plssss pls1");
             });
             // console.log("plssss pls");
             // $scope.sendEmailConfirmation(user);
         };
 
-        $scope.sendEmailConfirmation = function(user) {
-          console.log(user);
-          $http({
-            method: 'POST',
-            url: '/api/user/sendConfirmation',
-            data: user,
-            headers: {'Content-Type': 'application/json'}
-          }).success(function(data){
-              console.log("I think email sent? ...maybe??");
-            }).error(function(error){
-              console.log(error);
-            });
-        }
+        // $scope.sendEmailConfirmation = function(user) {
+        //   console.log(user);
+        //   $http({
+        //     method: 'POST',
+        //     url: '/api/user/sendConfirmation',
+        //     data: user,
+        //     headers: {'Content-Type': 'application/json'}
+        //   }).success(function(data){
+        //       console.log("I think email sent? ...maybe??");
+        //     }).error(function(error){
+        //       console.log(error);
+        //     });
+        // };
 
         // Crud Functions
         $scope.createUser = function(){
@@ -181,7 +191,7 @@ angular.module('bandApp')
                 .success(function(data){
                     $scope.user = data;
                     if($scope.user.local && $scope.user.local.state) $scope.user.local.state = $scope.user.local.state.toString();
-                    //callback();
+                    callback();
                 }).error(function(err){
                 callback(err);
             });
