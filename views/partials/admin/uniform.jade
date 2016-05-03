@@ -24,7 +24,7 @@
                           tr(ng-repeat='urequest in urequests')
                             td {{urequest.userNumber}}
                             td {{urequest.jacketNumber}}
-                            td {{urequest.chest}}
+                            td {{urequest.jumpsuitNumber}}
                             td {{urequest.complete}}
                             td  
                                 a.btn(data-toggle='modal' data-target='#editUrequest' ng-click='getUrequest(urequest)')
@@ -119,7 +119,7 @@
                     .form-group
                       label.col-sm-3.control-label User Number
                       .col-sm-9
-                        input.form-control(type='number' ng-model='urequest.userNumber')
+                        input.form-control(type='text' ng-model='urequest.userNumber')
                     .form-group
                       label.col-sm-3.control-label Jacket
                       .col-sm-9
@@ -143,9 +143,9 @@
                       .col-sm-9
                           input.form-control(type='number' name='waist' min='20' max='40' ng-model='urequest.waist')
                     .form-group
-                      label.col-sm-3.control-label Hips
+                      label.col-sm-3.control-label Seat
                       .col-sm-9
-                          input.form-control(type='number' name='hips' min='20' max='40' ng-model='urequest.hips')
+                          input.form-control(type='number' name='seat' min='20' max='40' ng-model='urequest.seat')
                     .form-group
                       label.col-sm-3.control-label Outseam
                       .col-sm-9

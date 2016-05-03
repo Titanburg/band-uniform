@@ -1,7 +1,7 @@
 var mongoose = require('mongoose');
 
 var schema   = new mongoose.Schema({
-    userNumber        : Number,
+    userNumber        : String,
     jacketNumber      : Number,
     jumpsuitNumber    : Number,
     //hatNumber         : Number,

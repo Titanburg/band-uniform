@@ -13,19 +13,12 @@ module.exports = {
     },
 
     newUrequest : function(req, res) {
-      var newUrequest = new Urequest({
-        userNumber: req.body.userNumber,
-        complete: req.body.complete,
-        jumpsuitNumber: req.body.jumpsuitNumber,
-        jacketNumber: req.body.jacketNumber,
-        chest : req.body.chest,
-        armlength : req.body.armlength,
-        waist: req.body.waist,
-        seat: req.body.seat,
-        outseam : req.body.outseam
-      });
+      console.log('New Request');
+      var newUrequest = new Urequest(req.body);
+      console.log(newUrequest);
       newUrequest.save(function(err) {
         if(err) {
+          console.log(err);
           res.json({'ERROR': err});
         } else {
           Urequest.find({},function(err,urequests){
@@ -92,27 +85,40 @@ module.exports = {
 
     bestMatch : function(req, res) {
       Urequest.findById(req.params.id, function(err, urequest) {
-        urequest.jumpsuitNumber = jumpsuit.findOne(
-          {waist: {$gt: urequest.waist}},
-          {outseam: {$gt: urequest.outseam}},
-          {hips: {$gt: urequest.hips}}
-        );
-        urequest.jacketNumber = Jacket.jacket.findOne(
-          {waist: {$gt: urequest.chest}},
-          {outseam: {$gt: urequest.armlength}}
-        );
-        console.log("urequest.jumpsuitNumber");
-        urequest.save(function(err) {
-        if(err) {
-            res.json({'ERROR': err});
-          } else {
-            Urequest.find({},function(err,urequests){
-                if(err) return;
-                console.log(urequests);
-                console.log("FUCK");
-                res.json(urequests);
+
+        Jumpsuit.findOne({
+          waist: {$gt: urequest.waist},
+          outseam: {$gt: urequest.outseam},
+          seat: {$gt: urequest.seat}},
+          function(err,data){
+            if(err){
+              throw err;
+            }
+            console.log("jumpsuit");
+            console.log(data);
+            urequest.jumpsuitNumber = data.number;
+            Jacket.findOne({chest: {$gt: urequest.chest}}, function(err,data){
+              if(err){
+                throw err;
+              }
+              console.log("jacket");
+              console.log(data);
+              urequest.jacketNumber = data.number;
+              urequest.save(function(err) {
+              if(err) {
+                  console.log(err);
+                  res.json({'ERROR': err});
+                } else {
+                  Urequest.find({},function(err,urequests){
+                      if(err) return;
+                      console.log(urequests);
+                      console.log("FUCK");
+                      res.json(urequests);
+                  });
+                }
+              });
             });
-          }
+
         });
       });
     }
