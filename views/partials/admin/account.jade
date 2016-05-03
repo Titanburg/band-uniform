@@ -1,5 +1,5 @@
 .row
-    .col-md-6.col-md-offset-3(ng-init='getUser(#{JSON.stringify(user)})')
+    .col-md-6.col-md-offset-3.user-account(ng-init='getUser(#{JSON.stringify(user)})')
         h1 {{user.local.firstName}} {{user.local.lastName}}
         form.form-horizontal(name='userForm')
           .simpleView
