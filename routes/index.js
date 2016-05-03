@@ -19,11 +19,12 @@ module.exports = function(app,passport){
       title:'Band Uniform Management Utility',
       user: {
         _id:req.user.id,
-        name:req.user.local.firstName + ' ' + req.user.local.lastName,
+        firstName:req.user.local.firstName,
+        lastName: req.user.local.lastName,
         email:req.user.local.email,
         admin:req.user.local.admin
       }
-    }
+    };
 
     // Check which type of user [user, admin]
     if(req.user && req.user.local.admin){

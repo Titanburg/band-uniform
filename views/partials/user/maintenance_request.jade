@@ -25,8 +25,9 @@
                                   span.glyphicon.glyphicon-cog
                                 a.btn(ng-click='deleteRequest(request)')
                                   span.glyphicon.glyphicon-trash.text-danger
+                            
                     .panel-footer
-                      button.btn.btn-success(data-toggle='modal' data-target='#editRequest' type='button' ng-click='createRequest()') New Request
+                      button.btn.btn-success(data-toggle='modal' data-target='#editRequest' type='button' ng-click='createRequest("#{user.firstName}","#{user.lastName}","#{user.email}")') New Request
     .modal.fade(id='editRequest' tabindex='-1' role='dialog')
       .modal-dialog
           .modal-content
@@ -43,11 +44,11 @@
                     .form-group
                       label.col-sm-3.control-label First name
                       .col-sm-9
-                        input.form-control(type='text' ng-model='request.firstName')
+                        input.form-control(type='text' ng-model='request.firstName' ) 
                     .form-group
                       label.col-sm-3.control-label Last name
                       .col-sm-9
-                        input.form-control(type='text' ng-model='request.lastName')
+                        input.form-control(type='text' ng-model='request.lastName') 
                     .form-group
                       label.col-sm-3.control-label Piece
                       .col-sm-9
