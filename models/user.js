@@ -26,6 +26,9 @@ var userSchema  = mongoose.Schema({
         lastName: {
             type: String,
             match: /[a-zA-Z]*/
+        },
+        state: {
+          type: Number,
         }
     },
     uniform:{
