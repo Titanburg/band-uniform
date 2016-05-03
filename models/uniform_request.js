@@ -4,10 +4,15 @@ var schema   = new mongoose.Schema({
     userNumber        : Number,
     jacketNumber      : Number,
     jumpsuitNumber    : Number,
-    hatNumber         : Number,
-    gloves            : Boolean,
-    shoes             : Boolean,
-    tshirt            : Boolean,
+    //hatNumber         : Number,
+    //gloves            : Boolean,
+  //  shoes             : Boolean,
+  //  tshirt            : Boolean,
+    chest             : Number,
+    armlength         : Number,
+    waist             : Number,
+    seat              : Number,
+    outseam           : Number,
     complete          : Boolean
 });
 

@@ -32,6 +32,16 @@ angular.module('bandApp')
         }
       };
 
+      $scope.bestMatch = function(id){
+          $http.get('/api/requesttest/' + id )
+              .success(function(data){
+                  $scope.urequest = data;
+              }).error(function(err){
+              console.log(err);
+          });
+      };
+
+
       $scope.getJumpsuits = function(){
         $http.get('/api/jumpsuit')
           .success(function(data){

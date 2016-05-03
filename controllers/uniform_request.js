@@ -1,4 +1,6 @@
 var Urequest = require('../models/uniform_request.js');
+var Jumpsuit = require('../models/uniform/jumpsuit.js');
+var Jacket = require('../models/uniform/jacket.js');
 
 module.exports = {
 
@@ -10,13 +12,17 @@ module.exports = {
         });
     },
 
-        // *** post ALL urequests *** //
     newUrequest : function(req, res) {
       var newUrequest = new Urequest({
         userNumber: req.body.userNumber,
         complete: req.body.complete,
         jumpsuitNumber: req.body.jumpsuitNumber,
-        jacketNumber: req.body.jacketNumber
+        jacketNumber: req.body.jacketNumber,
+        chest : req.body.chest,
+        armlength : req.body.armlength,
+        waist: req.body.waist,
+        seat: req.body.seat,
+        outseam : req.body.outseam
       });
       newUrequest.save(function(err) {
         if(err) {
@@ -48,8 +54,25 @@ module.exports = {
         urequest.complete = req.body.complete;
         urequest.jacketNumber = req.body.jacketNumber;
         urequest.jumpsuitNumber = req.body.jumpsuitNumber;
+        urequest.chest =req.body.chest;
+        urequest.armlength=req.body.armlength;
+        urequest.waist=req.body.waist;
+        urequest.seat= req.body.seat;
+        urequest.outseam =req.body.outseam;
+        matchJumpsuit = db.jumpsuit.find(
+          {waist: {$gt: urequest.waist}},
+          {outseam: {$gt: urequest.outseam}},
+          {hips: {$gt: urequest.hips}}
+        );
+        urequest.jumpsuitNumber= matchJumpsuit;
+        matchJacket = db.jacket.find(
+          {waist: {$gt: urequest.chest}},
+          {outseam: {$gt: urequest.armlength}}
+        );
+        urequest.jacketNumber= jacketJumpsuit;
+        console.log(urequest.jumpsuitNumber);
         urequest.save(function(err) {
-          if(err) {
+        if(err) {
             res.json({'ERROR': err});
           } else {
             Urequest.find({},function(err,urequests){

@@ -9,6 +9,9 @@ angular.module('bandApp')
         $scope.user = {}; // Used for selected user
         $scope.users = []; // Used for all users
 
+        $scope.urequest = {};
+        $scope.urequests = [];
+
         $scope.newPass = '';
         $scope.simpleView = true;
 
@@ -120,10 +123,31 @@ angular.module('bandApp')
 
           }
         };
+
         $scope.deleteUser = function(user){
           $http.get('/api/user/delete/' + user._id )
               .success(function(data){
                 $scope.users = data;
+              }).error(function(err){
+              console.log(err);
+          });
+        };
+
+        $scope.sendUrequest = function(){
+          $scope.urequest={
+            userNumber        : $scope.user._id,
+            jacketNumber      : '1',
+            jumpsuitNumber    : '1',
+            chest             : $scope.user.sizes.chest,
+            armlength         : $scope.user.sizes.armlength,
+            waist             : $scope.user.sizes.waist,
+            seat              : $scope.user.sizes.seat,
+            outseam           : $scope.user.sizes.outseam,
+            complete          : false
+          };
+          $http.post('/api/uniform_request',$scope.urequest)
+              .success(function(data){
+                console.log($scope.urequest);
               }).error(function(err){
               console.log(err);
           });
