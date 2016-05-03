@@ -70,7 +70,7 @@ public class LoginActivity extends AppCompatActivity {
 
         switch (status.login){
             case "SUCCESS":
-                Intent i = new Intent(view.getContext(), MainActivity.class);
+                Intent i = new Intent(view.getContext(), MenuActivity.class);
                 startActivity(i);
                 break;
             case "FAILURE":
