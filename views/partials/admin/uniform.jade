@@ -25,12 +25,15 @@
                             td {{urequest.userNumber}}
                             td {{urequest.jacketNumber}}
                             td {{urequest.jumpsuitNumber}}
-                            td {{urequest.complete}}
+                            td 
+                                button.btn.btn-success(type='button' ng-click='sendUser(urequest)') Assign
                             td  
                                 a.btn(data-toggle='modal' data-target='#editUrequest' ng-click='getUrequest(urequest)')
                                   span.glyphicon.glyphicon-cog
                                 a.btn(ng-click='deleteUrequest(urequest)')
-                                  span.glyphicon.glyphicon-trash.text-danger    
+                                  span.glyphicon.glyphicon-trash.text-danger 
+                            td 
+                              button.btn.btn-success(type='button' ng-click='bestMatch(urequest._id)') Get Match
                     .panel-footer
                       button.btn.btn-success(data-toggle='modal' data-target='#editUrequest' type='button' ng-click='createUrequest()') Add Request
                       
@@ -97,7 +100,7 @@
                                 a.btn(data-toggle='modal' data-target='#editJacket' ng-click='getJacket(jacket)')
                                   span.glyphicon.glyphicon-cog
                                 a.btn(ng-click='deleteJacket(jacket)')
-                                  span.glyphicon.glyphicon-trash.text-danger    
+                                  span.glyphicon.glyphicon-trash.text-danger
                     .panel-footer
                       button.btn.btn-success(data-toggle='modal' data-target='#editJacket' type='button' ng-click='createJacket()') Add Jacket
                       
@@ -117,17 +120,37 @@
                     .form-group
                       label.col-sm-3.control-label User Number
                       .col-sm-9
-                        input.form-control(type='number' ng-model='urequest.userNumber')
+                        input.form-control(type='text' ng-model='urequest.userNumber')
                     .form-group
                       label.col-sm-3.control-label Jacket
                       .col-sm-9
                         select.form-control(ng-model='urequest.jacketNumber')
-                          option(ng-repeat='jacket in jackets | orderBy:number' value="{{jacket.number}}") {{jacket.chest}}{{jacket.armlength}}
+                          option(ng-repeat='jacket in jackets | orderBy:number' value="{{jacket.number}}") No. {{jacket.number}} - {{jacket.chest}}{{jacket.armlength}}
                     .form-group
                       label.col-sm-3.control-label Jumpsuit
                       .col-sm-9
                         select.form-control(ng-model='urequest.jumpsuitNumber')
-                          option(ng-repeat='jumpsuit in jumpsuits | orderBy:number' value="{{jumpsuit.number}}") {{jumpsuit.waist}}/{{jumpsuit.seat}}/{{jumpsuit.outseam}}
+                          option(ng-repeat='jumpsuit in jumpsuits | orderBy:number' value="{{jumpsuit.number}}") No. {{jumpsuit.number}} - {{jumpsuit.waist}}/{{jumpsuit.seat}}/{{jumpsuit.outseam}}
+                    .form-group
+                      label.col-sm-3.control-label Chest
+                      .col-sm-9
+                          input.form-control(type='number' name='chest' min='20' max='40' ng-model='urequest.chest')
+                    .form-group
+                      label.col-sm-3.control-label Armlength
+                      .col-sm-9
+                          input.form-control(type='number' name='armlength' min='20' max='40' ng-model='urequest.armlength')
+                    .form-group
+                      label.col-sm-3.control-label Waist
+                      .col-sm-9
+                          input.form-control(type='number' name='waist' min='20' max='40' ng-model='urequest.waist')
+                    .form-group
+                      label.col-sm-3.control-label Seat
+                      .col-sm-9
+                          input.form-control(type='number' name='seat' min='20' max='40' ng-model='urequest.seat')
+                    .form-group
+                      label.col-sm-3.control-label Outseam
+                      .col-sm-9
+                          input.form-control(type='number' name='outseam' min='20' max='40' ng-model='urequest.outseam')
                     .form-group
                       label.col-sm-3.control-label Complete
                       .col-sm-9

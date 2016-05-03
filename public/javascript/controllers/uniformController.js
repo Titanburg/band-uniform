@@ -32,6 +32,16 @@ angular.module('bandApp')
         }
       };
 
+      $scope.bestMatch = function(id){
+          $http.post('/api/uniform_request/'+ id)
+              .success(function(data){
+                  $scope.urequest = data;
+              }).error(function(err){
+              console.log(err);
+          });
+      };
+
+
       $scope.getJumpsuits = function(){
         $http.get('/api/jumpsuit')
           .success(function(data){
@@ -235,6 +245,23 @@ angular.module('bandApp')
           }).error(function(err){
           console.log(err);
         });
+      };
+
+      $scope.sendUser = function(urequest){
+        $scope.urequest=urequest;
+        $scope.user={
+          uniform:{
+            jacket: $scope.urequest.jacketNumber,
+            jumpsuit: $scope.urequest.jumpsuitNumber
+          }
+        };
+        console.log($scope.user);
+        $http.post('/api/user/' + $scope.urequest.userNumber,$scope.user)
+            .success(function(data){
+              $scope.users = data;
+            }).error(function(err){
+            console.log(err);
+            });
       };
 
   });

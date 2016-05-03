@@ -38,7 +38,7 @@
     if(err){
       console.log(err);
     }else{
-      console.log('Mongoose:      Connected to banduniform database');
+      //console.log('Mongoose:      Connected to banduniform database');
 
       // Seed mongoose
       require('./database/seeds/banduniforms_1.0.js');

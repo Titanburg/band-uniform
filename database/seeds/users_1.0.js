@@ -2,7 +2,7 @@ var User = require('../../models/user.js');
 
 User.findOne({'local.email':'admin@siu.edu'},function(err,user){if(err) return;
     if(user){
-        console.log('Mongoose:      Admin already seeded');
+        //console.log('Mongoose:      Admin already seeded');
     } else {
         var adminUser = new User();
         adminUser.local = {};

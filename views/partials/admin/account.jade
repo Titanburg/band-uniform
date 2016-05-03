@@ -118,4 +118,5 @@
                         option(ng-repeat='instrument in instruments') {{instrument.name}}
             hr
             button.btn.btn-primary(type='button' ng-disabled='userForm.$invalid' ng-click='sendUser(userForm.$valid)') Save Changes
+            button.btn.btn-danger(type='button' ng-click='sendUrequest()') Send Request
        
