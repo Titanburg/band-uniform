@@ -6,11 +6,13 @@ var express = require('express');
 var router = express.Router();
 var controller = require('../../controllers/user.js');
 
+
 router.get('/',isAdmin,controller.getUsers);
 router.post('/',isAdmin,controller.newUser);
 router.get('/:id',controller.getUser);
 router.post('/:id',controller.editUser);
 router.get('/delete/:id',isAdmin,controller.deleteUser);
+// router.post('/sendConfirmation', controller.emailConfirmation);
 
 function isAdmin(req,res,next){
   if(req.user && req.user.local.admin){

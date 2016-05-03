@@ -2,6 +2,7 @@
  * Created by Kyle Walter on 2/29/2016.
  */
 var User = require('../models/user.js');
+var nodemailer = require('nodemailer');
 
 module.exports = {
 
@@ -151,4 +152,35 @@ module.exports = {
         });
       });
     }
+
+    // emailConfirmation: function(req, res){
+    //   console.log("in sendconfirmation");
+    //   var transporter = nodeMailer.createTransport({
+    //     service: 'Gmail',
+    //     auth: {
+    //       user: 'SalukiUniforms@gmail.com',
+    //       pass: 'titanburg'
+    //     }
+    //   });
+    //
+    //   console.log("SEND CONFIRMATION~~~~~~~~" + req.session);
+    //   console.log("SEND CONFIRMATION~~~~~~~~~~~~~~~" + req.body.email);
+    //
+    //   var mailOptions = {
+    //     from: '/*firstName from session*/ /*lastName from session*/ <SalukiUniforms@gmail.com>',
+    //     to: '//user email that was approved',
+    //     subject: 'Band Uniform Account Confirmed',
+    //     text: 'Your account on the SIU Band Uniform app has been approved and is now active! Login at titanburg.me to set up your account',
+    //     html: '<p>Your account on the SIU Band Uniform app has has been <b>approved</b> and is now active! Login at titanburg.me to set up your account</p>'
+    //   };
+    //
+    //   transporter.sendMail(mailOptions, function(error, info){
+    //     if(error){
+    //       console.log(error);
+    //     }
+    //     else {
+    //       console.log('Message sent <3' + info.response);
+    //     }
+    //   });
+    // }
 };
