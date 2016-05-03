@@ -22,12 +22,12 @@ module.exports = {
             }else{
                 console.log(instrument);
                 var newInstrument = new Instrument();
-                newinstrument.name = req.body.name;
-                newinstrument.gloves = req.body.gloves;
-                newinstrument.group = req.body.group;
-                newinstrument.hat = req.body.hat;
-                newinstrument.jacket = req.body.jacket;
-                newinstrument.jumpsuit = req.body.jumpsuit;
+                newInstrument.name = req.body.name;
+                newInstrument.gloves = req.body.gloves;
+                newInstrument.group = req.body.group;
+                newInstrument.hat = req.body.hat;
+                newInstrument.jacket = req.body.jacket;
+                newInstrument.jumpsuit = req.body.jumpsuit;
                 newInstrument.save(function(err) {
                     if (err)
                         throw err;
@@ -76,7 +76,7 @@ module.exports = {
                 // No user handle
                 console.log("Not Found");
             }
-        });        
+        });   
     },
 
     // Delete instrument
