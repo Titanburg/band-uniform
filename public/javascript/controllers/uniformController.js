@@ -33,7 +33,7 @@ angular.module('bandApp')
       };
 
       $scope.bestMatch = function(id){
-          $http.get('/api/requesttest/' + id )
+          $http.post('/api/uniform_request/'+ id)
               .success(function(data){
                   $scope.urequest = data;
               }).error(function(err){

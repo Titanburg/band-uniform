@@ -31,6 +31,8 @@
                                   span.glyphicon.glyphicon-cog
                                 a.btn(ng-click='deleteUrequest(urequest)')
                                   span.glyphicon.glyphicon-trash.text-danger 
+                            td 
+                              button.btn.btn-success(type='button' ng-click='bestMatch(urequest._id)') FUCK
                     .panel-footer
                       button.btn.btn-success(data-toggle='modal' data-target='#editUrequest' type='button' ng-click='createUrequest()') Add Request
                       
@@ -97,7 +99,7 @@
                                 a.btn(data-toggle='modal' data-target='#editJacket' ng-click='getJacket(jacket)')
                                   span.glyphicon.glyphicon-cog
                                 a.btn(ng-click='deleteJacket(jacket)')
-                                  span.glyphicon.glyphicon-trash.text-danger    
+                                  span.glyphicon.glyphicon-trash.text-danger
                     .panel-footer
                       button.btn.btn-success(data-toggle='modal' data-target='#editJacket' type='button' ng-click='createJacket()') Add Jacket
                       

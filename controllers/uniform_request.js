@@ -59,18 +59,6 @@ module.exports = {
         urequest.waist=req.body.waist;
         urequest.seat= req.body.seat;
         urequest.outseam =req.body.outseam;
-        matchJumpsuit = db.jumpsuit.find(
-          {waist: {$gt: urequest.waist}},
-          {outseam: {$gt: urequest.outseam}},
-          {hips: {$gt: urequest.hips}}
-        );
-        urequest.jumpsuitNumber= matchJumpsuit;
-        matchJacket = db.jacket.find(
-          {waist: {$gt: urequest.chest}},
-          {outseam: {$gt: urequest.armlength}}
-        );
-        urequest.jacketNumber= jacketJumpsuit;
-        console.log(urequest.jumpsuitNumber);
         urequest.save(function(err) {
         if(err) {
             res.json({'ERROR': err});
@@ -98,6 +86,33 @@ module.exports = {
                 console.log(urequests);
                 res.json(urequests);
             });
+        });
+      });
+    },
+
+    bestMatch : function(req, res) {
+      Urequest.findById(req.params.id, function(err, urequest) {
+        urequest.jumpsuitNumber = jumpsuit.findOne(
+          {waist: {$gt: urequest.waist}},
+          {outseam: {$gt: urequest.outseam}},
+          {hips: {$gt: urequest.hips}}
+        );
+        urequest.jacketNumber = Jacket.jacket.findOne(
+          {waist: {$gt: urequest.chest}},
+          {outseam: {$gt: urequest.armlength}}
+        );
+        console.log("urequest.jumpsuitNumber");
+        urequest.save(function(err) {
+        if(err) {
+            res.json({'ERROR': err});
+          } else {
+            Urequest.find({},function(err,urequests){
+                if(err) return;
+                console.log(urequests);
+                console.log("FUCK");
+                res.json(urequests);
+            });
+          }
         });
       });
     }
