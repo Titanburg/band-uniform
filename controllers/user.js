@@ -151,7 +151,7 @@ module.exports = {
             });
         });
       });
-    },
+    }
 
     // emailConfirmation: function(req, res){
     //   console.log("in sendconfirmation");
