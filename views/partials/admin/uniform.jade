@@ -26,14 +26,14 @@
                             td {{urequest.jacketNumber}}
                             td {{urequest.jumpsuitNumber}}
                             td 
-                                button.btn.btn-success(type='button' ng-click='sendUser(urequest)') Work
+                                button.btn.btn-success(type='button' ng-click='sendUser(urequest)') Assign
                             td  
                                 a.btn(data-toggle='modal' data-target='#editUrequest' ng-click='getUrequest(urequest)')
                                   span.glyphicon.glyphicon-cog
                                 a.btn(ng-click='deleteUrequest(urequest)')
                                   span.glyphicon.glyphicon-trash.text-danger 
                             td 
-                              button.btn.btn-success(type='button' ng-click='bestMatch(urequest._id)') Work
+                              button.btn.btn-success(type='button' ng-click='bestMatch(urequest._id)') Get Match
                     .panel-footer
                       button.btn.btn-success(data-toggle='modal' data-target='#editUrequest' type='button' ng-click='createUrequest()') Add Request
                       
@@ -125,12 +125,12 @@
                       label.col-sm-3.control-label Jacket
                       .col-sm-9
                         select.form-control(ng-model='urequest.jacketNumber')
-                          option(ng-repeat='jacket in jackets | orderBy:number' value="{{jacket.number}}") {{jacket.chest}}{{jacket.armlength}}
+                          option(ng-repeat='jacket in jackets | orderBy:number' value="{{jacket.number}}") No. {{jacket.number}} - {{jacket.chest}}{{jacket.armlength}}
                     .form-group
                       label.col-sm-3.control-label Jumpsuit
                       .col-sm-9
                         select.form-control(ng-model='urequest.jumpsuitNumber')
-                          option(ng-repeat='jumpsuit in jumpsuits | orderBy:number' value="{{jumpsuit.number}}") {{jumpsuit.waist}}/{{jumpsuit.seat}}/{{jumpsuit.outseam}}
+                          option(ng-repeat='jumpsuit in jumpsuits | orderBy:number' value="{{jumpsuit.number}}") No. {{jumpsuit.number}} - {{jumpsuit.waist}}/{{jumpsuit.seat}}/{{jumpsuit.outseam}}
                     .form-group
                       label.col-sm-3.control-label Chest
                       .col-sm-9

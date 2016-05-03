@@ -52,6 +52,7 @@ module.exports = {
         urequest.waist=req.body.waist;
         urequest.seat= req.body.seat;
         urequest.outseam =req.body.outseam;
+        
         urequest.save(function(err) {
         if(err) {
             res.json({'ERROR': err});
