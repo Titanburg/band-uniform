@@ -131,19 +131,24 @@ angular.module('bandApp')
             $scope.getUser(user,function(){
                 $scope.user.local.state = state;
                 $scope.sendUser(true, user,function(err){
-                  console.log('her saved');
+                  // console.log('her saved');
                 });
-
+                // console.log("plssss pls1");
             });
-            $scope.sendEmailConfirmation(user);
+            // console.log("plssss pls");
+            // $scope.sendEmailConfirmation(user);
         };
 
         $scope.sendEmailConfirmation = function(user) {
-          $http.post('/api/user/sendConfirmation', user)
-            .success(function(data){
+          console.log(user);
+          $http({
+            method: 'POST',
+            url: '/api/user/sendConfirmation',
+            data: user,
+            headers: {'Content-Type': 'application/json'}
+          }).success(function(data){
               console.log("I think email sent? ...maybe??");
-            })
-            .error(function(error){
+            }).error(function(error){
               console.log(error);
             });
         }
