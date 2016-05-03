@@ -41,8 +41,8 @@ public class MainActivity extends AppCompatActivity {
         refreshButton = (Button)findViewById(R.id.refreshButton);
 
         getUsers();
-        listViewAdapter = new ArrayAdapter<User>(this,R.layout.user_row,users);
-        usersListView.setAdapter(listViewAdapter);
+//        listViewAdapter = new ArrayAdapter<User>(this,R.layout.user_row,users);
+//        usersListView.setAdapter(listViewAdapter);
 
 
     }
@@ -85,24 +85,10 @@ public class MainActivity extends AppCompatActivity {
 
     private void getUsers(){
 
-        String https_url = "https://titanburg.me/api/user";
-        URL url;
-        try {
+        HttpsConnectionBuilder getUsers = new HttpsConnectionBuilder("https://titanburg.me/api/user");
+        String response = getUsers.sendGet();
+        System.out.println("Get users" + response);
 
-            url = new URL(https_url);
-            HttpsURLConnection con = (HttpsURLConnection)url.openConnection();
-
-//               //dumpl all cert info
-//               print_https_cert(con);
-
-            //dump all the content
-            print_content(con);
-
-        } catch (MalformedURLException e) {
-            e.printStackTrace();
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
 
     }
 }

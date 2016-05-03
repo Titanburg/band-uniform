@@ -28,7 +28,7 @@ module.exports = function(passport){
       if(req.body.type === 'android')
         return res.json({
           login:'FAILURE',
-          message:req.flash('loginMessage')
+          message:req.flash('loginMessage')[0]
         });
       return res.redirect('/auth/login');
     }

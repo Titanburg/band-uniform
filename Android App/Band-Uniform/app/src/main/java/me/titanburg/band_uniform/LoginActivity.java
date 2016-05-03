@@ -57,54 +57,18 @@ public class LoginActivity extends AppCompatActivity {
 
     public void loginButton(View view){
 
-        String https_url = "https://titanburg.me/auth/login";
-        URL url;
+        String httpsString = "https://titanburg.me/auth/login";
 
-        HashMap<String, String> postDataParams = new HashMap<String,String>();
-        postDataParams.put("email",email.getText().toString());
-        postDataParams.put("password",password.getText().toString());
-        postDataParams.put("type","android");
+        HttpsConnectionBuilder login = new HttpsConnectionBuilder(httpsString);
+        login.addData("email",email.getText().toString());
+        login.addData("password",password.getText().toString());
+        login.addData("type","android");
+        String response = login.sendPost();
 
-
-        String response = "";
-        try {
-            url = new URL(https_url);
-            HttpsURLConnection conn = (HttpsURLConnection)url.openConnection();
-            conn.setReadTimeout(10000);
-            conn.setConnectTimeout(15000);
-            conn.setRequestMethod("POST");
-            conn.setDoInput(true);
-            conn.setDoOutput(true);
-
-
-            OutputStream os = conn.getOutputStream();
-            BufferedWriter writer = new BufferedWriter(
-                    new OutputStreamWriter(os, "UTF-8"));
-            writer.write(getPostDataString(postDataParams));
-
-            writer.flush();
-            writer.close();
-            os.close();
-            int responseCode=conn.getResponseCode();
-
-            if (responseCode == HttpsURLConnection.HTTP_OK) {
-                String line;
-                BufferedReader br=new BufferedReader(new InputStreamReader(conn.getInputStream()));
-                while ((line=br.readLine()) != null) {
-                    response+=line;
-                }
-            }
-            else {
-                response="";
-            }
-
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
         System.out.println(response);
         status = gson.fromJson(response,Status.class);
 
-        switch (status.status){
+        switch (status.login){
             case "SUCCESS":
                 Intent i = new Intent(view.getContext(), MainActivity.class);
                 startActivity(i);
@@ -114,23 +78,6 @@ public class LoginActivity extends AppCompatActivity {
                 break;
         }
 
-    }
-
-    private String getPostDataString(HashMap<String, String> params) throws UnsupportedEncodingException {
-        StringBuilder result = new StringBuilder();
-        boolean first = true;
-        for(Map.Entry<String, String> entry : params.entrySet()){
-            if (first)
-                first = false;
-            else
-                result.append("&");
-
-            result.append(URLEncoder.encode(entry.getKey(), "UTF-8"));
-            result.append("=");
-            result.append(URLEncoder.encode(entry.getValue(), "UTF-8"));
-        }
-
-        return result.toString();
     }
 }
 
