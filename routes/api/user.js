@@ -18,7 +18,7 @@ function isAdmin(req,res,next){
   if(req.user && req.user.local.admin){
     return next();
   }
-  res.json({})
+  res.json({});
 }
 
 module.exports = router;
