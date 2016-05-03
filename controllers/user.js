@@ -65,6 +65,7 @@ module.exports = {
     // Edit existing user
     editUser : function(req,res){
         User.findOne({_id:req.params.id},function(err,user){
+            console.log("user:",req.body);
             if(err) return;
             if(user){
                 if(req.body.local){
