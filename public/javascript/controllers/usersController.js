@@ -2,7 +2,7 @@
  * Created by Kyle Walter on 2/29/2016.
  */
 angular.module('bandApp')
-    .controller('usersController',function($scope,$http){
+    .controller('usersController',function($scope,$http,share){
         $scope.title = "Users";
 
         // Users information
@@ -16,24 +16,97 @@ angular.module('bandApp')
         $scope.creating = false;
 
         // Ordering
-        $scope.order = 'local.firstName';
+        $scope.order = 'local.state';
 
         // Filtering
         $scope.selection = 1;
-        $scope.filter = '';
+        $scope.filter = {local:{state:1}};
 
         $scope.instruments = [
-          {name:'Woodwinds'},
+          {name:'Winds'},
           {name:'Sousas'},
-          {name:'Percussion'}
+          {name:'Percussion'},
+          {name:'Drum Majors'}
         ];
+
+        $scope.filters = [
+            {
+              id:1,
+              name:'Active',
+              filter:{
+                local:{
+                  state:1,
+                }
+              }
+            },
+            {
+              id:2,
+              name:'Pending',
+              filter:{
+                local:{
+                  state:0,
+                }
+              }
+            },
+            {
+              id:3,
+              name:'Admin',
+              filter:{
+                local:{
+                  admin:true
+                }
+              }
+
+            },
+            {
+              id:4,
+              name:'Woodwinds',
+              filter:{
+                other:{
+                  instrument:'Woodwinds'
+                }
+              }
+            },
+            {
+              id:5,
+              name:'Sousas',
+              filter:{
+                other:{
+                  instrument:'Sousas'
+                }
+              }
+            },
+            {
+              id:6,
+              name:'Percussion',
+              filter:{
+                other:{
+                  instrument:'Percussion'
+                }
+              }
+            },
+            {
+              id:6,
+              name:'Drum Majors',
+              filter:{
+                other:{
+                  instrument:'Drum Majors'
+                }
+              }
+            },
+            {
+              id:8,
+              name:'All',
+              filter:{}
+            }
+          ]
 
         // Helper Functions
         $scope.setOrder = function(order){
           $scope.order= 'local.' + order;
         };
         $scope.setFilter = function(filter){
-          $scope.filter = filter ;
+          $scope.filter = filter;
         };
         $scope.toggleMode = function(){
           $scope.simpleView = !$scope.simpleView;
@@ -43,9 +116,9 @@ angular.module('bandApp')
         };
         $scope.editSelection = function(index){
           $scope.selection = index;
-          $scope.newPass = '';
-          $scope.user.local.password = '';
-          $scope.user.sizes.sex='Male';
+          // $scope.newPass = '';
+          // $scope.user.local.password = '';
+          // $scope.user.sizes.sex='Male';
         };
         $scope.isSelected = function(index){
           return $scope.selection == index;
@@ -64,6 +137,13 @@ angular.module('bandApp')
           return true;
         };
 
+        $scope.activateUser = function(user,state){
+            $scope.getUser(user,function(){
+                $scope.user.local.state = state;
+                $scope.sendUser(true);
+            });
+        };
+
         // Crud Functions
         $scope.createUser = function(){
             $scope.creating = true;
@@ -74,16 +154,23 @@ angular.module('bandApp')
             .success(function(data){
               console.log(data);
               $scope.users = data;
+              var count = 0;
+              data.forEach(function(user){
+                if(!user.local.active) count++;
+              });
+              share.setRequest(count);
             }).error(function(err){
               console.log(err);
             });
         };
-        $scope.getUser = function(user){
+        $scope.getUser = function(user,callback){
             $http.get('/api/user/' + user._id )
                 .success(function(data){
                     $scope.user = data;
+                    if($scope.user.local && $scope.user.local.state) $scope.user.local.state = $scope.user.local.state.toString();
+                    callback(null);
                 }).error(function(err){
-                console.log(err);
+                callback(err);
             });
         };
         $scope.sendUser = function(isValid){

@@ -24,8 +24,8 @@ module.exports = function(passport){
 
   // Signup
   passport.use('local-signup', new LocalStrategy({
-          usernameField : 'email',
-          passwordField : 'password',
+          usernameField : 'newemail',
+          passwordField : 'newpassword',
           passReqToCallback : true
       },
       function(req, username, password, done) {
@@ -33,16 +33,19 @@ module.exports = function(passport){
               User.findOne({ 'local.email' :  username }, function(err, user) {
                   if (err) return done(err);
                   if (user) {
-                      return done(null, false, req.flash('signupMessage', 'That email is already taken.'));
+                      return done(null, false, req.flash('loginMessage', 'That email is already taken.'));
                   } else {
                       var newUser            = new User();
+                      newUser.local.firstName = req.body.firstName;
+                      newUser.local.lastName = req.body.lastName;
                       newUser.local.email    = username;
                       newUser.local.password    = newUser.generateHash(password);
                       newUser.local.admin       = false;
+                      newUser.local.state      = 0;
                       newUser.save(function(err) {
                           if (err)
                               throw err;
-                          return done(null, newUser);
+                          return done(null, false, req.flash('loginMessage', 'Account request sent. Waiting on admin to accept account request'));
                       });
                   }
               });
@@ -55,14 +58,21 @@ module.exports = function(passport){
             passwordField : 'password',
             passReqToCallback : true // allows us to pass back the entire request to the callback
         },
+        
         function(req, username, password, done) { // callback with email and password from our form
             User.findOne({ 'local.email' : username }, function(err, user) {
                 if (err)
                     return done(err);
                 if (!user)
                     return done(null, false, req.flash('loginMessage', 'No user found.'));
+                if (!user.local.email)
+                    return done(null, false, req.flash('loginMessage', 'No Email.'));
                 if (!user.validPassword(password))
                     return done(null, false, req.flash('loginMessage', 'Oops! Wrong password.'));
+                if (user.local.state == 0)
+                    return done(null,false,req.flash('loginMessage','Admin has not enabled your account yet.'));
+                if (user.local.state == 2)
+                    return done(null,false,req.flash('loginMessage','Account disabled'));
                 return done(null, stripUser(user));
             });
 

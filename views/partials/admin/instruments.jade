@@ -37,7 +37,7 @@
                                 a.btn(ng-click='deleteInstrument(instrument)')
                                   span.glyphicon.glyphicon-trash.text-danger
                     .panel-footer
-                      button.btn.btn-success(data-toggle='modal' data-target='#editInstrument' type='button' ng-click='createInstrument()') Add Instrument
+                      button.btn.btn-success(data-toggle='modal' data-target='#createInstrument' type='button' ng-click='createInstrument()') Add Instrument
     .modal.fade(id='editInstrument' tabindex='-1' role='dialog')
       .modal-dialog
           .modal-content
@@ -49,16 +49,22 @@
                   //- .row
                   //-   .col-sm-3
                   //-     img.img-thumbnail.pull-right(width='50px' height='50px')
-                  form.form-horizontal
+                  form.form-horizontal(name='myForm')
                     .for
                     .form-group
                       label.col-sm-3.control-label Name
                       .col-sm-9
-                        input.form-control(type='text' ng-model='instrument.name')
+                        input.form-control(type='text' name='name' ng-model='instrument.name' required name-validate)
+                        span(ng-show='myForm.name.$touched && myForm.name.$invalid') An Instrument Name is Required (Minimum 4 Letters)
                     .form-group
-                      label.col-sm-3.control-label Group
+                      label.col-sm-3.control-label Instrument Group
                       .col-sm-9
-                        input.form-control(type='text' ng-model='instrument.group')
+                        select.form-control(type='text' name='group' ng-model='instrument.group' required group-validate)
+                          option(value='Woodwinds') Woodwinds
+                          option(value='Percussion') Percussion
+                          option(value='Drum Majors') Drum Majors
+                          option(value='Sousas') Sousas
+                        span(ng-show='myForm.group.$touched && myForm.group.$invalid') An Instrument Group is Required
                     .form-group
                       label.col-sm-3.control-label Jacket
                       .col-sm-9
@@ -77,4 +83,50 @@
                         input.form-control(type='checkbox' ng-model='instrument.gloves')
               .modal-footer
                 button.btn.btn-default(type='button' data-dismiss='modal') Close
-                button.btn.btn-primary(type='button' ng-click='sendInstrument()' data-dismiss='modal') Save Changes
+                button.btn.btn-primary(type='button' ng-click='sendInstrument(instrument)' data-dismiss='modal' ng-disabled='myForm.name.$invalid || myForm.group.$invalid') Save Changes
+.modal.fade(id='createInstrument' tabindex='-1' role='dialog')
+      .modal-dialog
+          .modal-content
+              .modal-header
+                button.close(type='button' data-dismiss='modal' aria-label="Close")
+                  span(aria-hidden='true')
+                h4.modal-title Add an Instrument {{instrument.name}}
+              .modal-body
+                  //- .row
+                  //-   .col-sm-3
+                  //-     img.img-thumbnail.pull-right(width='50px' height='50px')
+                  form.form-horizontal(name='myForm')
+                    .for
+                    .form-group
+                      label.col-sm-3.control-label Name
+                      .col-sm-9
+                        input.form-control(type='text' name='name' ng-model='instrument.name' required name-validate)
+                        span(ng-show='myForm.name.$touched && myForm.name.$invalid') An Instrument Name is Required (Minimum 4 Letters)
+                    .form-group
+                      label.col-sm-3.control-label Instrument Group
+                      .col-sm-9
+                        select.form-control(type='text' name='group' ng-model='instrument.group' required group-validate)
+                          option(value='Woodwinds') Woodwinds
+                          option(value='Percussion') Percussion
+                          option(value='Drum Majors') Drum Majors
+                          option(value='Sousas') Sousas
+                        span(ng-show='myForm.group.$touched && myForm.group.$invalid') An Instrument Group is Required
+                    .form-group
+                      label.col-sm-3.control-label Jacket
+                      .col-sm-9
+                        input.form-control(type='checkbox' ng-model='instrument.jacket')
+                    .form-group
+                      label.col-sm-3.control-label Jumpsuit
+                      .col-sm-9
+                        input.form-control(type='checkbox' ng-model='instrument.jumpsuit')
+                    .form-group
+                      label.col-sm-3.control-label Hat
+                      .col-sm-9
+                        input.form-control(type='checkbox' ng-model='instrument.hat')
+                    .form-group
+                      label.col-sm-3.control-label Gloves
+                      .col-sm-9
+                        input.form-control(type='checkbox' ng-model='instrument.gloves')
+              .modal-footer
+                button.btn.btn-default(type='button' data-dismiss='modal') Close
+                button.btn.btn-primary(type='button' ng-click='sendInstrument(instrument)' data-dismiss='modal' ng-disabled='myForm.name.$invalid || myForm.group.$invalid') Save Changes
