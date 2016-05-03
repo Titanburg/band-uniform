@@ -2,6 +2,10 @@
 @import 'ngStyle.less';
 @import 'switch.less';
 
+@background-color: #470000;
+@light-text: whitesmoke;
+@header-background: #212121;
+
 body {
   margin:0px;
   font: 14px "Lucida Grande", Helvetica, Arial, sans-serif;
@@ -149,4 +153,51 @@ a {
 
 .alert {
   display:inline-block;
+}
+
+nav.navbar.navbar-default {
+  background-color: @header-background;
+  color: @light-text;
+  border-radius: 0px;
+  border: none;
+}
+
+.navbar.navbar-default .navbar-header {
+  a {
+    color: @light-text;
+  }
+
+  a:hover {
+    color: #696969;
+  }
+}
+
+.nav.navbar-nav.navbar-right li {
+  a {
+      color: @light-text;
+  }
+
+  a:hover {
+    color: #696969;
+  }
+}
+
+.nav.navbar-nav.navbar-left li {
+  a {
+      color: @light-text;
+  }
+
+  a:hover {
+    color: #696969;
+  }
+}
+
+body {
+  background-color: @background-color;
+
+}
+
+.panel-default > .panel-heading {
+  color: @light-text;
+  background: @header-background;
 }
