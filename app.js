@@ -42,6 +42,8 @@
 
       // Seed mongoose
       require('./database/seeds/banduniforms_1.0.js');
+      require('./database/seeds/instruments_1.0.js');
+      require('./database/seeds/users_1.0.js');
     }
   });
 
@@ -69,7 +71,7 @@
   // app.use(session({secret:'thisisasuperdupersecret',cookie:{_expires:60000}}));
   app.use(session({
     secret: 'thisisasuperdupersecret',
-    cookie: { maxAge: 60000 },
+    cookie: { maxAge: 60000000000 },
     name: 'band-uniform',
     store: sessionStore, // connect-mongo session store TODO: Make this applicable to Postgres?
     proxy: true,

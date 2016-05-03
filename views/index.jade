@@ -1,7 +1,7 @@
 extends layout
 
 block content
-  nav.navbar.navbar-default
+  nav.navbar.navbar-default(ng-controller='navbarController' ng-init='updateAll()')
     .container-fluid
       .navbar-header
         button.navbar-toggle.collapsed(type='button' data-toggle='collapse' data-target='#band-navbar' aria-expanded='false')
@@ -15,7 +15,12 @@ block content
           // Admin Only
           - if(user.admin)
             li
-              a(href='/users' Users) Users
+              a(href='/users' Users) Users &nbsp;
+                span.badge {{requests}}
+            li
+              a(href='/instruments' Instruments) Instruments  
+            li 
+              a(href='/uniform' Uniforms) Uniforms
           // User only
           
           // All
@@ -23,7 +28,7 @@ block content
             a(href='/maintenance_request' Maintenance) Maintenance
         ul.nav.navbar-nav.navbar-right
           li
-            a(href='#')= user.email
+            a(href='/account')= user.email
           li
             a(href='/logout') Logout
   .content(ng-view)

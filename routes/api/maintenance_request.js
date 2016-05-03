@@ -6,6 +6,6 @@ router.get('/',controller.getRequests);
 router.post('/',controller.newRequest);
 router.get('/:id',controller.getRequest);
 router.post('/:id',controller.editRequest);
-router.get('/delete/:id',controller.getRequests);
+router.get('/delete/:id',controller.deleteRequest);
 
 module.exports = router;

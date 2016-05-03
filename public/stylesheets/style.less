@@ -1,4 +1,6 @@
 @import '../../bower_components/bootstrap/less/bootstrap.less';
+@import 'ngStyle.less';
+@import 'switch.less';
 
 body {
   margin:0px;
@@ -10,27 +12,33 @@ a {
 }
 
 .login-page {
+  padding: 0px;
   background: maroon;
   margin:0px;
-  background-image: url('/images/loginCover.jpg');
+  background-image: url('../images/loginCover.jpg');
+  min-height: 650px;
   height: 100vh;
   background-size: cover;
 }
 
 .login-overlay {
   background: rgba(128,0,0,.6);
+  min-height: 650px;
   height: 100vh;
+  background-size: cover;
 }
 
 .login-bar {
   position: absolute;
   top: 0%;
-  margin-right: 0;
+  margin-right: 0px;
   margin-left: auto;
   background: white;
   width: 413px;
+  min-height: 650px;
   height: 100%;
   text-align: center;
+  overflow: hidden;
 }
 
 .login-input {
@@ -53,17 +61,21 @@ a {
   font-size: 25px;
 }
 
+
 .creators {
   text-align: left;
   display: inline-block;
 }
 
 .copyright {
-  position: absolute;
-  bottom: 0px;
-  margin-left: 60px;
-  margin-right: auto;
-  text-align: center;
+  position: relative;
+  margin-top: 230px;
+  height: 30px;
+  p {
+    position: absolute;
+    left: 75px;
+    bottom: 0px;
+  }
 }
 
 .login-input a{

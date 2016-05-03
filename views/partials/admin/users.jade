@@ -10,137 +10,193 @@
                         h3 {{title}}
                     .panel-body
                         ul.nav.nav-pills
-                          li(role='presentation' ng-class='{active:isSelected(1)}')
-                            a(href="#" ng-click='setFilter();editSelection(1)') All
-                          li(role='presentation' ng-class='{active:isSelected(2)}')
-                            a(href="#" ng-click='setFilter("true");editSelection(2)') Admin
-                          li(role='presentation' ng-class='{active:isSelected(3)}')
-                            a(href='#' ng-click='setFilter("Woodwinds");editSelection(3)') Woodwinds
-                          li(role='presentation' ng-class='{active:isSelected(4)}')
-                            a(href='#' ng-click='setFilter("Sousas");editSelection(4)') Sousas
-                          li(role='presentation' ng-class='{active:isSelected(5)}')
-                            a(href='#' ng-click='setFilter("Percussion");editSelection(5)') Percussion
+                            li(role='presentation' ng-repeat='filter in filters' ng-class='{active:isSelected(filter.id)}')
+                                a(href="#" ng-click='setFilter(filter.filter);editSelection(filter.id)') {{filter.name}}
                         table.table.table-hover
-                          thead
-                            tr
-                              th First Name
-                                a.btn(ng-click='setOrder("firstName")')
-                                  span.glyphicon.glyphicon-sort-by-alphabet
-                              th Last Name
-                                a.btn(ng-click='setOrder("lastName")')
-                                  span.glyphicon.glyphicon-sort-by-alphabet
-                              th Email
-                                a.btn(ng-click='setOrder("email")')
-                                  span.glyphicon.glyphicon-sort-by-alphabet
-                              th Admin
-                                a.btn(ng-click='setOrder("admin")')
-                                  span.glyphicon.glyphicon-sort-by-alphabet
-                          tbody
-                            tr(ng-repeat='user in users | orderBy:order | filter:filter')
-                              td {{user.local.firstName}}
-                              td {{user.local.lastName}}
-                              td {{user.local.email}}
-                              td {{user.local.admin}}
-                              td  
-                                a.btn(data-toggle='modal' data-target='#editUser' ng-click='getUser(user)')
-                                  span.glyphicon.glyphicon-cog
-                                a.btn(ng-click='deleteUser(user)')
-                                  span.glyphicon.glyphicon-trash.text-danger
+                            thead
+                                tr
+                                    th First Name
+                                        a.btn(ng-click='setOrder("firstName")')
+                                            span.glyphicon.glyphicon-sort-by-alphabet
+                                    th Last Name
+                                        a.btn(ng-click='setOrder("lastName")')
+                                            span.glyphicon.glyphicon-sort-by-alphabet
+                                    th Email
+                                        a.btn(ng-click='setOrder("email")')
+                                            span.glyphicon.glyphicon-sort-by-alphabet
+                                    th Admin
+                                        a.btn(ng-click='setOrder("admin")')
+                                            span.glyphicon.glyphicon-sort-by-alphabet
+                                    th State
+                                        a.btn(ng-click='setOrder("state")')
+                                            span.glyphicon.glyphicon-sort-by-alphabet
+                            tbody
+                                tr(ng-repeat='user in users | orderBy:order | filter:filter' ng-class='{"warning":user.local.state==0}')
+                                    td {{user.local.firstName}}
+                                    td {{user.local.lastName}}
+                                    td {{user.local.email}}
+                                    td.text-center
+                                        span.glyphicon.glyphicon-ok-sign.text-success(ng-show='user.local.admin')
+                                        span.glyphicon.glyphicon-remove-sign.text-danger(ng-hide='user.local.admin')
+                                    td.text-center
+                                        a.btn(ng-show='user.local.state==0' ng-click='activateUser(user,1)')
+                                            span.glyphicon.glyphicon-thumbs-up.text-success
+                                        a.btn(ng-show='user.local.state==0' ng-click='activateUser(user,2)')
+                                            span.glyphicon.glyphicon-thumbs-down.text-danger
+                                        span.glyphicon.glyphicon-ok-sign.text-success(ng-show='user.local.state==1')
+                                        span.glyphicon.glyphicon-remove-sign.text-danger(ng-show='user.local.state==2')
+
+                                    td
+                                        a.btn(data-toggle='modal' data-target='#editUser' ng-click='getUser(user)')
+                                            span.glyphicon.glyphicon-cog
+                                        a.btn(data-toggle='modal' data-target='#deleteUser' ng-click='getUser(user)')
+                                            span.glyphicon.glyphicon-trash.text-danger
                     .panel-footer
-                      button.btn.btn-success(data-toggle='modal' data-target='#editUser' type='button' ng-click='createUser()') Add User
+                        button.btn.btn-success(data-toggle='modal' data-target='#editUser' type='button' ng-click='createUser()') Add User
     .modal.fade(id='editUser' tabindex='-1' role='dialog')
-      .modal-dialog
-          .modal-content
-              .modal-header
-                button.close(type='button' data-dismiss='modal' aria-label="Close")
+        .modal-dialog
+            .modal-content
+                .modal-header
+                    button.close(type='button' data-dismiss='modal' aria-label="Close")
+                    span(aria-hidden='true')
+                    h4.modal-title Edit {{user.local.firstName + ' ' + user.local.lastName}}
+                .modal-body
+                    form.form-horizontal(name='userForm')
+                        .simpleView
+                            h3 User Info
+                            .form-group(ng-class='{"has-error":userForm.firstName.$invalid}')
+                                label.col-sm-3.control-label First name
+                                .col-sm-9
+                                    input.form-control(type='text' name='firstName' ng-model='user.local.firstName' required)
+                            .form-group(ng-class='{"has-error":userForm.lastName.$invalid}')
+                                label.col-sm-3.control-label Last name
+                                .col-sm-9
+                                    input.form-control(type='text' name='lastName' ng-model='user.local.lastName' required)
+                            .form-group(ng-class='{"has-error":userForm.email.$invalid}')
+                                label.col-sm-3.control-label Email
+                                .col-sm-9
+                                    input.form-control(type='email' name='email' ng-model='user.local.email' required)
+                            .form-group
+                                label.col-sm-3.control-label Admin
+                                .col-sm-9
+                                    input(type='checkbox' ng-model='user.local.admin')
+                            .form-group(ng-class='{"has-error":userForm.state.$invalid}')
+                                label.col-sm-3.control-label State
+                                .col-sm-9
+                                    select.form-control(type='text' name='state' ng-model='user.local.state' required)
+                                        option(value='0') Pending
+                                        option(value='1') Enabled
+                                        option(value='2') Disabled
+                            hr
+                            h3 Password
+                            .form-group.has-feedback(ng-class='{"has-error":invalidPassword()}')
+                                label.col-sm-3.control-label New Password
+                                .col-sm-9
+                                    input.form-control(type='password' ng-required='invalidPassword()' ng-model='newPass')
+                                    span.glyphicon.glyphicon-remove.form-control-feedback(ng-show='invalidPassword()')
+                                    span.glyphicon.glyphicon-ok.icon-success.form-control-feedback(ng-hide='invalidPassword()')
+                            .form-group.has-feedback(ng-class='{"has-error":diffPassword()}')
+                                label.col-sm-3.control-label Confirm
+                                .col-sm-9
+                                    input.form-control(type='password' ng-model='user.local.password')
+                                    span.glyphicon.glyphicon-remove.form-control-feedback(ng-show='diffPassword()')
+                                    span.glyphicon.glyphicon-ok.icon-success.form-control-feedback(ng-hide='diffPassword()')
+                        .advancedView(ng-hide='simpleView')
+                            hr
+                            h3 Sizes
+                            .form-group
+                                label.col-sm-3.control-label Sex
+                                .col-sm-9
+                                    label.radio-inline
+                                        input(type='radio' name='sex' value='Male' ng-model='user.sizes.sex')
+                                        | Male
+                                    label.radio-inline
+                                        input(type='radio' name='sex' value='Female' ng-model='user.sizes.sex')
+                                        | Female
+                                    label.radio-inline
+                                         input(type='radio' name='sex' value='Other' ng-model='user.sizes.sex')
+                                        | Other
+                            .form-group
+                                label.col-sm-3.control-label Chest
+                                .col-sm-9
+                                    .input-group
+                                        input.form-control(type='number' name='chest' min='20' max='40' ng-model='user.sizes.chest')
+                                        span.input-group-addon # inches
+                            .form-group
+                                label.col-sm-3.control-label Arm Length
+                                .col-sm-9
+                                    .input-group
+                                        input.form-control(type='number' name='armlength' min='20' max='40' ng-model='user.sizes.armlength')
+                                        span.input-group-addon # inches
+                            .form-group
+                                label.col-sm-3.control-label Waist
+                                .col-sm-9
+                                    .input-group
+                                        input.form-control(type='number' name='waist' min='20' max='40' ng-model='user.sizes.waist')
+                                        span.input-group-addon # inches
+                            .form-group
+                                label.col-sm-3.control-label Seat
+                                .col-sm-9
+                                    .input-group
+                                        input.form-control(type='number' name='seat' min='20' max='40' ng-model='user.sizes.seat')
+                                        span.input-group-addon # inches
+                            .form-group
+                                label.col-sm-3.control-label Outseam
+                                .col-sm-9
+                                    .input-group
+                                        input.form-control(type='number' name='outseam' min='20' max='40' ng-model='user.sizes.outseam')
+                                        span.input-group-addon # inches
+                            .form-group
+                                label.col-sm-3.control-label Shoe
+                                .col-sm-9
+                                    .input-group
+                                        input.form-control(type='number' name='shoe' min='0' ng-model='user.sizes.shoe')
+                                        span.input-group-addon # inches
+                            .form-group
+                                label.col-sm-3.control-label Hat
+                                .col-sm-9
+                                    select.form-control(type='text' ng-model='user.sizes.hat')
+                                        option Small
+                                        option Medium
+                                        option Large
+                                        option X-Large
+                            .form-group
+                                label.col-sm-3.control-label Glove
+                                .col-sm-9
+                                    select.form-control(type='text' ng-model='user.sizes.glove')
+                                        option Small
+                                        option Medium
+                                        option Large
+                            .form-group
+                                label.col-sm-3.control-label T-shirt
+                                .col-sm-9
+                                    select.form-control(type='text' ng-model='user.sizes.tshirt')
+                                        option Small
+                                        option Medium
+                                        option Large
+                                        option X-Large
+                                        option XX-Large
+                                        option XXX-Large
+                            hr
+                            h3 Other
+                            .form-group
+                                label.col-sm-3.control-label Instrument
+                                .col-sm-9
+                                    select.form-control(type='text' ng-model='user.other.instrument')
+                                        option(ng-repeat='instrument in instruments') {{instrument.name}}
+                .modal-footer
+                    a.btn.pull-left(ng-click='toggleMode()') Advanced
+                    button.btn.btn-default(type='button' ng-click='simpleOff()' data-dismiss='modal') Close
+                    button.btn.btn-primary(type='button' ng-disabled='userForm.$invalid' ng-click='sendUser(userForm.$valid)' data-dismiss='modal') Save Changes
+    .modal.fade(id='deleteUser' tabindex='-1' role='dialog')
+        .modal-dialog
+            .modal-content
+                .modal-header
+                  button.close(type='button' data-dismiss='modal' aria-label="Close")
                   span(aria-hidden='true')
-                h4.modal-title Edit {{user.local.firstName + ' ' + user.local.lastName}}
-              .modal-body
-                  //- .row
-                  //-   .col-sm-3
-                  //-     img.img-thumbnail.pull-right(width='50px' height='50px')
-                  form.form-horizontal
-                    .simpleView
-                      h3 User Info
-                      .form-group
-                        label.col-sm-3.control-label First name
-                        .col-sm-9
-                          input.form-control(type='text' ng-model='user.local.firstName')
-                      .form-group
-                        label.col-sm-3.control-label Last name
-                        .col-sm-9
-                          input.form-control(type='text' ng-model='user.local.lastName')
-                      .form-group
-                        label.col-sm-3.control-label Email
-                        .col-sm-9
-                          input.form-control(type='email' ng-model='user.local.email')
-                      .form-group
-                        label.col-sm-3.control-label Admin
-                        .col-sm-9
-                          input(type='checkbox' ng-model='user.local.admin')
-                      hr
-                      h3 Password
-                      .form-group
-                        label.col-sm-3.control-label New Password
-                        .col-sm-9
-                          input(type='password' ng-model='user.local.password')
-                      .form-group
-                        label.col-sm-3.control-label Confirm
-                        .col-sm-9
-                          input(type='password' ng-model='confirmPass')
-                    .advancedView(ng-hide='simpleView')
-                      hr
-                      h3 Sizes
-                      .form-group
-                        label.col-sm-3.control-label Sex
-                        .col-sm-9
-                          input(type='text' ng-model='user.sizes.sex')
-                      .form-group
-                        label.col-sm-3.control-label Chest
-                        .col-sm-9
-                          input(type='text' ng-model='user.sizes.chest')
-                      .form-group
-                        label.col-sm-3.control-label Arm Length
-                        .col-sm-9
-                          input(type='text' ng-model='user.sizes.armlength')
-                      .form-group
-                        label.col-sm-3.control-label Waist
-                        .col-sm-9
-                          input(type='text' ng-model='user.sizes.waist')
-                      .form-group
-                        label.col-sm-3.control-label Seat
-                        .col-sm-9
-                          input(type='text' ng-model='user.sizes.seat')
-                      .form-group
-                        label.col-sm-3.control-label Outseam
-                        .col-sm-9
-                          input(type='text' ng-model='user.sizes.outseam')
-                      .form-group
-                        label.col-sm-3.control-label Hat
-                        .col-sm-9
-                          input(type='text' ng-model='user.sizes.hat')
-                      .form-group
-                        label.col-sm-3.control-label Glove
-                        .col-sm-9
-                          input(type='text' ng-model='user.sizes.glove')
-                      .form-group
-                        label.col-sm-3.control-label Shoe
-                        .col-sm-9
-                          input(type='text' ng-model='user.sizes.shoe')
-                      .form-group
-                        label.col-sm-3.control-label T-shirt
-                        .col-sm-9
-                          input(type='text' ng-model='user.sizes.tshirt')
-                          
-                      hr
-                      h3 Other
-                      .form-group
-                        label.col-sm-3.control-label Instrument
-                        .col-sm-9
-                          input(type='text' ng-model='user.other.instrument')
-                    
+                  h4.modal-title Edit Delete {{user.local.firstName}} {{user.local.lastName}} ?
+                .modal-body
+                  h3 Are you sure you want to delete {{user.local.firstName}} {{user.local.lastName}} ?
+                .modal-footer
+                  a.btn.btn-danger(data-dismiss='modal' ng-click='deleteUser(user)') Permentally Delete
                   
-              .modal-footer
-                a.btn.pull-left(ng-click='toggleMode()') Advanced 
-                button.btn.btn-default(type='button' ng-click='simpleOff()' data-dismiss='modal') Close
-                button.btn.btn-primary(type='button' ng-click='sendUser()' data-dismiss='modal') Save Changes

@@ -6,20 +6,35 @@ module.exports = function(app,passport){
 
   app.get('/',initIsLoggedIn, function(req,res,next){
     // res.redirect('/auth/login');
-    res.render('index',{title:'Band Uniform Management Utility',user:{name:req.user.local.firstName}});
+
+    res.render('index',{title:'Band Uniform Management Utility',user:{_id:req.user.local.id,name:req.user.local.firstName,email:req.user.local.email,admin:req.user.local.admin}});
   });
 
   app.use('/auth',auth);
   app.use('/api',isLoggedIn,api);
 
   app.get('/partial/:name', isLoggedIn,function(req,res,next){
+
+    var jadeVariables = {
+      title:'Band Uniform Management Utility',
+      user: {
+        _id:req.user.id,
+        name:req.user.local.firstName + ' ' + req.user.local.lastName,
+        email:req.user.local.email,
+        admin:req.user.local.admin
+      }
+    }
+
     // Check which type of user [user, admin]
     if(req.user && req.user.local.admin){
       // admin
       switch(req.params.name){
         case 'users':
+        case 'instruments':
         case 'maintenance_request':
-          res.render('partials/admin/' + req.params.name);
+        case 'uniform':
+        case 'account':
+          res.render('partials/admin/' + req.params.name,jadeVariables);
           break;
         default:
           res.render('partials/oops');
@@ -28,7 +43,8 @@ module.exports = function(app,passport){
       // user
       switch(req.params.name){
         case 'maintenance_request':
-          res.render('partials/admin/' + req.params.name);
+        case 'account':
+          res.render('partials/user/' + req.params.name,jadeVariables);
           break;
         default:
           res.render('partials/oops');
@@ -39,7 +55,8 @@ module.exports = function(app,passport){
   });
 
   app.get('/*',isLoggedIn,function(req,res,next){
-    res.render('index',{title:'Band Uniform Management Utility',user:{email:req.user.local.email,admin:req.user.local.admin}});
+    console.log(JSON.stringify(req.user.id));
+    res.render('index',{title:'Band Uniform Management Utility',user:{_id:req.user.id,name:req.user.local.firstName,email:req.user.local.email,admin:req.user.local.admin}});
   });
 
   function isLoggedIn(req, res, next) {
