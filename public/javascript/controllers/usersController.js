@@ -60,10 +60,10 @@ angular.module('bandApp')
             },
             {
               id:4,
-              name:'Winds',
+              name:'Woodwinds',
               filter:{
                 other:{
-                  instrument:'Winds'
+                  instrument:'Woodwinds'
                 }
               }
             },
@@ -86,7 +86,16 @@ angular.module('bandApp')
               }
             },
             {
-              id:7,
+              id:6,
+              name:'Drum Majors',
+              filter:{
+                other:{
+                  instrument:'Drum Majors'
+                }
+              }
+            },
+            {
+              id:8,
               name:'All',
               filter:{}
             }
