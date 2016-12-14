@@ -174,25 +174,24 @@ angular.module('bandApp')
         };
         $scope.getUsers = function(){
           $http.get('/api/user')
-            .success(function(data){
-              console.log(data);
-              $scope.users = data;
+            .then(function successCallback(data){
+              $scope.users = data.data;
               var count = 0;
               data.forEach(function(user){
                 if(!user.local.active) count++;
               });
               share.setRequest(count);
-            }).error(function(err){
+            }, function errorCallback(err){
               console.log(err);
             });
         };
         $scope.getUser = function(user,callback){
             $http.get('/api/user/' + user._id )
-                .success(function(data){
-                    $scope.user = data;
+                .then(function successCallback(data){
+                    $scope.user = data.data;
                     if($scope.user.local && $scope.user.local.state) $scope.user.local.state = $scope.user.local.state.toString();
                     callback();
-                }).error(function(err){
+                }, function errorCallback(err){
                 callback(err);
             });
         };
@@ -201,10 +200,10 @@ angular.module('bandApp')
             // If creating is true send new user
             if($scope.creating === true){
                $http.post('/api/user',$scope.user)
-                   .success(function(data){
-                     $scope.users = data;
+                   .then(function successCallback(data){
+                     $scope.users = data.data;
                     //  callback();
-                   }).error(function(err){
+                   }, function errorCallback(err){
                    console.log(err);
                    callback(err);
                });
@@ -212,10 +211,10 @@ angular.module('bandApp')
             // If creating is false edit existing user
             else{
               $http.post('/api/user/' + $scope.user._id,$scope.user)
-                  .success(function(data){
-                    $scope.users = data;
+                  .then(function successCallback(data){
+                    $scope.users = data.data;
                     // callback();
-                  }).error(function(err){
+                  }, function errorCallback(err){
                   console.log(err);
                   callback(err);
               });
@@ -237,18 +236,18 @@ angular.module('bandApp')
 
         $scope.deleteUser = function(user){
           $http.get('/api/user/delete/' + user._id )
-              .success(function(data){
-                $scope.users = data;
-              }).error(function(err){
+              .then(function successCallback(data){
+                $scope.users = data.data;
+              }, function errorCallback(err){
               console.log(err);
           });
         };
 
         $scope.bestMatch = function(id){
             $http.post('/api/uniform_request/'+ id)
-                .success(function(data){
-                    $scope.urequest = data;
-                }).error(function(err){
+                .then(function successCallback(data){
+                    $scope.urequest = data.data;
+                }, function errorCallback(err){
                 console.log(err);
             });
         };
@@ -266,9 +265,9 @@ angular.module('bandApp')
             complete          : false
           };
           $http.post('/api/uniform_request',$scope.urequest)
-              .success(function(data){
+              .then(function successCallback(data){
                 console.log($scope.urequest);
-              }).error(function(err){
+              }, function errorCallback(err){
               console.log(err);
           });
         };
