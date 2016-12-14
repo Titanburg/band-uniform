@@ -34,7 +34,7 @@
 ///////////////////////////////////////////////////////////////////
 
   // Start Mongoose
-  mongoose.connect(configDB.url,function(err){
+  mongoose.connect('mongodb://' + process.env.MONGODB_PORT_27017_TCP_ADDR + ':' + process.env.MONGODB_PORT_27017_TCP_PORT + '/banduniform',function(err){
     if(err){
       console.log(err);
     }else{
